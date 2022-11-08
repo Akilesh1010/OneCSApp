@@ -17,7 +17,7 @@ import qa.framework.utils.Action;
 public class DashboardScreen {
 
 	
-	static DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSiOSApp_DashboardScreen"));
+	static DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSApp_iOS"));
 	
 	
 	public boolean dashboardScreenFieldValidations() {

@@ -17,7 +17,7 @@ import qa.oneCSiOS.pages.IOSHomeScreen;
 
 public class DashboardSreenStepDefs {
 
-	DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSiOSApp_DashboardScreen"));
+	DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSApp_iOS"));
 	IOSHomeScreen iOSHomeScreen = new IOSHomeScreen();
 	DashboardScreen dashboardScreen = new DashboardScreen();
 	

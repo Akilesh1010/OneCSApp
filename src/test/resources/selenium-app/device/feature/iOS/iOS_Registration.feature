@@ -1,4 +1,4 @@
-@td_MobileApp_TD
+@td_oneCSiOS_TD
 Feature: Device automation Demo for OneCS iOS App
 
   @IOSDemo @iOSDemo1
@@ -7,7 +7,7 @@ Feature: Device automation Demo for OneCS iOS App
     And user Clicks on "SIGN_IN_BTN" button for iOS
     When user enters "Incorrect_Username" and "Incorrect_Password" for iOS
     When user Clicks on "CONTINUE_SIGN_IN_BTN" button for iOS
-    Then user should see Sign in error message for iOS
+    #Then user should see Sign in error message for iOS
     And user closes "app" on mobile device
 
   @IOSDemo @iOSDemo2
