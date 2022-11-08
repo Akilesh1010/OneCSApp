@@ -54,7 +54,9 @@ import qa.framework.webui.browsers.WebDriverManager;
 
 //		tags = {"@HomePage, @Ind-WhatWeOffer, @Ind-AboutYou, @Ind-Insights, @Ind-HelpAndContact, @Ind-AboutCS, @FinancialAdvisers, @FA-WhatWeOffer, @FA-Insights, @FA-HelpAndContact, @FA-AboutCS, @ProfessionalsPage, @Prof-WhatWeOffer, @Prof-Insights, @Prof-HelpAndContactPage, @PROF-AboutCS, @CharitiesHomePage, @Charities-InvestManagement, @Charities-Insights, @Charities-HelpAndContactPage, @Charities-AboutCS, @PensionTrustees, @Pension-FiduciaryManagement, @Pension-Insights, @Pension-HelpAndContact, @Pension-AboutCS, @RequestACallBack"}
 //		tags = {"@Test59"}
+
 		tags = {"@POC1"}
+
 	)
 
  public class RunCucumberTest extends AbstractTestNGCucumberTests {
