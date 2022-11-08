@@ -10,13 +10,6 @@ import qa.framework.utils.Reporter;
 public class CommonDeviceStepDefs {
 
 	@Given("user launch app {string} on mobile device")
-	public void user_launch_app_on_mobile_device(String string) throws MalformedURLException {
-
-		DeviceDriverManager.createBrowserSession();
-	}
-	
-	
-	@Given("user launch app {string} on mobile device")
     public void user_launch_app_on_mobile_device(String string) throws MalformedURLException {
 
        DeviceDriverManager.createBrowserSession();
@@ -42,7 +35,7 @@ public class CommonDeviceStepDefs {
 
 	}
 
-	@Given("user launch app {string} on {string}mobile device")
+	@Given("user launch app {string} on {string} mobile device")
 	public void user_launch_app_on_mobile_device(String appFile, String deviceType) throws MalformedURLException {
 		DeviceDriverManager.createAppSession(appFile, deviceType);
 		//Reporter.addEntireScreenCaptured();

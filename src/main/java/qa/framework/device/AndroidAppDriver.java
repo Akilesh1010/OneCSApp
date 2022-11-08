@@ -22,7 +22,7 @@ public class AndroidAppDriver {
 	 * @author 10650956
 	 * @return
 	 */
-	private DesiredCapabilities getCapabilities() {
+	private DesiredCapabilities getCapabilities(String deviceType) {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 
 //		capabilities.setCapability("platformName", DeviceDriverManager.getPlatformName());
@@ -65,32 +65,52 @@ public class AndroidAppDriver {
 	 * @return
 	 * @throws MalformedURLException
 	 */
-	public AndroidDriver<AndroidElement> getDriver() throws MalformedURLException {
+	public AndroidDriver<MobileElement> getDriver(String apkFile , String deviceType) throws MalformedURLException {
+		if(deviceType.equalsIgnoreCase("RealDevice")) {
+		String userDir = System.getProperty("user.dir");
+		String apkFilePath = null;
 
-//		String userDir = System.getProperty("user.dir");
-//		String apkFilePath = null;
-//
-//		DesiredCapabilities capabilities = getCapabilities();
-//		/* Note: appium does not take relative path. */
-//		apkFilePath = FileManager.searchFile(userDir, apkFile);
-//		
-//		/*setting app capability*/
-//		capabilities.setCapability("app", apkFilePath);
-//		
-//		if (DeviceDriverManager.isAppiumServerCodeStarted() == true) {
-//			driver = new AndroidDriver<MobileElement>(new URL(
-//					"http://" + DeviceDriverManager.getHost() + ":" + DeviceDriverManager.getPort() + "/wd/hub"),
-//					capabilities);
-//		} else {
-//			driver = new AndroidDriver<MobileElement>(new URL(DeviceDriverManager.getServerUrl()), capabilities);
-//		}
-//		
-//		driver.manage().timeouts().implicitlyWait(GlobalVariables.waitTime, TimeUnit.SECONDS);
+		DesiredCapabilities capabilities = getCapabilities(deviceType);
+		/* Note: appium does not take relative path. */
+		apkFilePath = FileManager.searchFile(userDir, apkFile);
+		
+		/*setting app capability*/
+		capabilities.setCapability("app", apkFilePath);
+		
+		if (DeviceDriverManager.isAppiumServerCodeStarted() == true) {
+			driver = new AndroidDriver<MobileElement>(new URL(
+					"http://" + DeviceDriverManager.getHost() + ":" + DeviceDriverManager.getPort() + "/wd/hub"),
+					capabilities);
+		} else {
+			driver = new AndroidDriver<MobileElement>(new URL(DeviceDriverManager.getServerUrl()), capabilities);
+		}
+		
+				
+		}
+		else if(deviceType.equalsIgnoreCase("BrowserStack")) {
+			DesiredCapabilities capabilities = getCapabilities(deviceType);
+			
+			driver = new AndroidDriver<MobileElement>(new 
+					URL("http://hub.browserstack.com/wd/hub"), capabilities);
+		}
 
-		DesiredCapabilities capabilities = getCapabilities();
-		AndroidDriver<AndroidElement> driver = new AndroidDriver<AndroidElement>(
-				new URL("http://hub.browserstack.com/wd/hub"), capabilities);
+		else if(deviceType.equalsIgnoreCase("SauceLabs")) {
+						DesiredCapabilities caps = getCapabilities(deviceType);
+						String username = "nasarcs";    
+						String accesskey = "1d2d94fe-9cb8-4775-8590-330ab4e587e6";
+						String sauceurl = "@ondemand.eu-central-1.saucelabs.com:443";
+						String sauceremoteurl = "https://" + username + ":" + accesskey + sauceurl + "/wd/hub";
+			
+			
+						URL url = new URL(sauceremoteurl);
+						driver = new AndroidDriver<MobileElement>(url, caps);		
 
+		}
+		
+
+		
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
 		return driver;
 
 	}
@@ -104,24 +124,24 @@ public class AndroidAppDriver {
 	 * @return
 	 * @throws MalformedURLException
 	 */
-	public AndroidDriver<MobileElement> getDriver(String appPackage, String appActivity) throws MalformedURLException {
-
-		DesiredCapabilities capabilities = getCapabilities();
-		capabilities.setCapability("appPackage", appPackage);
-		capabilities.setCapability("appActivity", appActivity);
-
-		if (DeviceDriverManager.isAppiumServerCodeStarted() == true) {
-			driver = new AndroidDriver<MobileElement>(new URL(
-					"http://" + DeviceDriverManager.getHost() + ":" + DeviceDriverManager.getPort() + "/wd/hub"),
-					capabilities);
-		} else {
-			driver = new AndroidDriver<MobileElement>(new URL(DeviceDriverManager.getServerUrl()), capabilities);
-		}
-
-		driver.manage().timeouts().implicitlyWait(GlobalVariables.waitTime, TimeUnit.SECONDS);
-
-		return driver;
-
-	}
+//	public AndroidDriver<MobileElement> getDriver(String appPackage, String appActivity) throws MalformedURLException {
+//
+//		DesiredCapabilities capabilities = getCapabilities();
+//		capabilities.setCapability("appPackage", appPackage);
+//		capabilities.setCapability("appActivity", appActivity);
+//
+//		if (DeviceDriverManager.isAppiumServerCodeStarted() == true) {
+//			driver = new AndroidDriver<MobileElement>(new URL(
+//					"http://" + DeviceDriverManager.getHost() + ":" + DeviceDriverManager.getPort() + "/wd/hub"),
+//					capabilities);
+//		} else {
+//			driver = new AndroidDriver<MobileElement>(new URL(DeviceDriverManager.getServerUrl()), capabilities);
+//		}
+//
+//		driver.manage().timeouts().implicitlyWait(GlobalVariables.waitTime, TimeUnit.SECONDS);
+//
+//		return driver;
+//
+//	}
 
 }

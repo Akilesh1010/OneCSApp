@@ -384,7 +384,7 @@ public class DeviceDriverManager {
 			switch (platformName.toLowerCase()) {
 			case "android": {
 				/* starting android browser session in device */
-				driver = new AndroidAppDriver().getDriver();
+				driver = new AndroidAppDriver().getDriver(appfileName,deviceType);
 				flag = true;
 				break;
 			}
