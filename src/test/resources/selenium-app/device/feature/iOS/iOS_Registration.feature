@@ -3,7 +3,7 @@ Feature: Device automation Demo for OneCS iOS App
 
   @IOSDemo @iOSDemo1
   Scenario: Verification of user login functionality with Incorrect Password
-    Given user launch app "OneCSiOSApp" on "realDevice"mobile device
+    Given user launch app "OneCSiOSApp" on "realDevice" mobile device
     And user Clicks on "SIGN_IN_BTN" button for iOS
     When user enters "Incorrect_Username" and "Incorrect_Password" for iOS
     When user Clicks on "CONTINUE_SIGN_IN_BTN" button for iOS
@@ -12,7 +12,7 @@ Feature: Device automation Demo for OneCS iOS App
 
   @IOSDemo @iOSDemo2
   Scenario: Verification of user login functionality with Correct Username and Correct Password
-    Given user launch app "OneCSiOSApp" on "browserStack"mobile device
+    Given user launch app "OneCSiOSApp" on "browserStack" mobile device
     And user Clicks on "SIGN_IN_BTN" button for iOS
     When user enters "Bob" and "Pass123$" for iOS
     When user Clicks on "CONTINUE_SIGN_IN_BTN" button for iOS
