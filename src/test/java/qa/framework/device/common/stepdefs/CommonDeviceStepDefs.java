@@ -9,8 +9,8 @@ import qa.framework.utils.Reporter;
 
 public class CommonDeviceStepDefs {
 
-	@Given("^user launch browser on mobile device$")
-	public void user_lauch_browser_on_mobile_device() throws MalformedURLException {
+	@Given("user launch app {string} on mobile device")
+	public void user_launch_app_on_mobile_device(String string) throws MalformedURLException {
 
 		DeviceDriverManager.createBrowserSession();
 	}

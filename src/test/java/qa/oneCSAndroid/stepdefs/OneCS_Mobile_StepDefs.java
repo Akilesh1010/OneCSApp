@@ -26,7 +26,7 @@ import qa.oneCSAndroid.pages.OneCS_Mobile;
 
 public class OneCS_Mobile_StepDefs {
 
-	DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("MobileApp_HomeScreen"));
+	DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSApp_Android"));
 
 	@And("user Clicks on {string} button")
 	public void user_Clicks_on_button(String button) {
@@ -70,13 +70,7 @@ public class OneCS_Mobile_StepDefs {
 		DeviceActions.click((MobileElement) action.getElement(button));
 	}
 
-	@Then("user should see RECOVER DETAILS screen popping up with below content")
-	public void user_should_see_RECOVER_DETAILS_screen_popping_up_with_below_content(DataTable dataTable) {
-		List<String> data = dataTable.asList();
-		List<String> Appdata = OneCS_Mobile.getDashboarddata();
-		Assert.assertEquals(data, Appdata, "Error..... App Screen items does not match");
-	}
-
+	
 	@Then("user enters the {string} code in input box")
     public void user_enters_the_code_in_input_box(String otp) throws InterruptedException {
         Thread.sleep(4000);

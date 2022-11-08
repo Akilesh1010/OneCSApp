@@ -1,9 +1,9 @@
-@td_MobileApp_TD
+@td_OneCSAndroid_TD
 Feature: Device automation POC for Virtual Device
 
   @AndroidPOC1 @POC1
   Scenario: Verification of user login functionality with Incorrect Password
-    Given user launch app "OneCS.apk" on mobile device
+    Given user launch app "universal.apk" on mobile device
     And user Clicks on "SIGN_IN" button
     When user enters "Incorrect_Username" and "Incorrect_Password"
     When user Clicks on "Continue_Button"
