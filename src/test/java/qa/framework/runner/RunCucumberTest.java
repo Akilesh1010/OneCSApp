@@ -42,7 +42,7 @@ import qa.framework.webui.browsers.WebDriverManager;
 				"qa/amazon/device/stepdefs",
 				"qa/oneCS/webui/stepdefs",
 				"qa/websiteRedesign/stepdefs",
-				"qa/oneCSiOSApp/stepDefs"
+				"qa/oneCSiOS/stepDefs"
 		},
 		
 		
