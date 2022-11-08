@@ -13,22 +13,9 @@ import qa.framework.utils.Reporter;
 public class OneCS_Mobile {
 
 	
-	static Action action = new Action(SQLDriver.getEleObjData("MobileApp_HomeScreen"));
+	static DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSApp_Android"));
 
-	public static List<String> getDashboarddata() {
-		List<String> columnNames = new ArrayList<String>();
-		Action.waitForPageLoad();
-		Action.ScrollToElement(action.getElement("TAB_HEADER"));
-		List<WebElement> listOfElements = action.getElements("TAB_HEADER");
-		for (WebElement element : listOfElements) {
-			columnNames.add(Action.getText(element));
-			System.out.println("**********" + Action.getText(element));
-		}
-		Reporter.addScreenCapture();
-		return columnNames;
-		
-		
-	}
+	
 
 }
 
