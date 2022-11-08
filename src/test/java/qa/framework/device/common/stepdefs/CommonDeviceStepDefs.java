@@ -14,8 +14,15 @@ public class CommonDeviceStepDefs {
 
 		DeviceDriverManager.createBrowserSession();
 	}
+	
+	
+	@Given("user launch app {string} on mobile device")
+    public void user_launch_app_on_mobile_device(String string) throws MalformedURLException {
 
-	@And("^user closes \"([^\"]*)\" on mobile device$")
+       DeviceDriverManager.createBrowserSession();
+    }
+
+	@And("user closes {string} on mobile device")
 	public void user_closes_browser_on_mobile_device(String type) {
 
 		type = type.toLowerCase();
