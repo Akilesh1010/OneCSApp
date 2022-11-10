@@ -359,15 +359,6 @@ public class DeviceActions extends TouchAction {
 		AndroidDriver<WebElement> driver = (AndroidDriver<WebElement>) DeviceDriverManager.getDriver();
 		driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+visibleText+"\").instance(0))").click();
 	}
-	
-	final public static void iOSscrollAndClick(String element) {
-		HashMap<String, Object> scrollObject = new HashMap<>();
-		scrollObject.put("direction", "down");
-		scrollObject.put("", "");
-//		DeviceDriverManager.getDriver().
-//		IN PROGRESS
-		
-	}
 
 	public final boolean isPresent(String key) {
 		boolean isPresent = false;

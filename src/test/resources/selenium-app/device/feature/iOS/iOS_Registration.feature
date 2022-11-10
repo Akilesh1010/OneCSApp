@@ -13,5 +13,3 @@ Feature: Sign in / Login feature validation on iOS app
     When user Clicks on "CONTINUE_SIGN_IN_BTN" button for iOS
     #Then user should see Sign in error message for iOS
     And user closes "app" on mobile device
-
-  
