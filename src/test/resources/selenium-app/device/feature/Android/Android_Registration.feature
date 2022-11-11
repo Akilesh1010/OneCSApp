@@ -1,22 +1,22 @@
 @td_OneCSAndroid_TD
 Feature: Sign In/Login
 
-  @2.01
+  @2.01_Android
   Scenario: verify the details displayed on the Sign In Welcome Screen
     Given user launch app "OneCS.apk" on "RealDevice" mobile device
     And user should see "CHARLES_STANLEY" logo in welcome screen for Android
     And user should see "CREATE_SECURE" text in welcome screen for Android
     Then user verifies "SIGN_IN" button in welcome screen for Android
-    And user should "Don't have an account?" text on welcome screen for Android
-    And user should verifies "CREATE_ONE_ON_OUR_WEBSITE" text in welcome screen for Android
+    And user should see "Don't have an account?" text on welcome screen for Android
+    And user should verify "CREATE_ONE_ON_OUR_WEBSITE" text in welcome screen for Android
     When user taps on "CREATE_ONE_ON_OUR_WEBSITE" link on Android
-    Then user should be Navigated to the "charles-stanley.co.uk/services/save" website for Android
+    Then user should be Navigated to the "https://www.charles-stanley.co.uk/services/save" website for Android
     And user clicks on Back Button for Android
     Then user should be Navigated again to "WELCOME_SCREEN" for Android
     And user closes "app" on mobile device
     
     
-    @2.02
+    @2.02_Android
   Scenario: To verify the details displayed on the "Sign In Registration" Screens
     Given user launch app "OneCS.apk" on "RealDevice" mobile device
     And user Clicks on "SIGN_IN" button
@@ -30,7 +30,7 @@ Feature: Sign In/Login
     And user verifies username and password field is empty
    	And user closes "app" on mobile device
    	
-   	@2.03
+   	@2.03_Android
   Scenario: To verify the Username/Password validation  on the "Registration" Screen
     Given user launch app "OneCS.apk" on "RealDevice" mobile device
     And user Clicks on "SIGN_IN" button
@@ -72,9 +72,9 @@ Feature: Sign In/Login
 		And user Clicks on "SIGN_IN" button
 		And user enters "Correct_Password" in password field and taps on "Eye_Icon" for Android
 		Then user should see the entered password in password fiedls for Android
-
+		And user closes "app" on mobile device
 	
-    @2.04
+    @2.04_Android
   Scenario: Verify the "I need help in entering details" link
 
 		Given user launch app "OneCS.apk" on mobile device
@@ -89,7 +89,7 @@ Feature: Sign In/Login
     And user should see progress bar as "Step1_of_4" in signin screen for Android
     Then user should see the entered username and password retained in sigin Screen for Android
     Then user should see "TWO_FA" screen
-
+		And user closes "app" on mobile device
 
 
 
