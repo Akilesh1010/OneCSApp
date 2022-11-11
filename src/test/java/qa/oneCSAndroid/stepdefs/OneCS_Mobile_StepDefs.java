@@ -47,13 +47,14 @@ public class OneCS_Mobile_StepDefs {
 		Assert.assertTrue(action.isPresent(signin));
 	}
 
-	@Then("user should {string} text on welcome screen for Android")
-	public void user_should_text_on_welcome_screen_for_Android(String text) {
-		OneCS.getText();
+	@Then("user should see {string} text on welcome screen for Android")
+	public void user_should_see_text_on_welcome_screen_for_Android(String text) {
+		Assert.assertEquals(text,OneCS.androidGetText("DON’T_HAVE_ACCOUNT"));
+		
 	}
 
-	@Then("user should verifies {string} text in welcome screen for Android")
-	public void user_should_verifies_text_in_welcome_screen_for_Android(String string) {
+	@Then("user should verify {string} text in welcome screen for Android")
+	public void user_should_verify_text_in_welcome_screen_for_Android(String string) {
 
 		Assert.assertEquals(DeviceActions.getTestData("CREATE_ONE_ON_OUR_WEBSITE"),
 				OneCS.androidGetText("CREATE_ONE_ON_OUR_WEBSITE"));
@@ -83,8 +84,9 @@ public class OneCS_Mobile_StepDefs {
 
 	@Given("user should see {string} from Signin Screen for Android")
 	public void user_should_see_from_Signin_Screen_for_Android(String step) {
-
-		Assert.assertEquals(step, OneCS_Mobile.getTextofsteop1of4());
+		
+		Assert.assertEquals(step,OneCS.androidGetText("SIGN_IN_STEP_1_OF_4"));
+		
 	}
 
 	@And("user should see {string} on the top left corner of the screen for Android")
@@ -94,7 +96,7 @@ public class OneCS_Mobile_StepDefs {
 
 	@And("user should see progress bar as {string} in signin screen for Android")
 	public void user_should_see_progress_bar_as_in_signin_screen_for_Android(String step1) {
-		Assert.assertEquals(DeviceActions.getTestData(step1), OneCS.androidGetText("Step1_of_4"));
+		Assert.assertEquals(DeviceActions.getTestData(step1), OneCS.androidGetText(step1));
 	}
 
 	@And("user should verify whether {string} is present in sigin screen for Android")
@@ -214,8 +216,10 @@ public class OneCS_Mobile_StepDefs {
 
 	@Then("user should see the entered username and password retained in sigin Screen for Android")
 	public void user_should_see_the_entered_username_and_password_retained_in_sigin_Screen_for_Android() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new cucumber.api.PendingException();
+		
+		Assert.assertEquals(OneCS.androidGetText("USERNAME_INPUT_FIELD"), DeviceActions.getTestData("Correct_Username"));
+		OneCS.AndroidBtnClick("");
+		Assert.assertEquals(OneCS.androidGetText("PASSWORD_INPUT_FIELD"), DeviceActions.getTestData("Correct_Password"));
 	}
 
 	@And("user Clicks on {string} button")

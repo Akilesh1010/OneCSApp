@@ -37,20 +37,6 @@ public class OneCS_Mobile {
 		String text = DeviceActions.getText((MobileElement) action.getElement("CREATE_SECURE_FIANACIAL"));
 		Assert.assertEquals(DeviceActions.getTestData("CREATE_SECURE"), text);
 	}
-
-	public void getText() {
-
-		String text = DeviceActions.getText((MobileElement) action.getElement("DON’T_HAVE_ACCOUNT"));
-		Assert.assertEquals(DeviceActions.getTestData("DON’T_HAVE_ACCOUNT"), text);
-	}
-	
-	public static String getTextofsteop1of4() {
-
-		String text = DeviceActions.getText((MobileElement) action.getElement("STEP_1_OF_4"));;
-		
-		return text;
-	}
-	
 	public void usernameFieldEmpty() {
 
 		DeviceActions.click((MobileElement) action.getElement("USERNAME_TEXT"));
