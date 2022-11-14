@@ -19,6 +19,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import qa.framework.assertions.AssertLogger;
 import qa.framework.dbutils.SQLDriver;
 import qa.framework.device.DeviceActions;
 import qa.framework.device.DeviceDriverManager;
@@ -124,6 +125,21 @@ public class OneCS_Mobile_StepDefs {
 	public void user_verifies_username_and_password_field_is_empty() {
 		OneCS.usernameFieldEmpty();
 	}
+	
+	@Then("user should see {string} symbol inside password box")
+	public void user_should_see_symbol_inside_password_box(String eye) {
+		Assert.assertTrue(action.isPresent(eye));
+	}
+
+	@Then("user should see {string} encircled in pink in signin screen")
+	public void user_should_see_encircled_in_pink_in_signin_screen(String info) {
+		Assert.assertTrue(action.isPresent(info));
+	}
+
+	@Then("user should see a link stating {string} in signin screen")
+	public void user_should_see_a_link_stating_in_signin_screen(String help) {
+		Assert.assertEquals(OneCS.androidGetText("I_need_help_in_entering_details"), help);
+	}
 
 	@Given("user enters {string} in username field")
 	public void user_enters_in_username_field(String Username) {
@@ -215,10 +231,11 @@ public class OneCS_Mobile_StepDefs {
 	}
 
 	@Then("user should see the entered username and password retained in sigin Screen for Android")
-	public void user_should_see_the_entered_username_and_password_retained_in_sigin_Screen_for_Android() {
+	public void user_should_see_the_entered_username_and_password_retained_in_sigin_Screen_for_Android() throws InterruptedException {
 		
 		Assert.assertEquals(OneCS.androidGetText("USERNAME_INPUT_FIELD"), DeviceActions.getTestData("Correct_Username"));
-		OneCS.AndroidBtnClick("");
+		OneCS.AndroidBtnClick("Eye_Icon");
+		Thread.sleep(2000);
 		Assert.assertEquals(OneCS.androidGetText("PASSWORD_INPUT_FIELD"), DeviceActions.getTestData("Correct_Password"));
 	}
 
@@ -255,6 +272,80 @@ public class OneCS_Mobile_StepDefs {
 		Assert.assertEquals(DeviceActions.getTestData("Error_Msg"), ErrorMsg);
 		Reporter.addDeviceScreenshot("Login Scrren", "Mobile App Login Screen");
 	}
+	
+	
+	
+	@And("user taps on {string} in Signin screen for Android")
+	public void user_taps_on_in_Signin_screen_for_Android(String help) {
+	    OneCS.AndroidBtnClick(help);
+	}
+
+	@Then("user should verify below details in signin Screen for Android")
+	public void user_should_verify_below_details_in_signin_Screen_for_Android(DataTable dataTable) {
+		List<String> data = dataTable.asList();
+		List<String> pageValues = OneCS_Mobile.getNeedHelpPopupScreen();
+		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
+	}
+
+	@Then("user should see {string} on the top right corner of the screen for Android")
+	public void user_should_see_on_the_top_right_corner_of_the_screen_for_Android(String x) {
+		Assert.assertTrue(action.isPresent(x));
+	}
+
+	@Then("user taps on anywhere on the {string} for Android")
+	public void user_taps_on_anywhere_on_the_for_Android(String empty) throws InterruptedException {
+		
+		OneCS.AndroidBtnClick(empty);
+		Thread.sleep(2000);
+	}
+
+	@Then("user should not see the {string} pop up in Signin Screen for Android")
+	public void user_should_not_see_the_pop_up_in_Signin_Screen_for_Android(String popup) {
+		Assert.assertFalse(action.isPresent(popup));
+	}
+
+	
+	@When("user taps {string} on signin screen for Android")
+	public void user_taps_on_signin_screen_for_Android(String userpass) {
+	    OneCS.AndroidBtnClick(userpass);
+	}
+
+	@Then("user verifies below fields in forgot username website for Android")
+	public void user_verifies_below_fields_in_forgot_username_website_for_Android(DataTable dataTable) {
+		List<String> data = dataTable.asList();
+		List<String> pageValues = OneCS_Mobile.getForgotUserWebScreen();
+		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
+	}
+
+	@Then("user taps on {string} on Forgot usrname popup for Android")
+	public void user_taps_on_on_Forgot_usrname_popup_for_Android(String close) {
+	    OneCS.AndroidBtnClick(close);
+	}
+	
+	@Then("user should see the entered username and password retained in Login Screen for Android")
+	public void user_should_see_the_entered_username_and_password_retained_in_Login_Screen_for_Android() throws InterruptedException {
+		Assert.assertEquals(OneCS.androidGetText("USERNAME_INPUT_FIELD"), DeviceActions.getTestData("Correct_Username"));
+		
+		Assert.assertEquals(OneCS.androidGetText("PASSWORD_INPUT_FIELD"), DeviceActions.getTestData("Correct_Password"));
+	}
+
+	@Then("user should be navigated back to the {string} screen for Android")
+	public void user_should_be_navigated_back_to_the_screen_for_Android(String signin) {
+		Assert.assertTrue(action.isPresent(signin));
+	}
+
+	@Then("user verifies below fields in forgot password website for Android")
+	public void user_verifies_below_fields_in_forgot_password_website_for_Android(DataTable dataTable) {
+		List<String> data = dataTable.asList();
+		List<String> pageValues = OneCS_Mobile.getForgotPassWebScreen();
+		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
+	}
+	
+	
+	
+	
+	
+	
 
 	@When("user Clicks on I {string} button on login screen")
 	public void user_Clicks_on_I_button_on_login_screen(String button) {

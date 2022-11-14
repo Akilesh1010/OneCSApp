@@ -28,6 +28,10 @@ Feature: Sign In/Login
     And user should see "Username" text inside the username box
     And user should see "Password"  text inside the Password box
     And user verifies username and password field is empty
+    Then user should see "CLOSED_EYE" symbol inside password box
+    Then user should see "INFO_BUTTON" encircled in pink in signin screen
+    And user should see a link stating "I need help entering the correct details?" in signin screen
+    And user should verify continue button Disabled
    	And user closes "app" on mobile device
    	
    	@2.03_Android
@@ -75,9 +79,9 @@ Feature: Sign In/Login
 		And user closes "app" on mobile device
 	
     @2.04_Android
-  Scenario: Verify the "I need help in entering details" link
+  Scenario: To verify the validation for the Progress bar present on the "Registration" and "2FA" Screen
 
-		Given user launch app "OneCS.apk" on mobile device
+		Given user launch app "OneCS.apk" on "RealDevice" mobile device
     And user Clicks on "SIGN_IN" button
     When user enters "Correct_Username" and "Correct_Password"
     Then user should see "Continue_Button" enabled
@@ -92,7 +96,47 @@ Feature: Sign In/Login
 		And user closes "app" on mobile device
 
 
+	@2.05_Android
+  Scenario: Verify the "I need help in entering details" link
 
+		Given user launch app "OneCS.apk" on "RealDevice" mobile device
+    And user Clicks on "SIGN_IN" button
+    When user enters "Correct_Username" and "Correct_Password"
+    And user taps on "I_need_help_in_entering_details" in Signin screen for Android
+    Then user should verify below details in signin Screen for Android
+    			|Recover details																																			|
+    			|Forgot sign in details? Not to worry, just tap the relevant button below to fix this.|
+    			|Forgot username																																			|
+    			|Forgot password																																			|
+    And user should see "X_Button" on the top right corner of the screen for Android
+    And user taps on anywhere on the "DARK_SPACE" for Android
+    Then user should not see the "FORGOT_USERNAME_PASSWORD" pop up in Signin Screen for Android
+    Then user should see the entered username and password retained in sigin Screen for Android
+    And user taps on "I_need_help_in_entering_details" in Signin screen for Android
+   	When user taps "FORGOT_USERNAME" on signin screen for Android
+   	Then user should be Navigated to the "https://www.charles-stanley-direct.co.uk/app/forgotten-username" website for Android
+   	Then user verifies below fields in forgot username website for Android
+   							|Date Of Birth|
+    						|Account Number|
+		And user clicks on Back Button for Android
+		And user taps on "X_Button" on Forgot usrname popup for Android
+		Then user should see the entered username and password retained in Login Screen for Android
+		Then user should be navigated back to the "LOG_IN" screen for Android
+		And user taps on "I_need_help_in_entering_details" in Signin screen for Android
+		When user taps "FORGOT_PASSWORD" on signin screen for Android
+		Then user should be Navigated to the "https://www.charles-stanley-direct.co.uk/app/reset-password" website for Android
+		Then user verifies below fields in forgot password website for Android
+   							|Username|
+    						|Next|
+    And user clicks on Back Button for Android
+    And user taps on "X_Button" on Forgot usrname popup for Android
+		Then user should see the entered username and password retained in Login Screen for Android
+		And user taps on "I_need_help_in_entering_details" in Signin screen for Android
+		And user taps on "X_Button" on Forgot usrname popup for Android
+		Then user should not see the "FORGOT_USERNAME_PASSWORD" pop up in Signin Screen for Android
+		And user closes "app" on mobile device
+		
+		
 
 
 
