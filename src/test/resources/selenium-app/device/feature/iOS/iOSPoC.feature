@@ -14,7 +14,7 @@ Feature: Sign in / Login feature validation on iOS app
   Scenario: Verification of user login functionality with Correct Username and Correct Password
     Given user launch app "OneCSiOSApp" on "realDevice" mobile device
     Then user Clicks on "SIGN_IN_BTN" button for iOS
-    When user enters "Bob" and "Pass123$" for iOS
+    When user enters "Correct_Username" and "Correct_Password" for iOS
     When user Clicks on "CONTINUE_SIGN_IN_BTN" button for iOS
     Then user should see "VERIFY_YOUR_ACCOUNT_TWO_FA_TXT" screen for iOS
     And user get the SIX digit code displayed on screen and enters in TWOFA input field for iOS
