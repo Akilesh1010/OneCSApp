@@ -8,9 +8,11 @@ import org.openqa.selenium.interactions.Actions;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.nativekey.AndroidKey;
+import junit.framework.Assert;
 import qa.framework.dbutils.SQLDriver;
 import qa.framework.device.DeviceActions;
 import qa.framework.utils.Action;
+import qa.framework.utils.Reporter;
 
 public class IOSSignInScreen {
 
@@ -23,8 +25,8 @@ public class IOSSignInScreen {
 	}
 	
 	public void userLoginiOS(String userName, String pwd) {
-		DeviceActions.sendKeys((MobileElement) action.getElement("USERNAME_EDIT"), userName);
-		DeviceActions.sendKeys((MobileElement) action.getElement("PWD_EDIT"), pwd);	
+		DeviceActions.sendKeys((MobileElement) action.getElement("USERNAME_EDIT"), DeviceActions.getTestData(userName));
+		DeviceActions.sendKeys((MobileElement) action.getElement("PWD_EDIT"), DeviceActions.getTestData(pwd));	
 	}
 	
 	public void input2FA() throws InterruptedException {
@@ -56,6 +58,27 @@ public class IOSSignInScreen {
 		return DeviceActions.getText((MobileElement) action.getElement(getText));
 	}
 	
+	public String buttonDisablediOS(String btnName) {
+		MobileElement element = (MobileElement) action.getElement(btnName);
+		String isEnabled = element.getAttribute("enabled");
+		return isEnabled;
+	}
+	
+	public boolean errorMsgPopDetailsiOS() {
+		boolean flag = false;
+
+		List<MobileElement> fields = new ArrayList<MobileElement>();
+
+		fields.add((MobileElement) action.getElement("DETAILS_INCORRECT_TITLE_LABEL"));
+		fields.add((MobileElement) action.getElement("PLEASE_CHECK_THE_DETAILS_ENTERED_TXT"));
+		fields.add((MobileElement) action.getElement("EDIT_DETAILS_BTN"));
+
+		for (MobileElement element : fields) {
+			flag = element.isDisplayed();
+		}	
+
+		return flag;
+	}
 	
 }
 	
