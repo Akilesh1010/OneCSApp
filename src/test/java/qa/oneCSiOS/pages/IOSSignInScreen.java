@@ -23,8 +23,8 @@ public class IOSSignInScreen {
 	}
 	
 	public void userLoginiOS(String userName, String pwd) {
-		DeviceActions.sendKeys((MobileElement) action.getElement("USERNAME_BTN"), userName);
-		DeviceActions.sendKeys((MobileElement) action.getElement("PWD_BTN"), pwd);	
+		DeviceActions.sendKeys((MobileElement) action.getElement("USERNAME_EDIT"), userName);
+		DeviceActions.sendKeys((MobileElement) action.getElement("PWD_EDIT"), pwd);	
 	}
 	
 	public void input2FA() throws InterruptedException {
@@ -39,8 +39,8 @@ public class IOSSignInScreen {
 	
 	public void signIniOS(String userName, String pwd) {
 		DeviceActions.click((MobileElement) action.getElement("SIGN_IN_BTN"));
-		DeviceActions.sendKeys((MobileElement) action.getElement("USERNAME_BTN"), userName);
-		DeviceActions.sendKeys((MobileElement) action.getElement("PWD_BTN"), pwd);
+		DeviceActions.sendKeys((MobileElement) action.getElement("USERNAME_EDIT"), userName);
+		DeviceActions.sendKeys((MobileElement) action.getElement("PWD_EDIT"), pwd);
 		DeviceActions.click((MobileElement) action.getElement("CONTINUE_SIGN_IN_BTN"));
 		String codetext = DeviceActions.getText((MobileElement) action.getElement("SIGN_IN_CODE_2FA_TXT"));
         DeviceActions.sendKeys((MobileElement) action.getElement("SIGN_IN_2FA_CODE_INPUT_FIELD"), codetext);
@@ -50,6 +50,10 @@ public class IOSSignInScreen {
         DeviceActions.sendKeys((MobileElement) action.getElement("CONFIRM_PIN_INPUT"), DeviceActions.getTestData("SIX_DIGIT"));
         DeviceActions.click((MobileElement) action.getElement("CONFIRM_PIN_BTN"));
         DeviceActions.click((MobileElement) action.getElement("MAYBE_LATER_BIOMETRICS_BTN"));	
+	}
+	
+	public String getTextiOS(String getText) {
+		return DeviceActions.getText((MobileElement) action.getElement(getText));
 	}
 	
 	
