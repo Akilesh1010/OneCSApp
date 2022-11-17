@@ -1,14 +1,21 @@
 package qa.oneCSAndroid.pages;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.openqa.selenium.WebElement;
 
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.PerformsTouchActions;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.ElementOption;
 import junit.framework.Assert;
 import qa.framework.dbutils.SQLDriver;
 import qa.framework.device.DeviceActions;
+import qa.framework.device.DeviceDriverManager;
 import qa.framework.utils.Action;
 import qa.framework.utils.Reporter;
 
@@ -89,13 +96,12 @@ public class OneCS_Mobile {
 		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
 		return pageValues;
 	}
-	
+
 	public static List<String> getForgotUserWebScreen() {
 		List<String> pageValues = new ArrayList<String>();
 		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
 		listOfElements.add((MobileElement) action.getElement("WEB_DATE_OF_BIRTH"));
 		listOfElements.add((MobileElement) action.getElement("WEB_ACCOUNT_NUMBER"));
-		
 
 		for (MobileElement element : listOfElements) {
 			pageValues.add(DeviceActions.getText((MobileElement) element));
@@ -103,19 +109,89 @@ public class OneCS_Mobile {
 		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
 		return pageValues;
 	}
-	
+
 	public static List<String> getForgotPassWebScreen() {
 		List<String> pageValues = new ArrayList<String>();
 		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
 		listOfElements.add((MobileElement) action.getElement("WEB_PASS_USERNAME"));
 		listOfElements.add((MobileElement) action.getElement("WEB_PASS_NEXT"));
-		
 
 		for (MobileElement element : listOfElements) {
 			pageValues.add(DeviceActions.getText((MobileElement) element));
 		}
 		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
 		return pageValues;
+	}
+
+	public String getEntered2FACode(String gettext) {
+		String twoFA = DeviceActions.getText((MobileElement) action.getElement("SIX_DIGIT_INPUT_BOX"));
+		String code = twoFA.trim();
+		return code;
+
+	}
+
+	public String enterRandomSixDigitCode() {
+
+		Random rnd = new Random();
+		int number = rnd.nextInt(999999);
+		String code = String.format("%06d", number);
+		return code;
+
+	}
+
+	public void androidSwipe(MobileElement element, MobileElement element1) {
+		TouchAction swipe = new TouchAction((PerformsTouchActions) DeviceDriverManager.getDriver());
+		swipe.press(ElementOption.element(element)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(800)))
+				.moveTo(ElementOption.element(element1)).release().perform();
+	}
+
+	public static List<String> getRecoverDetailsScreen() {
+		List<String> pageValues = new ArrayList<String>();
+		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("RECOVER_DETAILS"));
+		listOfElements.add((MobileElement) action.getElement("STRUGGLING_VERIFY_ACCOUNT"));
+		listOfElements.add((MobileElement) action.getElement("RESEND_SIX_DIGIT_CODE"));
+		listOfElements.add((MobileElement) action.getElement("CHECK_MOBILE_NUMBER"));
+
+		for (MobileElement element : listOfElements) {
+			pageValues.add(DeviceActions.getText((MobileElement) element));
+		}
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+		return pageValues;
+	}
+
+	public static List<String> getCheckMobileNumWebPage() {
+		List<String> pageValues = new ArrayList<String>();
+		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("MOBILE_NUM_USERNAME_WEB"));
+		listOfElements.add((MobileElement) action.getElement("MOBILE_NUM_PASSWORD_WEB"));
+		listOfElements.add((MobileElement) action.getElement("MOBILE_NUM_LOGIN_WEB"));
+
+		for (MobileElement element : listOfElements) {
+			pageValues.add(DeviceActions.getText((MobileElement) element));
+		}
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+		return pageValues;
+	}
+
+	public static List<String> getStep3Screenvalues() {
+		List<String> pageValues = new ArrayList<String>();
+		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("CREATE_YOUR_PIN"));
+		listOfElements.add((MobileElement) action.getElement("CREATE_YOUR_PIN_TEXT"));
+
+		for (MobileElement element : listOfElements) {
+			pageValues.add(DeviceActions.getText((MobileElement) element));
+		}
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+		return pageValues;
+	}
+
+	public void sixDigitBoxEmpty() {
+
+		String empty = DeviceActions.getText((MobileElement) action.getElement("CREATE_YOUR_PIN_BOX"));
+		Assert.assertEquals(empty, "");
+		
 	}
 
 }
