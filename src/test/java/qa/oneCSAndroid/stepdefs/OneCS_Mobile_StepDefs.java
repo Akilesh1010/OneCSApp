@@ -32,7 +32,7 @@ import qa.oneCSAndroid.pages.OneCS_Mobile;
 
 public class OneCS_Mobile_StepDefs {
 
-	DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSApp_Android"));
+	DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSAppAndroid_Android"));
 	OneCS_Mobile OneCS = new OneCS_Mobile();
 	SoftAssert softAssert = new SoftAssert();
 
