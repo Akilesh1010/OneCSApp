@@ -36,7 +36,7 @@ public class IOSAppDriver {
 			capabilities.setCapability("bundleId", DeviceDriverManager.getDeviceBundleId());
 
 
-			/* Do not stop app, do not clear app data, and do not uninstall .ipa */
+			/* Do not stop app, do not clear app data, and do not un-install .ipa */
 			capabilities.setCapability("noReset", false);
 			capabilities.setCapability("fullReset", false);
 
