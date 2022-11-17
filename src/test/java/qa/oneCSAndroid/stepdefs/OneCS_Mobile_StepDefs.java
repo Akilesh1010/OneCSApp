@@ -1,11 +1,13 @@
 package qa.oneCSAndroid.stepdefs;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import cucumber.api.PendingException;
 import io.appium.java_client.MobileElement;
@@ -13,6 +15,8 @@ import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -30,6 +34,7 @@ public class OneCS_Mobile_StepDefs {
 
 	DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSApp_Android"));
 	OneCS_Mobile OneCS = new OneCS_Mobile();
+	SoftAssert softAssert = new SoftAssert();
 
 	@Given("user should see {string} logo in welcome screen for Android")
 	public void user_should_see_logo_in_welcome_screen_for_Android(String Logo) {
@@ -50,8 +55,8 @@ public class OneCS_Mobile_StepDefs {
 
 	@Then("user should see {string} text on welcome screen for Android")
 	public void user_should_see_text_on_welcome_screen_for_Android(String text) {
-		Assert.assertEquals(text,OneCS.androidGetText("DON’T_HAVE_ACCOUNT"));
-		
+		Assert.assertEquals(text, OneCS.androidGetText("DON’T_HAVE_ACCOUNT"));
+
 	}
 
 	@Then("user should verify {string} text in welcome screen for Android")
@@ -69,7 +74,7 @@ public class OneCS_Mobile_StepDefs {
 
 	@Then("user should be Navigated to the {string} website for Android")
 	public void user_should_be_Navigated_to_the_website_for_Android(String URL) {
-		Assert.assertEquals(URL, OneCS.androidGetText("DEVICE_URL"));
+		softAssert.assertEquals(URL, OneCS.androidGetText("DEVICE_URL"));
 	}
 
 	@Then("user clicks on Back Button for Android")
@@ -84,10 +89,10 @@ public class OneCS_Mobile_StepDefs {
 	}
 
 	@Given("user should see {string} from Signin Screen for Android")
-	public void user_should_see_from_Signin_Screen_for_Android(String step) {
-		
-		Assert.assertEquals(step,OneCS.androidGetText("SIGN_IN_STEP_1_OF_4"));
-		
+	public void user_should_see_from_Signin_Screen_for_Android(String step) throws InterruptedException {
+		Thread.sleep(3000);
+		Assert.assertEquals(step, OneCS.androidGetText("SIGN_IN_STEP_1_OF_4"));
+
 	}
 
 	@And("user should see {string} on the top left corner of the screen for Android")
@@ -102,7 +107,7 @@ public class OneCS_Mobile_StepDefs {
 
 	@And("user should verify whether {string} is present in sigin screen for Android")
 	public void user_should_verify_whether_is_present_in_sigin_screen_for_Android(String Userpass) {
-		
+
 		Assert.assertEquals(Userpass, OneCS.androidGetText("USERNAME_PASSWORD"));
 	}
 
@@ -125,7 +130,7 @@ public class OneCS_Mobile_StepDefs {
 	public void user_verifies_username_and_password_field_is_empty() {
 		OneCS.usernameFieldEmpty();
 	}
-	
+
 	@Then("user should see {string} symbol inside password box")
 	public void user_should_see_symbol_inside_password_box(String eye) {
 		Assert.assertTrue(action.isPresent(eye));
@@ -225,18 +230,21 @@ public class OneCS_Mobile_StepDefs {
 	}
 
 	@Then("user should see the continue button turning to {string} for Android")
-	public void user_should_see_the_continue_button_turning_to_for_Android(String string) {
-		// Write code here that turns the phrase above into concrete actions
-		throw new cucumber.api.PendingException();
+	public void user_should_see_the_continue_button_turning_to_for_Android(String spinner) throws InterruptedException {
+		Assert.assertTrue(action.isPresent(spinner));
+		Thread.sleep(5000);
 	}
 
 	@Then("user should see the entered username and password retained in sigin Screen for Android")
-	public void user_should_see_the_entered_username_and_password_retained_in_sigin_Screen_for_Android() throws InterruptedException {
-		
-		Assert.assertEquals(OneCS.androidGetText("USERNAME_INPUT_FIELD"), DeviceActions.getTestData("Correct_Username"));
+	public void user_should_see_the_entered_username_and_password_retained_in_sigin_Screen_for_Android()
+			throws InterruptedException {
+
+		Assert.assertEquals(OneCS.androidGetText("USERNAME_INPUT_FIELD"),
+				DeviceActions.getTestData("Correct_Username"));
 		OneCS.AndroidBtnClick("Eye_Icon");
 		Thread.sleep(2000);
-		Assert.assertEquals(OneCS.androidGetText("PASSWORD_INPUT_FIELD"), DeviceActions.getTestData("Correct_Password"));
+		Assert.assertEquals(OneCS.androidGetText("PASSWORD_INPUT_FIELD"),
+				DeviceActions.getTestData("Correct_Password"));
 	}
 
 	@And("user Clicks on {string} button")
@@ -272,12 +280,10 @@ public class OneCS_Mobile_StepDefs {
 		Assert.assertEquals(DeviceActions.getTestData("Error_Msg"), ErrorMsg);
 		Reporter.addDeviceScreenshot("Login Scrren", "Mobile App Login Screen");
 	}
-	
-	
-	
+
 	@And("user taps on {string} in Signin screen for Android")
 	public void user_taps_on_in_Signin_screen_for_Android(String help) {
-	    OneCS.AndroidBtnClick(help);
+		OneCS.AndroidBtnClick(help);
 	}
 
 	@Then("user should verify below details in signin Screen for Android")
@@ -294,7 +300,7 @@ public class OneCS_Mobile_StepDefs {
 
 	@Then("user taps on anywhere on the {string} for Android")
 	public void user_taps_on_anywhere_on_the_for_Android(String empty) throws InterruptedException {
-		
+
 		OneCS.AndroidBtnClick(empty);
 		Thread.sleep(2000);
 	}
@@ -304,10 +310,9 @@ public class OneCS_Mobile_StepDefs {
 		Assert.assertFalse(action.isPresent(popup));
 	}
 
-	
 	@When("user taps {string} on signin screen for Android")
 	public void user_taps_on_signin_screen_for_Android(String userpass) {
-	    OneCS.AndroidBtnClick(userpass);
+		OneCS.AndroidBtnClick(userpass);
 	}
 
 	@Then("user verifies below fields in forgot username website for Android")
@@ -319,14 +324,17 @@ public class OneCS_Mobile_StepDefs {
 
 	@Then("user taps on {string} on Forgot usrname popup for Android")
 	public void user_taps_on_on_Forgot_usrname_popup_for_Android(String close) {
-	    OneCS.AndroidBtnClick(close);
+		OneCS.AndroidBtnClick(close);
 	}
-	
+
 	@Then("user should see the entered username and password retained in Login Screen for Android")
-	public void user_should_see_the_entered_username_and_password_retained_in_Login_Screen_for_Android() throws InterruptedException {
-		Assert.assertEquals(OneCS.androidGetText("USERNAME_INPUT_FIELD"), DeviceActions.getTestData("Correct_Username"));
-		
-		Assert.assertEquals(OneCS.androidGetText("PASSWORD_INPUT_FIELD"), DeviceActions.getTestData("Correct_Password"));
+	public void user_should_see_the_entered_username_and_password_retained_in_Login_Screen_for_Android()
+			throws InterruptedException {
+		Assert.assertEquals(OneCS.androidGetText("USERNAME_INPUT_FIELD"),
+				DeviceActions.getTestData("Correct_Username"));
+
+		Assert.assertEquals(OneCS.androidGetText("PASSWORD_INPUT_FIELD"),
+				DeviceActions.getTestData("Correct_Password"));
 	}
 
 	@Then("user should be navigated back to the {string} screen for Android")
@@ -340,6 +348,192 @@ public class OneCS_Mobile_StepDefs {
 		List<String> pageValues = OneCS_Mobile.getForgotPassWebScreen();
 		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
 	}
+
+	@Then("user should see {string} text in step two of sigin screen for Android")
+	public void user_should_see_text_in_step_two_of_sigin_screen_for_Android(String verifyAccount) {
+		Assert.assertEquals(OneCS.androidGetText("VERIFY_ACCOUNT_TEXT"), verifyAccount);
+	}
+
+	@Then("user should see a link stating {string} in step two of sigin screen for Android")
+	public void user_should_see_a_link_stating_in_step_two_of_sigin_screen_for_Android(String accountHelp) {
+		Assert.assertEquals(OneCS.androidGetText("HELP_VERIFY_ACCOUNT"), accountHelp);
+	}
+
+	@Then("user enters {string} code in six digit code box for Android")
+	public void user_enters_code_in_six_digit_code_box_for_Android(String digit) {
+System.out.println(DeviceActions.getTestData(digit));
+		if (digit.equalsIgnoreCase("ONE_DIGIT")) {
+			OneCS.AndroidInputText("SIX_DIGIT_INPUT_BOX", digit);
+		}
+		if (digit.equalsIgnoreCase("TWO_DIGIT")) {
+			OneCS.AndroidInputText("SIX_DIGIT_INPUT_BOX", digit);
+		}
+		if (digit.equalsIgnoreCase("THREE_DIGIT")) {
+			OneCS.AndroidInputText("SIX_DIGIT_INPUT_BOX", digit);
+		}
+		if (digit.equalsIgnoreCase("FOUR_DIGIT")) {
+			OneCS.AndroidInputText("SIX_DIGIT_INPUT_BOX", digit);
+		}
+		if (digit.equalsIgnoreCase("FIVE_DIGIT")) {
+			OneCS.AndroidInputText("SIX_DIGIT_INPUT_BOX", digit);
+		}
+
+	}
+
+	@Then("user should verify {string} disabled for Android")
+	public void user_should_verify_disabled_for_Android(String verifyButton) {
+		OneCS.androidButtonDisabled(verifyButton);
+
+	}
+
+	@Then("user should verify {string} enabled for Android")
+	public void user_should_verify_enabled_for_Android(String verifyButton) {
+		OneCS.androidButtonEnabled(verifyButton);
+	}
+	
+	@Then("user verifies whether the {string} code entered is in correct order for Android")
+	public void user_verifies_whether_the_code_entered_is_in_correct_order_for_Android(String twoFACode) {
+		Assert.assertEquals(OneCS.androidGetText("SIX_DIGIT_INPUT_BOX"), OneCS.getEntered2FACode(twoFACode));
+	}
+
+	@When("user enters incorrect TWOFA code in input box")
+	public void user_enters_incorrect_TWOFA_code_in_input_box() {
+	    OneCS.AndroidInputText("SIX_DIGIT_INPUT_BOX", "SIX_DIGIT_INCORRECT");
+	}
+	
+	@Then("user should see the {string} in pop up for Android")
+	public void user_should_see_the_in_pop_up_for_Android(String errorMsg) {
+		Assert.assertEquals(DeviceActions.getTestData(errorMsg), OneCS.androidGetText(errorMsg));
+	}
+	
+	@Then("user should see {string} alert pop up for Android")
+	public void user_should_see_alert_pop_up_for_Android(String incorrectCodePopUp) {
+		Assert.assertTrue(action.isPresent(incorrectCodePopUp));
+	}
+	
+	@Then("user verfies the incorrect TWOFA code retained in the box for Android")
+	public void user_verfies_the_incorrect_TWOFA_code_retained_in_the_box_for_Android() {
+	    Assert.assertEquals(OneCS.androidGetText("SIX_DIGIT_INPUT_BOX"), OneCS.androidGetText("SIX_DIGIT_INPUT_BOX"));
+	}
+	
+	@And("upon swiping up RECOVER DETAILS popup should go to fullscreen for Android")
+	public void upon_swiping_up_RECOVER_DETAILS_popup_should_go_to_fullscreen_for_Android() throws InterruptedException {
+		MobileElement element= (MobileElement) action.getElement("RECOVER_DETAILS");
+		MobileElement element1= (MobileElement) action.getElement("SWIPING_RECOVER_FULLSCREEN");
+		OneCS.androidSwipe(element, element1);      
+	}
+	
+	@Then("user should see below details in TwoFA	 Screen for Android")
+	public void user_should_see_below_details_in_TwoFA_Screen_for_Android(DataTable dataTable) {
+		List<String> data = dataTable.asList();
+		List<String> pageValues = OneCS_Mobile.getRecoverDetailsScreen();
+		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
+	}
+	
+	@When("user taps {string} on TwoFA screen for Android")
+	public void user_taps_on_TwoFA_screen_for_Android(String MobileNum ) {
+	    OneCS.AndroidBtnClick(MobileNum);
+	}
+	
+	@Then("user validates below fields in web url opened for Android")
+	public void user_validates_below_fields_in_web_url_opened_for_Android(DataTable dataTable) {
+		List<String> data = dataTable.asList();
+		List<String> pageValues = OneCS_Mobile.getCheckMobileNumWebPage();
+		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
+	}
+	
+	@Then("user enters {string} and {string} in web url opened for Android")
+	public void user_enters_and_in_web_url_opened_for_Android(String user, String pass) {
+	   OneCS.AndroidInputText(user, user);
+	   OneCS.AndroidInputText(pass, pass);
+	}
+	
+	@Then("user should be able to login to web application for Android")
+	public void user_should_be_able_to_login_to_web_application_for_Android() {
+		Assert.assertTrue(action.isPresent("MEMORABLE_WORD"));
+	}
+	
+	@Then("user taps on {string} on Recover Details popup for Android")
+	public void user_taps_on_on_Recover_Details_popup_for_Android(String close) {
+	    OneCS.AndroidBtnClick(close);
+	}
+	
+	@Then("user should not see the {string} pop up in TwoFA Screen for Android")
+	public void user_should_not_see_the_pop_up_in_TwoFA_Screen_for_Android(String popup) {
+		Assert.assertFalse(action.isPresent(popup));
+	}
+	
+	@Then("user validates below details in Step three screen for Android")
+	public void user_validates_below_details_in_Step_three_screen_for_Android(DataTable dataTable) {
+		List<String> data = dataTable.asList();
+		List<String> pageValues = OneCS_Mobile.getStep3Screenvalues();
+		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
+	}
+	
+	@Then("user should see six blank text boxes for Android")
+	public void user_should_see_six_blank_text_boxes_for_Android() {
+	    OneCS.sixDigitBoxEmpty();
+	}
+	
+	@Then("user should see {string} for Android")
+	public void user_should_see_for_Android(String Continue) {
+		Assert.assertTrue(action.isPresent(Continue));
+	}
+
+	@Then("user should not see the {string} for Android")
+	public void user_should_not_see_the_for_Android(String backButton) {
+		Assert.assertFalse(action.isPresent(backButton));
+	}
+	
+	
+	@Then("user tries to enter alphabets {string} in {string} for Android")
+	public void user_tries_to_enter_alphabets_in_for_Android(String alphabets, String pinbox) {
+	    OneCS.AndroidInputText(pinbox, alphabets);
+	}
+
+	@Then("user verifies the alphabets entered doenot appear in {string} for Android")
+	public void user_verifies_the_alphabets_entered_doenot_appear_in_for_Android(String pinbox) {
+		Assert.assertEquals(OneCS.androidGetText(pinbox), "");
+	}
+
+	@Then("user should verify continue button Disabled in step three screen for Android")
+	public void user_should_verify_continue_button_Disabled_in_step_three_screen_for_Android() {
+	    OneCS.androidButtonDisabled("CONTINUE_BUTTON_DISABLED");
+	}
+
+	@Then("user enters {string} pin in {string} for Android")
+	public void user_enters_pin_in_for_Android(String code, String pinbox) {
+		OneCS.AndroidInputText(pinbox, code);
+	}
+
+	@Then("user verfies {string} pin entered appears in {string} for Android")
+	public void user_verfies_pin_entered_appears_in_for_Android(String code, String pinbox) {
+		Assert.assertNotEquals(OneCS.androidGetText(pinbox), "");
+	}
+
+	@Then("user verifies whether the {string} code entered is in sequential order for Android")
+	public void user_verifies_whether_the_code_entered_is_in_sequential_order_for_Android(String code) {
+		Assert.assertNotEquals(OneCS.androidGetText(code), "");
+	}
+
+	@Then("user should verify continue button Enabled in step three screen for Android")
+	public void user_should_verify_continue_button_Enabled_in_step_three_screen_for_Android() {
+		OneCS.androidButtonEnabled("CONTINUE_BUTTON_DISABLED");
+	}
+
+	@Then("user taps on {string} for Android")
+	public void user_taps_on_for_Android(String continueButton) {
+	    OneCS.AndroidBtnClick(continueButton);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -357,20 +551,14 @@ public class OneCS_Mobile_StepDefs {
 		Thread.sleep(4000);
 		String codetext = DeviceActions.getText((MobileElement) action.getElement("CODE_TO_TYPE"));
 		// String code = codetext.replaceAll("[^0-9]", "");
-		DeviceActions.sendKeys((MobileElement) action.getElement("Incorrect_Username"), codetext);
-//        WebDriverWait wait = new WebDriverWait(DeviceDriverManager.getDriver(),20);
-//        String Xpath="(//android.widget.Button[@index='1'])[3]";
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Xpath)));
-
-		// Thread.sleep(5000);
-
+		DeviceActions.sendKeys((MobileElement) action.getElement("SIX_DIGIT_INPUT_BOX"), codetext);
+		
 	}
 
 	@And("user clicks on Verify button")
 	public void user_clicks_on_Verify_Button() throws InterruptedException {
 		DeviceActions.click((MobileElement) action.getElement("VERIFY_BUTTON"));
-		Thread.sleep(8000);
-
+		
 	}
 
 	@When("user should tap on {string} in screen")
@@ -518,5 +706,7 @@ public class OneCS_Mobile_StepDefs {
 		DeviceActions.scrollAndClick("Sign out");
 		Thread.sleep(2000);
 	}
+	
+	
 
 }

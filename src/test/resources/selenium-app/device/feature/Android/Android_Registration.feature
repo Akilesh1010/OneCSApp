@@ -1,7 +1,7 @@
 @td_OneCSAndroid_TD
 Feature: Sign In/Login
 
-  @2.01_Android
+  @SignIn_Android @2.01_Android
   Scenario: verify the details displayed on the Sign In Welcome Screen
     Given user launch app "OneCS.apk" on "RealDevice" mobile device
     And user should see "CHARLES_STANLEY" logo in welcome screen for Android
@@ -16,7 +16,7 @@ Feature: Sign In/Login
     And user closes "app" on mobile device
     
     
-    @2.02_Android
+    @SignIn_Android @2.02_Android
   Scenario: To verify the details displayed on the "Sign In Registration" Screens
     Given user launch app "OneCS.apk" on "RealDevice" mobile device
     And user Clicks on "SIGN_IN" button
@@ -34,7 +34,7 @@ Feature: Sign In/Login
     And user should verify continue button Disabled
    	And user closes "app" on mobile device
    	
-   	@2.03_Android
+   @SignIn_Android	@2.03_Android
   Scenario: To verify the Username/Password validation  on the "Registration" Screen
     Given user launch app "OneCS.apk" on "RealDevice" mobile device
     And user Clicks on "SIGN_IN" button
@@ -78,7 +78,7 @@ Feature: Sign In/Login
 		Then user should see the entered password in password fiedls for Android
 		And user closes "app" on mobile device
 	
-    @2.04_Android
+    @SignIn_Android @2.04_Android
   Scenario: To verify the validation for the Progress bar present on the "Registration" and "2FA" Screen
 
 		Given user launch app "OneCS.apk" on "RealDevice" mobile device
@@ -96,7 +96,7 @@ Feature: Sign In/Login
 		And user closes "app" on mobile device
 
 
-	@2.05_Android
+	@SignIn_Android @2.05_Android
   Scenario: Verify the "I need help in entering details" link
 
 		Given user launch app "OneCS.apk" on "RealDevice" mobile device
@@ -137,12 +137,137 @@ Feature: Sign In/Login
 		And user closes "app" on mobile device
 		
 		
-
-
-
-
-
-
+	@SignIn_Android @2.06_Android
+  Scenario: Verify the sign in step 2 of 4 screen details & validations [2FA Screen]
+		Given user launch app "OneCS.apk" on "RealDevice" mobile device
+    And user Clicks on "SIGN_IN" button
+    When user enters "Correct_Username" and "Correct_Password"
+    When user Clicks on "Continue_Button"
+		Then user should see the continue button turning to "Loading_Spinner" for Android
+		And user should see "Sign in step 2 of 4" from Signin Screen for Android
+		And user should see "BACK_BUTTON" on the top left corner of the screen for Android
+		Then user should see "Verify your account" text in step two of sigin screen for Android
+		And user should see a link stating "I need help verifying my account" in step two of sigin screen for Android
+		And user enters "ONE_DIGIT" code in six digit code box for Android
+		Then user should verify "VERIFY_BUTTON" disabled for Android
+		And user enters "TWO_DIGIT" code in six digit code box for Android
+		Then user should verify "VERIFY_BUTTON" disabled for Android
+		And user enters "THREE_DIGIT" code in six digit code box for Android
+		Then user should verify "VERIFY_BUTTON" disabled for Android
+		And user enters "FOUR_DIGIT" code in six digit code box for Android
+		Then user should verify "VERIFY_BUTTON" disabled for Android
+		And user enters "FIVE_DIGIT" code in six digit code box for Android
+		Then user should verify "VERIFY_BUTTON" disabled for Android
+		And user enters the "TWO_FA" code in input box
+		Then user should verify "VERIFY_BUTTON" enabled for Android
+		Then user verifies whether the "TWO_FA" code entered is in correct order for Android
+    When user clicks on Verify button
+    Then user should see "Sign in step 3 of 4" from Signin Screen for Android
+		And user clicks on Back Button for Android
+		And user Clicks on "SIGN_IN" button
+    When user enters "Correct_Username" and "Correct_Password"
+    When user Clicks on "Continue_Button"
+    And user should see "Sign in step 2 of 4" from Signin Screen for Android
+		And user enters incorrect TWOFA code in input box
+		When user clicks on Verify button
+		Then user should see "INCORRECT_CODE" alert pop up for Android
+		Then user should see the "ERROR_MSG_POPUP" in pop up for Android
+		And user taps on "EDIT_DETAILS" button in error message for Android
+		Then user should not see "EDIT_DETAILS" overlay popup for Android
+		And user should see "Sign in step 2 of 4" from Signin Screen for Android
+		Then user verfies the incorrect TWOFA code retained in the box for Android
+		Then user should verify "VERIFY_BUTTON" enabled for Android
+		And user closes "app" on mobile device
+		
+		
+	@SignIn_Android @2.07_Android
+  Scenario: To verify the Sign In process when Mobile number is linked to account 2FA
+  	Given user launch app "OneCS.apk" on "RealDevice" mobile device
+    And user Clicks on "SIGN_IN" button
+    When user enters "Correct_Username" and "Correct_Password"
+    When user Clicks on "Continue_Button"
+		Then user should see the continue button turning to "Loading_Spinner" for Android
+		And user should see "Sign in step 2 of 4" from Signin Screen for Android
+  	And user taps on "I_need_help_verifying_my_account" in Signin screen for Android
+  	And upon swiping up RECOVER DETAILS popup should go to fullscreen for Android
+  	Then user should see below details in TwoFA	 Screen for Android
+    			|Recover details																																													|
+    			|Struggling to verify your account? Not to worry. Just tap the relevant button below to get back on track.|
+    			|Resend 6-digit code																																											|
+    			|Check mobile number																																											|
+  	And user should see "CLOSE_BUTTON_RECOVER" on the top right corner of the screen for Android
+  	When user taps "CHECK_MOBILE_NUMBER" on TwoFA screen for Android
+  	Then user should be Navigated to the "https://www.charles-stanley-direct.co.uk/My_Dashboard/My_Direct_Accounts/My_Profile/PersonalInformation" website for Android
+  	Then user validates below fields in web url opened for Android
+   							|Username|
+    						|Password|
+  							|Login	 |
+  	And user enters "WEB_USERNAME" and "WEB_PASSWORD" in web url opened for Android
+  	When user Clicks on "LOGIN_BUTTON"
+  	Then user should be able to login to web application for Android
+  	And user clicks on Back Button for Android
+    And user taps on "CLOSE_BUTTON_RECOVER" on Recover Details popup for Android
+    Then user should not see the "RECOVER_DETAILS" pop up in TwoFA Screen for Android
+    And user closes "app" on mobile device
+  	
+  	
+  	@SignIn_Android @2.09_Android
+  Scenario: To verify the "Sign in step 3 of 4" screen details
+  	Given user launch app "OneCS.apk" on "RealDevice" mobile device
+    And user Clicks on "SIGN_IN" button
+    When user enters "Correct_Username" and "Correct_Password"
+    When user Clicks on "Continue_Button"
+  	And user enters the "TWO_FA" code in input box
+  	When user clicks on Verify button
+  	Then user should see "Sign in step 3 of 4" from Signin Screen for Android
+  	And user should see progress bar as "Step3_of_4" in signin screen for Android
+  	Then user validates below details in Step three screen for Android
+  					|Create your PIN																																										 |
+    				|You’ll use this 6-digit PIN to log in to your OneCS account securely if you don’t enable Biometrics.|
+    Then user should see six blank text boxes for Android
+    Then user should see "CONTINUE_BUTTON_DISABLED" for Android
+    Then user should not see the "BACK_BUTTON" for Android
+    
+  	
+	@SignIn_Android @2.10_Android
+  Scenario: To verify the "Sign in step 3 of 4" screen validations
+  	Given user launch app "OneCS.apk" on "RealDevice" mobile device							
+    And user Clicks on "SIGN_IN" button
+    When user enters "Correct_Username" and "Correct_Password"
+    When user Clicks on "Continue_Button"
+  	And user enters the "TWO_FA" code in input box
+  	When user clicks on Verify button
+  	Then user should see "Sign in step 3 of 4" from Signin Screen for Android
+  	And user tries to enter alphabets "abcdef" in "CREATE_YOUR_PIN_BOX" for Android
+  	Then user verifies the alphabets entered doenot appear in "CREATE_YOUR_PIN_BOX" for Android
+  	And user should verify continue button Disabled in step three screen for Android
+  	And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+  	Then user verfies "SIX_DIGIT" pin entered appears in "CREATE_YOUR_PIN_BOX" for Android
+  	Then user verifies whether the "SIX_DIGIT" code entered is in sequential order for Android
+  	And user should verify continue button Enabled in step three screen for Android
+  	And user taps on "STEP3_CONTINUE_BUTTON" for Android
+  	Then user should see "Sign in step 4 of 4" from Signin Screen for Android
+  	
+  @SignIn_Android @2.11_Android
+  Scenario: To verify the "Sign in step 4 of 4" screen details	
+  	Given user launch app "OneCS.apk" on "RealDevice" mobile device							
+    And user Clicks on "SIGN_IN" button
+    When user enters "Correct_Username" and "Correct_Password"
+    When user Clicks on "Continue_Button"
+  	And user enters the "TWO_FA" code in input box
+  	When user clicks on Verify button
+  	And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+  	And user taps on "STEP3_CONTINUE_BUTTON" for Android
+   	And user should see progress bar as "Step4_of_4" in signin screen for Android
+  	Then user should see "Sign in step 4 of 4" from Signin Screen for Android
+  	Then user should see "BACK_BUTTON" on the top left corner of the screen for Android 
+  	Then user validates below details in step four of sign in screen for Android
+  				|Confirm your PIN																																										 |
+					|You’ll use this 6-digit PIN to log in to your OneCS account securely if you don’t enable Biometrics.|
+		
+  	Then user verifies the "CREATE_YOUR_PIN_BOX"  is empty for Android
+		
+		
 
 
   @AndroidPOC1 @POC2
