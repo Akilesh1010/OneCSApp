@@ -1,8 +1,13 @@
 package qa.oneCSiOS.stepDefs;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.testng.Assert;
 
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.PerformsTouchActions;
+import io.appium.java_client.TouchAction;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,6 +15,7 @@ import io.cucumber.java.en.When;
 import qa.framework.assertions.AssertLogger;
 import qa.framework.dbutils.SQLDriver;
 import qa.framework.device.DeviceActions;
+import qa.framework.device.DeviceDriverManager;
 import qa.framework.utils.Reporter;
 import qa.oneCSAndroid.pages.SEA_HomeScreen;
 import qa.oneCSiOS.pages.DashboardScreen;
@@ -62,6 +68,26 @@ public class DashboardSreenStepDefs {
 	public void user_should_be_displayed_with_bottom_naviagation_options_for_portfolio_contact_investments_insights_and_more_on_iOS() {
 		boolean flag = dashboardScreen.portfolioSummaryValueDetailsDisplayiOS();
 		Assert.assertTrue(flag, "Error...Expected bottom navigation options do not appear on the Dashboard screen...");
+	}
+	
+	@Then("user should be able to pull down the screen to refresh the details for iOS")
+	public void user_should_be_able_to_pull_down_the_screen_to_refresh_the_details_for_iOS() {
+        @SuppressWarnings("rawtypes")
+		TouchAction swipe = new TouchAction((PerformsTouchActions) DeviceDriverManager.getDriver()).press(null)
+//                .press((MobileElement) action.getElement("USERNAME_EDIT"))
+                .moveTo((MobileElement) action.getElement("USERNAME_EDIT"))
+                .release()
+                .perform();
+	}
+	
+	@Then("user should verify the value of date format displayed on screen for iOS")
+	public void user_should_verify_the_value_of_date_format_displayed_on_screen_for_iOS() {
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		
+		String formattedDate = sdf.format(date);
+		System.out.println(formattedDate);
+	
 	}
 	
 

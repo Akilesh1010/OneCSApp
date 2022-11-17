@@ -80,6 +80,26 @@ public class IOSSignInScreen {
 		return flag;
 	}
 	
+	public boolean secureSignInScreenFieldsDisplayiOS() {
+		boolean flag = false;
+
+		List<MobileElement> fields = new ArrayList<MobileElement>();
+
+		fields.add((MobileElement) action.getElement("SECURE_SIGN_IN_LABEL"));
+		fields.add((MobileElement) action.getElement("PLEASE_ENTER_SIX_DIGIT_PIN_LABEL_TXT"));
+		fields.add((MobileElement) action.getElement("SECURE_SIGN_IN_INPUT_FIELD"));
+		fields.add((MobileElement) action.getElement("I_NEED_HELP_WITH_MY_PIN_LINK"));
+		fields.add((MobileElement) action.getElement("SECURE_SIGN_IN_VERIFY_BTN"));
+
+		for (MobileElement element : fields) {
+			flag = element.isDisplayed();
+		}	
+
+		return flag;
+	}
+	
+	
+	
 }
 	
 	

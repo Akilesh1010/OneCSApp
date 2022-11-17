@@ -71,3 +71,5 @@ Feature: Sign in / Login feature validation on iOS app
     And user Clicks on "EYE_PWD_HIDE_BTN" button for iOS
     Then user should see the entered password in password fiedls for iOS
     And user closes "app" on mobile device
+
+ 

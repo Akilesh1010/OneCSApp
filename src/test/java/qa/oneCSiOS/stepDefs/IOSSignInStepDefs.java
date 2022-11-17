@@ -7,13 +7,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import qa.framework.assertions.AssertLogger;
 import qa.framework.dbutils.SQLDriver;
 import qa.framework.device.DeviceActions;
 import qa.framework.device.DeviceDriverManager;
 import qa.framework.utils.Reporter;
-import qa.oneCSAndroid.pages.OneCS_Mobile;
-import qa.oneCSAndroid.pages.SEA_HomeScreen;
 import qa.oneCSiOS.pages.DashboardScreen;
 import qa.oneCSiOS.pages.IOSSignInScreen;
 
@@ -99,6 +96,8 @@ public class IOSSignInStepDefs {
 	@Then("user clicks on Back Button for iOS")
 	public void user_clicks_on_Back_Button_for_iOS() {
 		DeviceDriverManager.getDriver().navigate().back();
+		DeviceDriverManager.getDriver().navigate().back();
+		
 	}
 
 	@Given("user should see {string} from Signin Screen for iOS")
@@ -203,6 +202,12 @@ public class IOSSignInStepDefs {
 	public void user_should_see_the_entered_password_in_password_fiedls_for_iOS() {
 		Assert.assertEquals(iOSSignInScreen.getTextiOS("PWD_EDIT"),
 				DeviceActions.getTestData("Correct_Password"));
+	}
+	
+	@Then("user should be displayed with secure sign in page for iOS")
+	public void user_should_be_displayed_with_secure_sign_in_page_for_iOS() {
+	    boolean flag = iOSSignInScreen.secureSignInScreenFieldsDisplayiOS();
+	    Assert.assertTrue(flag, "Error...Secure sign in screen fields not displayed.");
 	}
 
 
