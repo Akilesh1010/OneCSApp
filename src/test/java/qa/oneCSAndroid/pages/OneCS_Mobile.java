@@ -21,7 +21,7 @@ import qa.framework.utils.Reporter;
 
 public class OneCS_Mobile {
 
-	static DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSApp_Android"));
+	static DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSAppAndroid_Android"));
 
 	public static String getDispalyText() {
 
