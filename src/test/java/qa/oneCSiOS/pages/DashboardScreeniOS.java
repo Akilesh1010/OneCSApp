@@ -1,5 +1,6 @@
 package qa.oneCSiOS.pages;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,20 +8,24 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.PerformsTouchActions;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.ElementOption;
 import qa.framework.dbutils.SQLDriver;
 import qa.framework.device.DeviceActions;
 import qa.framework.device.DeviceDriverManager;
 import qa.framework.device.IOSAppDriver;
 import qa.framework.utils.Action;
 
-public class DashboardScreen {
+public class DashboardScreeniOS {
 
 
-	static DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSApp_iOS"));
+	static DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSAppiOS_iOS"));
 
 
-	public boolean dashboardScreenFieldValidations() {
+	public boolean dashboardScreenFieldValidationsiOS() {
 		boolean flag = false;
 
 		List<MobileElement> fields = new ArrayList<MobileElement>();
@@ -120,6 +125,12 @@ public class DashboardScreen {
 		return flag;
 
 	} 
+	
+	public void swipeiOS(MobileElement startingElement, MobileElement endingElement) {
+		TouchAction swipe = new TouchAction((PerformsTouchActions) DeviceDriverManager.getDriver());
+		swipe.press(ElementOption.element(startingElement)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1500)))
+				.moveTo(ElementOption.element(endingElement)).release().perform();
+	}
 
 
 

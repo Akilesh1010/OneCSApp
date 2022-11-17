@@ -14,10 +14,10 @@ import qa.framework.device.DeviceActions;
 import qa.framework.utils.Action;
 import qa.framework.utils.Reporter;
 
-public class IOSSignInScreen {
+public class SignInScreeniOS {
 
 	
-	static DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSApp_iOS"));
+	static DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSAppiOS_iOS"));
 	
 
 	public void btnClickiOS(String btnName) {

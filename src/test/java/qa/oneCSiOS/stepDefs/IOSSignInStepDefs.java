@@ -11,14 +11,14 @@ import qa.framework.dbutils.SQLDriver;
 import qa.framework.device.DeviceActions;
 import qa.framework.device.DeviceDriverManager;
 import qa.framework.utils.Reporter;
-import qa.oneCSiOS.pages.DashboardScreen;
-import qa.oneCSiOS.pages.IOSSignInScreen;
+import qa.oneCSiOS.pages.DashboardScreeniOS;
+import qa.oneCSiOS.pages.SignInScreeniOS;
 
 public class IOSSignInStepDefs {
 
-	DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSApp_iOS"));
-	IOSSignInScreen iOSSignInScreen = new IOSSignInScreen();
-	DashboardScreen dashboardScreen = new DashboardScreen();
+	DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSAppiOS_iOS"));
+	SignInScreeniOS iOSSignInScreen = new SignInScreeniOS();
+	DashboardScreeniOS dashboardScreeniOS = new DashboardScreeniOS();
 
 
 	@Given("user Clicks on {string} button for iOS")
