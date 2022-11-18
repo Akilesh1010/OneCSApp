@@ -193,5 +193,18 @@ public class OneCS_Mobile {
 		Assert.assertEquals(empty, "");
 		
 	}
+	
+	public static List<String> getStep4Screenvalues() {
+		List<String> pageValues = new ArrayList<String>();
+		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("CONFIRM_PIN_TEXT"));
+		listOfElements.add((MobileElement) action.getElement("CREATE_YOUR_PIN_TEXT"));
+
+		for (MobileElement element : listOfElements) {
+			pageValues.add(DeviceActions.getText((MobileElement) element));
+		}
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+		return pageValues;
+	}
 
 }
