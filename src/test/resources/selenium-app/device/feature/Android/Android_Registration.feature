@@ -227,7 +227,7 @@ Feature: Sign In/Login
     Then user should see six blank text boxes for Android
     Then user should see "CONTINUE_BUTTON_DISABLED" for Android
     Then user should not see the "BACK_BUTTON" for Android
-    
+    And user closes "app" on mobile device
   	
 	@SignIn_Android @2.10_Android
   Scenario: To verify the "Sign in step 3 of 4" screen validations
@@ -247,6 +247,7 @@ Feature: Sign In/Login
   	And user should verify continue button Enabled in step three screen for Android
   	And user taps on "STEP3_CONTINUE_BUTTON" for Android
   	Then user should see "Sign in step 4 of 4" from Signin Screen for Android
+  	And user closes "app" on mobile device
   	
   @SignIn_Android @2.11_Android
   Scenario: To verify the "Sign in step 4 of 4" screen details	
@@ -264,8 +265,90 @@ Feature: Sign In/Login
   	Then user validates below details in step four of sign in screen for Android
   				|Confirm your PIN																																										 |
 					|You’ll use this 6-digit PIN to log in to your OneCS account securely if you don’t enable Biometrics.|
+		Then user verifies the "CREATE_YOUR_PIN_BOX"  is empty for Android
+		Then user should verify "CONFIRM_PIN" button in step four of singin screen for Android
+		And user closes "app" on mobile device
 		
-  	Then user verifies the "CREATE_YOUR_PIN_BOX"  is empty for Android
+		@SignIn_Android @2.12_Android
+  Scenario: To verify the "Sign in step 4 of 4" screen validations
+  	Given user launch app "OneCS.apk" on "RealDevice" mobile device							
+    And user Clicks on "SIGN_IN" button
+    When user enters "Correct_Username" and "Correct_Password"
+    When user Clicks on "Continue_Button"
+  	And user enters the "TWO_FA" code in input box
+  	When user clicks on Verify button
+  	And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+  	And user taps on "STEP3_CONTINUE_BUTTON" for Android
+  	And user taps on "BACK_BUTTON" in step four of sign in screen for Android
+  	Then user should see "Sign in step 3 of 4" from Signin Screen for Android
+  	And user should verify "CONTINUE_BUTTON_DISABLED" buttom Disabled in step four screen for Android
+		And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+		And user taps on "STEP3_CONTINUE_BUTTON" for Android
+		And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+		And user taps on "CONFIRM_PIN" button in step four of sigin screen for Android
+		Then user should see the continue button turning to "Loading_Spinner" for Android
+		Then upon confirming user should see "Enable biometrics" and "Maybe later" options for Android
+		And user closes "app" on mobile device
+		
+		@SignIn_Android @2.13_Android
+  Scenario: To verify the "Sign in step 4 of 4" screen validations
+		Given user launch app "OneCS.apk" on "RealDevice" mobile device							
+    And user Clicks on "SIGN_IN" button
+    When user enters "Correct_Username" and "Correct_Password"
+    When user Clicks on "Continue_Button"
+  	And user enters the "TWO_FA" code in input box
+  	When user clicks on Verify button
+  	And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+		And user taps on "STEP3_CONTINUE_BUTTON" for Android
+		Then user should see "Sign in step 4 of 4" from Signin Screen for Android
+		And user enters "INCORRECT_SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+		And user taps on "CONFIRM_PIN" button in step four of sigin screen for Android
+		Then user should see "INCORRECT_PIN" pop up in step four of sigin screen for Android
+		Then user should validates "ERROR_MSG_STEP4" pop up in step four of sigin screen for Android
+		Then user should see "EDIT_DETAILS_STEP4" button for Android	
+		
+		
+		@SignIn_Android @2.16_Android
+  Scenario: To verify whether the user is able to skip the Fingerprint/Face ID authentication during Registration - Maybe later
+		Given user launch app "OneCS.apk" on "RealDevice" mobile device							
+    And user Clicks on "SIGN_IN" button
+    When user enters "Correct_Username" and "Correct_Password"
+    When user Clicks on "Continue_Button"
+  	And user enters the "TWO_FA" code in input box
+  	When user clicks on Verify button
+  	And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+		And user taps on "STEP3_CONTINUE_BUTTON" for Android
+		And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+		And user taps on "CONFIRM_PIN" button in step four of sigin screen for Android
+		Then user should see "Secure Sign in" as header for Android
+		Then upon confirming user should see "Enable biometrics" and "Maybe later" options for Android
+		And user taps on "MAY_BE_LATER" option for Android
+		Then user should see Dashboard screen
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 
