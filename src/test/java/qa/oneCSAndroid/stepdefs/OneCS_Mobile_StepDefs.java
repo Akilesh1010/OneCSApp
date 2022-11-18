@@ -35,7 +35,7 @@ public class OneCS_Mobile_StepDefs {
 	DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSAppAndroid_Android"));
 	OneCS_Mobile OneCS = new OneCS_Mobile();
 	SoftAssert softAssert = new SoftAssert();
-
+	WebDriverWait wait = new WebDriverWait(DeviceDriverManager.getDriver(),20);
 	@Given("user should see {string} logo in welcome screen for Android")
 	public void user_should_see_logo_in_welcome_screen_for_Android(String Logo) {
 		Assert.assertTrue(action.isPresent(Logo));
@@ -526,6 +526,83 @@ System.out.println(DeviceActions.getTestData(digit));
 	    OneCS.AndroidBtnClick(continueButton);
 	}
 	
+	@Then("user validates below details in step four of sign in screen for Android")
+	public void user_validates_below_details_in_step_four_of_sign_in_screen_for_Android(DataTable dataTable) {
+		List<String> data = dataTable.asList();
+		List<String> pageValues = OneCS_Mobile.getStep4Screenvalues();
+		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
+	}
+
+	@Then("user verifies the {string}  is empty for Android")
+	public void user_verifies_the_is_empty_for_Android(String string) {
+		Assert.assertEquals(OneCS.androidGetText("CREATE_YOUR_PIN_BOX"), "");
+	}
+
+	@Then("user should verify {string} button in step four of singin screen for Android")
+	public void user_should_verify_button_in_step_four_of_singin_screen_for_Android(String button) {
+		Assert.assertTrue(action.isPresent(button));
+	}
+	
+	
+	@When("user taps on {string} in step four of sign in screen for Android")
+	public void user_taps_on_in_step_four_of_sign_in_screen_for_Android(String back) {
+	    OneCS.AndroidBtnClick(back);
+	}
+
+	@Then("user should verify {string} buttom Disabled in step four screen for Android")
+	public void user_should_verify_buttom_Disabled_in_step_four_screen_for_Android(String confirmPin) {
+	    OneCS.androidButtonEnabled(confirmPin);
+	}
+
+	@Then("user taps on {string} button in step four of sigin screen for Android")
+	public void user_taps_on_button_in_step_four_of_sigin_screen_for_Android(String button) {
+		OneCS.AndroidBtnClick(button);
+	}
+
+	@Then("upon confirming user should see {string} and {string} options for Android")
+	public void upon_confirming_user_should_see_and_options_for_Android(String bio, String later) {
+	    Assert.assertEquals(OneCS.androidGetText("ENABLE_BIOMETRICS"),bio);
+	    Assert.assertEquals(OneCS.androidGetText("MAY_BE_LATER"),later);
+	}
+	
+	@Then("user should see {string} pop up in step four of sigin screen for Android")
+	public void user_should_see_pop_up_in_step_four_of_sigin_screen_for_Android(String incPin) {
+		Assert.assertEquals(OneCS.androidGetText(incPin), DeviceActions.getTestData(incPin));
+	}
+
+	@Then("user should validates {string} pop up in step four of sigin screen for Android")
+	public void user_should_validates_pop_up_in_step_four_of_sigin_screen_for_Android(String errorMsg) {
+		Assert.assertEquals(OneCS.androidGetText(errorMsg), DeviceActions.getTestData(errorMsg));
+	}
+
+	@Then("user should see {string} button for Android")
+	public void user_should_see_button_for_Android(String editdetails) {
+		Assert.assertTrue(action.isPresent(editdetails));
+	}
+	
+	@Then("user should see Dashboard screen")
+	public void user_should_see_Dashboard_screen() throws InterruptedException {
+		Assert.assertEquals(DeviceActions.getTestData("WELCOME_MSG"), OneCS.androidGetText("DASHBOARD_SCREEN"));
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile App Login Screen");
+
+	}
+	
+	@Then("user should see {string} as header for Android")
+	public void user_should_see_as_header_for_Android(String header) {
+		Assert.assertEquals(header, OneCS.androidGetText("SECURE_SIGN_IN"));
+	}
+
+	@Then("user taps on {string} option for Android")
+	public void user_taps_on_option_for_Android(String later) {
+	    OneCS.AndroidBtnClick(later);
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -548,9 +625,8 @@ System.out.println(DeviceActions.getTestData(digit));
 
 	@Then("user enters the {string} code in input box")
 	public void user_enters_the_code_in_input_box(String otp) throws InterruptedException {
-		Thread.sleep(4000);
+														wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("Loading_Spinner")));
 		String codetext = DeviceActions.getText((MobileElement) action.getElement("CODE_TO_TYPE"));
-		// String code = codetext.replaceAll("[^0-9]", "");
 		DeviceActions.sendKeys((MobileElement) action.getElement("SIX_DIGIT_INPUT_BOX"), codetext);
 		
 	}
@@ -558,6 +634,7 @@ System.out.println(DeviceActions.getTestData(digit));
 	@And("user clicks on Verify button")
 	public void user_clicks_on_Verify_Button() throws InterruptedException {
 		DeviceActions.click((MobileElement) action.getElement("VERIFY_BUTTON"));
+		Thread.sleep(4000);
 		
 	}
 
@@ -593,16 +670,7 @@ System.out.println(DeviceActions.getTestData(digit));
 		Thread.sleep(15000);
 	}
 
-	@Then("user should see Dashboard screen")
-	public void user_should_see_Dashboard_screen() throws InterruptedException {
-		String Dashboard = DeviceActions.getText((MobileElement) action.getElement("DASHBOARD_SCREEN"));
-		Assert.assertEquals(DeviceActions.getTestData("WELCOME_MSG"), Dashboard);
-		Reporter.addDeviceScreenshot("Login Scrren", "Mobile App Login Screen");
-		Thread.sleep(6000);
-
-		Reporter.addDeviceScreenshot("Login Scrren", "Mobile App Login Screen");
-
-	}
+	
 
 	@When("^user clicks on Holdings Tab$")
 	public void user_clicks_on_holdings_tab() throws Throwable {
