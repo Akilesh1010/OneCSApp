@@ -9,8 +9,8 @@ Feature: Sign in / Login feature validation on iOS app
     Then user should see "SIGN_IN_BTN" in welcome screen for iOS
     And user should see "DON’T_HAVE_AN_ACCOUNT_LNK" text in welcome screen for iOS
     And user Clicks on "CREATE_ACCOUNT_ON_WEBSITE_LNK" button for iOS
-    Then user should be Navigated to the "‎CS_SECURE_URL" website for iOS
-    #And user clicks on Back Button for iOS
+    Then user should be Navigated to the "‎‎charles-stanley.co.uk, secure" website for iOS
+    Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
     And user should see "CS_WELCOME_LOGO" in welcome screen for iOS
     And user closes "app" on mobile device
 
@@ -20,7 +20,6 @@ Feature: Sign in / Login feature validation on iOS app
     And user Clicks on "SIGN_IN_BTN" button for iOS
     And user should see "Sign in step 1 of 4" from Signin Screen for iOS
     And user should see "IC_CLOSE_BTN" on the top left corner of the screen for iOS
-    #And user should see progress bar as "Step1_of_4" in signin screen for iOS
     And user should be displayed with "USERNAME_PASSWORD_LABEL_TXT" in sigin screen for iOS
     And user should be displayed with "Please enter your username and password associated with your Charles Stanley account." in signin screen for iOS
     And user should see "Username" text inside the username box for iOS
@@ -72,4 +71,39 @@ Feature: Sign in / Login feature validation on iOS app
     Then user should see the entered password in password fiedls for iOS
     And user closes "app" on mobile device
 
- 
+  @SignIn_iOS @2.05_iOS
+  Scenario: Verify the "I need help in entering details" link
+    Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    And user Clicks on "SIGN_IN_BTN" button for iOS
+    When user enters "Correct_Username" and "Correct_Password" for iOS
+    And user Clicks on "I_NEED_HELP_ENTERING_CORRECT_DETAILS_LINK" button for iOS
+    Then user should verity the fields and labels of Forgot Sign in details section for iOS
+    And user Clicks on "CANCEL_BTN" button for iOS
+    Then user should not see the "FORGOT_SIGN_IN_DETAILS_LABEL_TXT" pop up in Signin Screen for iOS
+    Then user should see the entered username and password retained in sigin Screen for iOS
+    And user Clicks on "I_NEED_HELP_ENTERING_CORRECT_DETAILS_LINK" button for iOS
+    When user Clicks on "FORGOT_USER_NAME_BTN" button for iOS
+    #Then user should be Navigated to the "https://www.charles-stanley-direct.co.uk/app/forgotten-username" website for iOS
+    Then user verifies below fields in forgot username website for iOS
+      | Forgotten Username |
+      | Date Of Birth      |
+      | Account Number     |
+    Then user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    And user Clicks on "SIGN_IN_BTN" button for iOS
+    When user enters "Correct_Username" and "Correct_Password" for iOS
+    Then user should see the entered username and password retained in sigin Screen for iOS
+    And user Clicks on "I_NEED_HELP_ENTERING_CORRECT_DETAILS_LINK" button for iOS
+    When user Clicks on "FORGOT_PWD_BTN" button for iOS
+    #Then user should be Navigated to the "https://www.charles-stanley-direct.co.uk/app/reset-password" website for iOS
+    Then user verifies below fields in forgot password website for iOS
+      | Forgotten Password |
+      | Username           |
+      | Next               |
+    Then user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    And user Clicks on "SIGN_IN_BTN" button for iOS
+    When user enters "Correct_Username" and "Correct_Password" for iOS
+    Then user should see the entered username and password retained in sigin Screen for iOS
+    And user Clicks on "I_NEED_HELP_ENTERING_CORRECT_DETAILS_LINK" button for iOS
+    And user Clicks on "CANCEL_BTN" button for iOS
+    Then user should not see the "FORGOT_SIGN_IN_DETAILS_LABEL_TXT" pop up in Signin Screen for iOS
+    And user closes "app" on mobile device

@@ -86,6 +86,10 @@ public class IOSDashboardSreenStepDefs {
 
 		@SuppressWarnings("deprecation")
 		int hours = date.getHours()-12;
+		
+		@SuppressWarnings("deprecation")
+		int year = date.getYear();
+		System.out.println(year);
 
 		@SuppressWarnings("deprecation")
 		int minutes = date.getMinutes();

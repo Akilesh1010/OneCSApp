@@ -1,16 +1,23 @@
 package qa.oneCSiOS.stepDefs;
 
-import org.testng.Assert;
+import java.util.List;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 import io.appium.java_client.MobileElement;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import qa.framework.assertions.AssertLogger;
 import qa.framework.dbutils.SQLDriver;
 import qa.framework.device.DeviceActions;
 import qa.framework.device.DeviceDriverManager;
 import qa.framework.utils.Reporter;
+import qa.oneCSAndroid.pages.OneCS_Mobile;
 import qa.oneCSiOS.pages.DashboardScreeniOS;
 import qa.oneCSiOS.pages.SignInScreeniOS;
 
@@ -19,6 +26,8 @@ public class IOSSignInStepDefs {
 	DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSAppiOS_iOS"));
 	SignInScreeniOS iOSSignInScreen = new SignInScreeniOS();
 	DashboardScreeniOS dashboardScreeniOS = new DashboardScreeniOS();
+	SoftAssert softAssert = new SoftAssert();
+	WebDriverWait wait = new WebDriverWait(DeviceDriverManager.getDriver(),20);
 
 
 	@Given("user Clicks on {string} button for iOS")
@@ -89,15 +98,12 @@ public class IOSSignInStepDefs {
 
 	@Then("user should be Navigated to the {string} website for iOS")
 	public void user_should_be_Navigated_to_the_website_for_iOS(String url) {
-		Assert.assertEquals(iOSSignInScreen.getTextiOS("BROWSER_URL"), DeviceActions.getTestData("CS_SECURE_URL"));
-		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
-	}
-
-	@Then("user clicks on Back Button for iOS")
-	public void user_clicks_on_Back_Button_for_iOS() {
-		DeviceDriverManager.getDriver().navigate().back();
-		DeviceDriverManager.getDriver().navigate().back();
+//		Assert.assertEquals(iOSSignInScreen.getTextiOS("BROWSER_URL"), DeviceActions.getTestData("CS_SECURE_URL"));
+		String text = iOSSignInScreen.getTextiOS("BROWSER_URL");
+		System.out.println(text);
+		softAssert.assertEquals(url, iOSSignInScreen.getTextiOS("BROWSER_URL"));
 		
+		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
 	}
 
 	@Given("user should see {string} from Signin Screen for iOS")
@@ -180,34 +186,83 @@ public class IOSSignInStepDefs {
 	public void user_clicks_on_in_signin_Screen_for_iOS(String btnName) {
 		iOSSignInScreen.btnClickiOS(btnName);
 	}
-	
+
 	@Then("user should not see {string} overlay popup for iOS")
 	public void user_should_not_see_overlay_popup_for_iOS(String label) {
 		Assert.assertFalse(action.isPresent(label));
+		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
 	}
-	
+
 	@Then("user should see {string} Enabled for iOS")
 	public void user_should_see_Enabled_for_iOS(String btnName) {
 		Assert.assertEquals(iOSSignInScreen.buttonDisablediOS(btnName), "true");
 		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
 	}
-	
+
 	@Then("user clears the entered Username and Password from the fields for iOS")
 	public void user_clears_the_entered_Username_and_Password_from_the_fields_for_iOS() {
 		DeviceActions.clear((MobileElement) action.getElement("USERNAME_EDIT"));
-		DeviceActions.clear((MobileElement) action.getElement("PWD_EDIT"));   
+		DeviceActions.clear((MobileElement) action.getElement("PWD_EDIT"));  
+		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
 	}
-	
+
 	@Then("user should see the entered password in password fiedls for iOS")
 	public void user_should_see_the_entered_password_in_password_fiedls_for_iOS() {
 		Assert.assertEquals(iOSSignInScreen.getTextiOS("PWD_EDIT"),
 				DeviceActions.getTestData("Correct_Password"));
+		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
 	}
-	
+
 	@Then("user should be displayed with secure sign in page for iOS")
 	public void user_should_be_displayed_with_secure_sign_in_page_for_iOS() {
-	    boolean flag = iOSSignInScreen.secureSignInScreenFieldsDisplayiOS();
-	    Assert.assertTrue(flag, "Error...Secure sign in screen fields not displayed.");
+		boolean flag = iOSSignInScreen.secureSignInScreenFieldsDisplayiOS();
+		Assert.assertTrue(flag, "Error...Secure sign in screen fields not displayed.");
+		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
+	}
+
+	@Then("user should verity the fields and labels of Forgot Sign in details section for iOS")
+	public void user_should_verity_the_fields_and_labels_of_Forgot_Sign_in_details_section_for_iOS() {
+		boolean flag = iOSSignInScreen.forgotSignInDetailsDisplayiOS();
+		Assert.assertTrue(flag, "Error... Forgot Sign in details fields not displayed.");
+		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
+	}
+
+	@Then("user should not see the {string} pop up in Signin Screen for iOS")
+	public void user_should_not_see_the_pop_up_in_Signin_Screen_for_iOS(String popup) throws InterruptedException {
+//		wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("FORGOT_SIGN_IN_DETAILS_LABEL_TXT")));
+		Thread.sleep(2000);
+		Assert.assertFalse(action.isPresent(popup));
+	}
+
+	@Then("user should see the entered username and password retained in sigin Screen for iOS")
+	public void user_should_see_the_entered_username_and_password_retained_in_sigin_Screen_for_iOS() {
+		iOSSignInScreen.btnClickiOS("EYE_PWD_HIDE_BTN");
+		
+		Assert.assertEquals(iOSSignInScreen.getTextiOS("USERNAME_EDIT"),
+				DeviceActions.getTestData("Correct_Username"));
+		
+		Assert.assertEquals(iOSSignInScreen.getTextiOS("PWD_EDIT"),
+				DeviceActions.getTestData("Correct_Password"));
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile");
+	}
+	
+	@Then("user verifies below fields in forgot username website for iOS")
+	public void user_verifies_below_fields_in_forgot_username_website_for_iOS(DataTable dataTable) {
+		List<String> data = dataTable.asList();
+		List<String> pageValues = iOSSignInScreen.getForgotUserWebScreeniOS();
+		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile");
+	   
+	}
+	
+	@Then("user verifies below fields in forgot password website for iOS")
+	public void user_verifies_below_fields_in_forgot_password_website_for_iOS(DataTable dataTable) {
+		iOSSignInScreen.btnClickiOS("FORGOTTEN_PWD_TXT_IN_WEBSITE");
+		List<String> data = dataTable.asList();
+		List<String> pageValues = iOSSignInScreen.getForgotPasswordWebScreeniOS();
+		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile");
+	  
 	}
 
 

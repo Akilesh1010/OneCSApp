@@ -98,6 +98,49 @@ public class SignInScreeniOS {
 		return flag;
 	}
 	
+	public boolean forgotSignInDetailsDisplayiOS() {
+		boolean flag = false;
+
+		List<MobileElement> fields = new ArrayList<MobileElement>();
+
+		fields.add((MobileElement) action.getElement("FORGOT_SIGN_IN_DETAILS_LABEL_TXT"));
+		fields.add((MobileElement) action.getElement("FORGOT_USER_NAME_BTN"));
+		fields.add((MobileElement) action.getElement("FORGOT_PWD_BTN"));
+		fields.add((MobileElement) action.getElement("CANCEL_BTN"));
+
+		for (MobileElement element : fields) {
+			flag = element.isDisplayed();
+		}	
+
+		return flag;
+	}
+	
+	public List<String> getForgotUserWebScreeniOS() {
+		List<String> pageValues = new ArrayList<String>();
+		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("FORGOTTEN_USERNAME_TXT_IN_WEBSITE"));
+		listOfElements.add((MobileElement) action.getElement("DOB_STATIC_TEXT_IN_WEBSITE"));
+		listOfElements.add((MobileElement) action.getElement("ACCOUNT_NUMBER_STATIC_TEXT_IN_WEBSITE"));
+
+		for (MobileElement element : listOfElements) {
+			pageValues.add(DeviceActions.getText((MobileElement) element));
+		}
+		return pageValues;
+	}
+	
+	public List<String> getForgotPasswordWebScreeniOS() {
+		List<String> pageValues = new ArrayList<String>();
+		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("FORGOTTEN_PWD_TXT_IN_WEBSITE"));
+		listOfElements.add((MobileElement) action.getElement("USERNAME_TXT_IN_WEBSITE"));
+		listOfElements.add((MobileElement) action.getElement("NEXT_BTN_IN_WEBSITE"));
+
+		for (MobileElement element : listOfElements) {
+			pageValues.add(DeviceActions.getText((MobileElement) element));
+		}
+		return pageValues;
+	}
+	
 	
 	
 }
