@@ -35,6 +35,10 @@ public class SignInScreeniOS {
         DeviceActions.sendKeys((MobileElement) action.getElement("SIGN_IN_2FA_CODE_INPUT_FIELD"), codetext);
 	}
 	
+	public void inputIncorrect2FAiOS() {
+		DeviceActions.sendKeys((MobileElement) action.getElement("SIGN_IN_2FA_CODE_INPUT_FIELD"), DeviceActions.getTestData("INCORRECT_2FA_CODE"));
+	}
+	
 	public void inputFieldiOS(String inputField, String value) {
 		DeviceActions.sendKeys((MobileElement) action.getElement(inputField), DeviceActions.getTestData(value));
 	}
@@ -134,6 +138,33 @@ public class SignInScreeniOS {
 		listOfElements.add((MobileElement) action.getElement("FORGOTTEN_PWD_TXT_IN_WEBSITE"));
 		listOfElements.add((MobileElement) action.getElement("USERNAME_TXT_IN_WEBSITE"));
 		listOfElements.add((MobileElement) action.getElement("NEXT_BTN_IN_WEBSITE"));
+
+		for (MobileElement element : listOfElements) {
+			pageValues.add(DeviceActions.getText((MobileElement) element));
+		}
+		return pageValues;
+	}
+	
+	public List<String> getVerifyAccountCodePopDetailsiOS() {
+		List<String> pageValues = new ArrayList<String>();
+		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("STRUGGLING_TO_VERIFY_CODE_POP_TXT"));
+		listOfElements.add((MobileElement) action.getElement("RESEND_6_DIGIT_CODE_BTN"));
+		listOfElements.add((MobileElement) action.getElement("CHECK_MOBILE_NUMBER_BTN"));
+		listOfElements.add((MobileElement) action.getElement("CANCEL_BTN"));
+
+		for (MobileElement element : listOfElements) {
+			pageValues.add(DeviceActions.getText((MobileElement) element));
+		}
+		return pageValues;
+	}
+	
+	public List<String> loginPageWebiOS() {
+		List<String> pageValues = new ArrayList<String>();
+		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("USERNAME_TXT_IN_WEBSITE"));
+		listOfElements.add((MobileElement) action.getElement("PASSWORD_TXT_IN_WEB"));
+		listOfElements.add((MobileElement) action.getElement("LOGIN_BTN_IN_WEB"));
 
 		for (MobileElement element : listOfElements) {
 			pageValues.add(DeviceActions.getText((MobileElement) element));

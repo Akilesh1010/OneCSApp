@@ -107,3 +107,67 @@ Feature: Sign in / Login feature validation on iOS app
     And user Clicks on "CANCEL_BTN" button for iOS
     Then user should not see the "FORGOT_SIGN_IN_DETAILS_LABEL_TXT" pop up in Signin Screen for iOS
     And user closes "app" on mobile device
+
+  @SignIn_iOS @2.06_iOS
+  Scenario: Verify the sign in step 2 of 4 screen details & validations [2FA Screen]
+    Then user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    And user Clicks on "SIGN_IN_BTN" button for iOS
+    When user enters "Correct_Username" and "Correct_Password" for iOS
+    When user Clicks on "CONTINUE_SIGN_IN_BTN" button for iOS
+    And user should see "Sign in step 2 of 4" from Signin Screen for iOS
+    And user should see "BACK_BUTTON" on the top left corner of the screen for iOS
+    Then user should see "VERIFY_YOUR_ACCOUNT_TWO_FA_TXT" screen for iOS
+    #Then user should see "WE_HAVE_SENT_A_6_DIGIT_CODE_TXT_2FA_SCREEN" screen for iOS
+    And user should see a link stating "I need help verifying my account" in step two of sigin screen for iOS
+    And user enters "ONE_DIGIT" code in six digit code box for iOS
+    And user should verify "VERIFY_BTN" Disabled for iOS
+    And user enters "TWO_DIGIT" code in six digit code box for iOS
+    And user should verify "VERIFY_BTN" Disabled for iOS
+    And user enters "THREE_DIGIT" code in six digit code box for iOS
+    And user should verify "VERIFY_BTN" Disabled for iOS
+    And user enters "FOUR_DIGIT" code in six digit code box for iOS
+    And user should verify "VERIFY_BTN" Disabled for iOS
+    And user enters "FIVE_DIGIT" code in six digit code box for iOS
+    And user should verify "VERIFY_BTN" Disabled for iOS
+    And user get the SIX digit code displayed on screen and enters in TWOFA input field for iOS
+    Then user should see "VERIFY_BTN" Enabled for iOS
+    And user Clicks on "VERIFY_BTN" button for iOS
+    And user should see "Sign in step 3 of 4" from Signin Screen for iOS
+    #And user should see "BACK_BUTTON" on the top left corner of the screen for iOS
+    Then user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    And user Clicks on "SIGN_IN_BTN" button for iOS
+    When user enters "Correct_Username" and "Correct_Password" for iOS
+    When user Clicks on "CONTINUE_SIGN_IN_BTN" button for iOS
+    And user should see "Sign in step 2 of 4" from Signin Screen for iOS
+    And user enters incorrect TWOFA code in input box for iOS
+    And user Clicks on "VERIFY_BTN" button for iOS
+    Then user should see "INCORRECT_CODE_LABEL_TXT" text in the pop up for iOS
+    Then user should see "PLEASE_CHECK_THE_DETAILS_ENTERED_TXT" text in the pop up for iOS
+    And user Clicks on "EDIT_DETAILS_BTN" button for iOS
+    Then user should not see "INCORRECT_CODE_LABEL_TXT" overlay popup for iOS
+    And user should see "Sign in step 2 of 4" from Signin Screen for iOS
+    And user closes "app" on mobile device
+
+  @SignIn_iOS @2.07_iOS
+  Scenario: To verify the Sign In process when Mobile number is linked to account 2FA
+    Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    And user Clicks on "SIGN_IN_BTN" button for iOS
+    When user enters "Correct_Username" and "Correct_Password" for iOS
+    When user Clicks on "CONTINUE_SIGN_IN_BTN" button for iOS
+    And user should see "Sign in step 2 of 4" from Signin Screen for iOS
+    And user Clicks on "I_NEED_HELP_VERIFYING_ACCOUNT_LINK" button for iOS
+    Then user should see below details in TwoFA Screen for iOS
+      | Struggling to verify your account? Not to worry. Just tap the relevant button below to get back on track. |
+      | Resend 6-digit code                                                                                       |
+      | Check mobile number                                                                                       |
+      | Cancel                                                                                                    |
+    And user Clicks on "CHECK_MOBILE_NUMBER_BTN" button for iOS
+    #	Then user should be Navigated to the "https://www.charles-stanley-direct.co.uk/My_Dashboard/My_Direct_Accounts/My_Profile/PersonalInformation" website for iOS
+    Then user validates below fields in web url opened for iOS
+      | Username |
+      | Password |
+      | Login    |
+    And user enters "WEB_USERNAME" and "WEB_PASSWORD" in web url opened for iOS
+    When user Clicks on "LOGIN_BTN_IN_WEB" button for iOS
+    Then user should be able to view the memorable Word field in the web for iOS
+    And user closes "app" on mobile device

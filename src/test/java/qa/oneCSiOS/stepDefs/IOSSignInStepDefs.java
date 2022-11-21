@@ -55,14 +55,14 @@ public class IOSSignInStepDefs {
 
 	@Then("user should see {string} screen for iOS")
 	public void user_should_see_screen_for_iOS(String twoFA) throws InterruptedException {
-		Thread.sleep(3000);
-		Assert.assertTrue(action.isPresent(twoFA));
+//		Thread.sleep(3000);
+		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement(twoFA)));
 		Reporter.addDeviceScreenshot("2FA Screen", "Mobile App Login Screen");		
 	}
 
 	@Then("user get the SIX digit code displayed on screen and enters in TWOFA input field for iOS")
 	public void user_get_the_SIX_digit_code_displayed_on_screen_and_enters_in_TWOFA_input_field_for_iOS() throws InterruptedException {
-		iOSSignInScreen.input2FA();   
+		iOSSignInScreen.input2FA();  
 	}
 
 	@Then("user enters value in {string} field with {string} pin for iOS")
@@ -108,13 +108,22 @@ public class IOSSignInStepDefs {
 
 	@Given("user should see {string} from Signin Screen for iOS")
 	public void user_should_see_from_Signin_Screen_for_iOS(String step1TitleTxt) {
-		Assert.assertEquals(iOSSignInScreen.getTextiOS("SIGN_IN_STEP_1_OF_4_TITLE"),step1TitleTxt);	
+		if(step1TitleTxt.equalsIgnoreCase("Sign in step 1 of 4")) {
+			Assert.assertEquals(iOSSignInScreen.getTextiOS("SIGN_IN_STEP_1_OF_4_TITLE"),step1TitleTxt);	
+		}
+		else if(step1TitleTxt.equalsIgnoreCase("Sign in step 2 of 4")) {
+			Assert.assertEquals(iOSSignInScreen.getTextiOS("SIGN_IN_STEP_2_OF_4_TITLE"),step1TitleTxt);	
+		}
+		else if(step1TitleTxt.equalsIgnoreCase("Sign in step 3 of 4")) {
+			Assert.assertEquals(iOSSignInScreen.getTextiOS("SIGN_IN_STEP_3_OF_4_TITLE"),step1TitleTxt);	
+		}
+		
 		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
 	}
 
 	@Given("user should see {string} on the top left corner of the screen for iOS")
-	public void user_should_see_on_the_top_left_corner_of_the_screen_for_iOS(String closeBtn) {
-		Assert.assertTrue(action.isPresent(closeBtn));
+	public void user_should_see_on_the_top_left_corner_of_the_screen_for_iOS(String btn) {
+		Assert.assertTrue(action.isPresent(btn));
 	}
 
 	@Given("user should see progress bar as {string} in signin screen for iOS")
@@ -262,8 +271,63 @@ public class IOSSignInStepDefs {
 		List<String> pageValues = iOSSignInScreen.getForgotPasswordWebScreeniOS();
 		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
 		Reporter.addDeviceScreenshot("Login Scrren", "Mobile");
-	  
 	}
+	
+	@Then("user should see a link stating {string} in step two of sigin screen for iOS")
+	public void user_should_see_a_link_stating_in_step_two_of_sigin_screen_for_iOS(String accountHelp) {
+		Assert.assertEquals(iOSSignInScreen.getTextiOS("I_NEED_HELP_VERIFYING_ACCOUNT_LINK"), accountHelp);
+	}
+	
+	@Then("user enters {string} code in six digit code box for iOS")
+	public void user_enters_code_in_six_digit_code_box_for_iOS(String code) {
+		DeviceActions.sendKeys((MobileElement) action.getElement("SIGN_IN_2FA_CODE_INPUT_FIELD"), DeviceActions.getTestData(code));
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile");  
+	}
+	
+	@When("user enters incorrect TWOFA code in input box for iOS")
+	public void user_enters_incorrect_TWOFA_code_in_input_box_for_iOS() {
+		iOSSignInScreen.inputIncorrect2FAiOS();
+	}
+	
+	@Then("user should see {string} text in the pop up for iOS")
+	public void user_should_see_alert_pop_up_for_iOS(String popAlrert) {
+		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement(popAlrert)));
+		Reporter.addDeviceScreenshot("2FA Screen", "Mobile App Login Screen");
+	    
+	}
+	
+	@Then("user should see below details in TwoFA Screen for iOS")
+	public void user_should_see_below_details_in_TwoFA_Screen_for_iOS(DataTable dataTable) {
+		List<String> data = dataTable.asList();
+		List<String> pageValues = iOSSignInScreen.getVerifyAccountCodePopDetailsiOS();
+		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile");
+	}
+	
+	@Then("user validates below fields in web url opened for iOS")
+	public void user_validates_below_fields_in_web_url_opened_for_iOS(DataTable dataTable) {
+		iOSSignInScreen.btnClickiOS("LOGIN_TXT_IN_WEB");
+		List<String> data = dataTable.asList();
+		List<String> pageValues = iOSSignInScreen.loginPageWebiOS();
+		AssertLogger.assertEquals(pageValues, data, "Error..... Web page - login screen details does not match");
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile");
+	}
+	
+	@Then("user enters {string} and {string} in web url opened for iOS")
+	public void user_enters_and_in_web_url_opened_for_iOS(String userName, String pwd) {
+		DeviceActions.sendKeys((MobileElement) action.getElement("USERNAME_WEB_FIELD"), DeviceActions.getTestData(userName));
+		DeviceActions.sendKeys((MobileElement) action.getElement("PASSWORD_WEB_FIELD"), DeviceActions.getTestData(pwd));
+	    
+	}
+	
+	@Then("user should be able to view the memorable Word field in the web for iOS")
+	public void user_should_be_able_to_view_the_memorable_Word_field_in_the_web_for_iOS() {
+		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement("MEMERABLE_WORD_WEB_TXT")));
+		Reporter.addDeviceScreenshot("2FA Screen", "Mobile App Login Screen");
+	}
+	
+	
+	
 
 
 
