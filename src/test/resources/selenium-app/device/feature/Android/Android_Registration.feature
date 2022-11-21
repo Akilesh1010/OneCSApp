@@ -305,7 +305,8 @@ Feature: Sign In/Login
 		And user taps on "CONFIRM_PIN" button in step four of sigin screen for Android
 		Then user should see "INCORRECT_PIN" pop up in step four of sigin screen for Android
 		Then user should validates "ERROR_MSG_STEP4" pop up in step four of sigin screen for Android
-		Then user should see "EDIT_DETAILS_STEP4" button for Android	
+		Then user should see "EDIT_DETAILS_STEP4" button for Android
+		And user closes "app" on mobile device	
 		
 		
 		@SignIn_Android @2.16_Android
@@ -318,19 +319,35 @@ Feature: Sign In/Login
   	When user clicks on Verify button
   	And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
 		And user taps on "STEP3_CONTINUE_BUTTON" for Android
-		And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+		And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" in step four for Android
 		And user taps on "CONFIRM_PIN" button in step four of sigin screen for Android
 		Then user should see "Secure Sign in" as header for Android
 		Then upon confirming user should see "Enable biometrics" and "Maybe later" options for Android
 		And user taps on "MAY_BE_LATER" option for Android
 		Then user should see Dashboard screen
+		And user closes "app" on mobile device
 		
+		@SignIn_Android @2.22_Android
+  Scenario: More - Verify the Sign out process for the PIN, Fingerprint and Face ID logins
+  	Given user launch app "OneCS.apk" on "RealDevice" mobile device							
+    And user Clicks on "SIGN_IN" button
+    When user enters "Correct_Username" and "Correct_Password"
+    When user Clicks on "Continue_Button"
+  	And user enters the "TWO_FA" code in input box
+  	When user clicks on Verify button
+  	And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+		And user taps on "STEP3_CONTINUE_BUTTON" for Android
+		And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" in step four for Android
+		And user taps on "CONFIRM_PIN" button in step four of sigin screen for Android
+		And user taps on "MAY_BE_LATER" option for Android
+		And user Clicks on "More_Option" in Dashboard Screen for Android
+		Then user should see "OneCS" as tittle in more options Screen for Android
+		And user Signs Out the Mobile Application
+		And user should see "CHARLES_STANLEY" logo in welcome screen for Android
+		And user closes "app" on mobile device
 		
-		
-		
-		
-		
-		
+		@SignIn_Android @2.24_Android
+  Scenario: To verify the "Sign In" Screen for  the new user login using 6 - digit PIN
 		
 		
 		
