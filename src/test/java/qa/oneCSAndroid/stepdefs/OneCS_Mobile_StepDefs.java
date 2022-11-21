@@ -90,9 +90,17 @@ public class OneCS_Mobile_StepDefs {
 
 	@Given("user should see {string} from Signin Screen for Android")
 	public void user_should_see_from_Signin_Screen_for_Android(String step) throws InterruptedException {
-		Thread.sleep(3000);
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("SIGN_IN_STEP_1_OF_4")));
 		Assert.assertEquals(step, OneCS.androidGetText("SIGN_IN_STEP_1_OF_4"));
 
+	}
+	
+	@Then("user enters the {string} code in input box")
+	public void user_enters_the_code_in_input_box(String otp) throws InterruptedException {
+		wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("Loading_Spinner")));
+		String codetext = DeviceActions.getText((MobileElement) action.getElement("CODE_TO_TYPE"));
+		DeviceActions.sendKeys((MobileElement) action.getElement("SIX_DIGIT_INPUT_BOX"), codetext);
+		
 	}
 
 	@And("user should see {string} on the top left corner of the screen for Android")
@@ -170,7 +178,7 @@ public class OneCS_Mobile_StepDefs {
 
 	@Then("user should see {string} in pop up for Android")
 	public void user_should_see_in_pop_up_for_Android(String errorMsg) throws InterruptedException {
-		Thread.sleep(10000);
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("DETAILS_INCORRECT")));
 		Assert.assertEquals(OneCS.androidGetText(errorMsg), DeviceActions.getTestData("ERROR_MSG"));
 	}
 
@@ -232,7 +240,7 @@ public class OneCS_Mobile_StepDefs {
 	@Then("user should see the continue button turning to {string} for Android")
 	public void user_should_see_the_continue_button_turning_to_for_Android(String spinner) throws InterruptedException {
 		Assert.assertTrue(action.isPresent(spinner));
-		Thread.sleep(5000);
+		wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("Loading_Spinner")));
 	}
 
 	@Then("user should see the entered username and password retained in sigin Screen for Android")
@@ -505,6 +513,12 @@ System.out.println(DeviceActions.getTestData(digit));
 	public void user_enters_pin_in_for_Android(String code, String pinbox) {
 		OneCS.AndroidInputText(pinbox, code);
 	}
+	
+	@When("user enters {string} pin in {string} in step four for Android")
+	public void user_enters_pin_in_in_step_four_for_Android(String code, String pinbox) {
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("CONFIRM_PIN_TEXT")));
+		OneCS.AndroidInputText(pinbox, code);
+	}
 
 	@Then("user verfies {string} pin entered appears in {string} for Android")
 	public void user_verfies_pin_entered_appears_in_for_Android(String code, String pinbox) {
@@ -594,9 +608,26 @@ System.out.println(DeviceActions.getTestData(digit));
 
 	@Then("user taps on {string} option for Android")
 	public void user_taps_on_option_for_Android(String later) {
-	    OneCS.AndroidBtnClick(later);
+		OneCS.AndroidBtnClick(later);
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("DASHBOARD_SCREEN")));
 	}
 	
+	@And("user Clicks on {string} in Dashboard Screen for Android")
+    public void user_clicks_on_in_dashboard_screen_for_android(String more) throws Throwable {
+		DeviceActions.click((MobileElement) action.getElement(more));
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile App Login Screen");
+	}
+	
+	@Then("user should see {string} as tittle in more options Screen for Android")
+	public void user_should_see_as_tittle_in_more_options_Screen_for_Android(String Onecs) {
+		Assert.assertEquals(Onecs, OneCS.androidGetText("OneCS_Tittle"));
+	}
+	
+	@And("user Signs Out the Mobile Application")
+	public void user_signs_out_the_mobile_application() throws Throwable {
+		DeviceActions.scrollAndClick("Sign out");
+		
+	}
 	
 	
 	
@@ -623,18 +654,10 @@ System.out.println(DeviceActions.getTestData(digit));
 		DeviceActions.click((MobileElement) action.getElement(button));
 	}
 
-	@Then("user enters the {string} code in input box")
-	public void user_enters_the_code_in_input_box(String otp) throws InterruptedException {
-														wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("Loading_Spinner")));
-		String codetext = DeviceActions.getText((MobileElement) action.getElement("CODE_TO_TYPE"));
-		DeviceActions.sendKeys((MobileElement) action.getElement("SIX_DIGIT_INPUT_BOX"), codetext);
-		
-	}
-
 	@And("user clicks on Verify button")
 	public void user_clicks_on_Verify_Button() throws InterruptedException {
 		DeviceActions.click((MobileElement) action.getElement("VERIFY_BUTTON"));
-		Thread.sleep(4000);
+		wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("Loading_Spinner")));
 		
 	}
 
@@ -745,12 +768,7 @@ System.out.println(DeviceActions.getTestData(digit));
 		Thread.sleep(1000);
 	}
 
-	@And("^user Clicks on More Option$")
-	public void user_clicks_on_more_option() throws Throwable {
-		DeviceActions.click((MobileElement) action.getElement("MORE_BUTTON"));
-		Thread.sleep(1000);
-		Reporter.addDeviceScreenshot("Login Scrren", "Mobile App Login Screen");
-	}
+	
 
 	@And("^User Clicks on Documents Tab$")
 	public void user_clicks_on_documents_tab() throws Throwable {
@@ -769,11 +787,7 @@ System.out.println(DeviceActions.getTestData(digit));
 		throw new PendingException();
 	}
 
-	@And("^user Signs Out the Mobile Application$")
-	public void user_signs_out_the_mobile_application() throws Throwable {
-		DeviceActions.scrollAndClick("Sign out");
-		Thread.sleep(2000);
-	}
+	
 	
 	
 
