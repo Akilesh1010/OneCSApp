@@ -15,7 +15,7 @@
 		<cucumber-java.version>4.7.0</cucumber-java.version>
 		<cucumber-testng.version>4.7.0</cucumber-testng.version>
 		<testng-version>7.0.0</testng-version>
-
+		<allure-testng-version>2.13.9</allure-testng-version>
 		<extentreports.version>4.1.7</extentreports.version>
 		<extentreports-cucumber4-adapter.version>1.0.12</extentreports-cucumber4-adapter.version>
 		<browser-stack.version>1.0.3</browser-stack.version>
@@ -53,13 +53,18 @@
 
 		<threadCount>3</threadCount>
 
-		<!-- Allure Report Dependencies - START -->
-
-		<!-- Allure Report Dependencies - END -->
 
 	</properties>
 
 	<dependencies>
+
+		<!-- Allure Report Dependencies - START -->
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-testng</artifactId>
+			<version>${allure-testng-version}</version>
+		</dependency>
+		<!-- Allure Report Dependencies - END -->
 
 		<!-- Extent Report Start -->
 

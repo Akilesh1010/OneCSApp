@@ -25,33 +25,33 @@ public class AndroidAppDriver {
 	private DesiredCapabilities getCapabilities(String deviceType) {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 
-//		capabilities.setCapability("platformName", DeviceDriverManager.getPlatformName());
-//		capabilities.setCapability("platformVersion", DeviceDriverManager.getPlatformVersion());
-//		capabilities.setCapability("automationName", DeviceDriverManager.getAutomationEngine());
+		capabilities.setCapability("platformName", DeviceDriverManager.getPlatformName());
+		capabilities.setCapability("platformVersion", DeviceDriverManager.getPlatformVersion());
+		capabilities.setCapability("automationName", DeviceDriverManager.getAutomationEngine());
+
+		capabilities.setCapability("deviceName", DeviceDriverManager.getDeviceName());
+
+//		capabilities.setCapability("browserstack.user", "akileshs_JY4nW5");
+//		capabilities.setCapability("browserstack.key", "C8qZDyUkZS39eHYnBsXL");
 //
-//		capabilities.setCapability("deviceName", DeviceDriverManager.getDeviceName());
-
-		capabilities.setCapability("browserstack.user", "akileshs_JY4nW5");
-		capabilities.setCapability("browserstack.key", "C8qZDyUkZS39eHYnBsXL");
-
-		capabilities.setCapability("app", "bs://c0f0482fe14f8effacbff7219e623ef4ad1fe30e");
-
-		capabilities.setCapability("device", "Samsung Galaxy S20");
-		capabilities.setCapability("os_version", "10.0");
-
-		capabilities.setCapability("project", "OneCS Mobile");
-		capabilities.setCapability("build", "OneCS QA");
-
-		capabilities.setCapability("name", "OneCS Digital");
-
-		/* Do not stop app, do not clear app data, and do not uninstall apk. */
-
-		capabilities.setCapability("browserstack.local", "true");
-
-		capabilities.setCapability("browserstack.autoWait", "2");
+//		capabilities.setCapability("app", "bs://c0f0482fe14f8effacbff7219e623ef4ad1fe30e");
+//
+//		capabilities.setCapability("device", "Samsung Galaxy S20");
+//		capabilities.setCapability("os_version", "10.0");
+//
+//		capabilities.setCapability("project", "OneCS Mobile");
+//		capabilities.setCapability("build", "OneCS QA");
+//
+//		capabilities.setCapability("name", "OneCS Digital");
+//
+//		/* Do not stop app, do not clear app data, and do not uninstall apk. */
+//
+//		capabilities.setCapability("browserstack.local", "true");
+//
+//		capabilities.setCapability("browserstack.autoWait", "2");
 
 		/* Do not stop app, do not clear app data, and do not uninstall apk. */
-		capabilities.setCapability("noReset", true);
+		capabilities.setCapability("noReset", false);
 
 		return capabilities;
 
