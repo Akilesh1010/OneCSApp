@@ -117,6 +117,9 @@ public class IOSSignInStepDefs {
 		else if(step1TitleTxt.equalsIgnoreCase("Sign in step 3 of 4")) {
 			Assert.assertEquals(iOSSignInScreen.getTextiOS("SIGN_IN_STEP_3_OF_4_TITLE"),step1TitleTxt);	
 		}
+		else if(step1TitleTxt.equalsIgnoreCase("Sign in step 4 of 4")) {
+			Assert.assertEquals(iOSSignInScreen.getTextiOS("SIGN_IN_STEP_4_OF_4_TITLE"),step1TitleTxt);	
+		}
 		
 		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
 	}
@@ -323,6 +326,18 @@ public class IOSSignInStepDefs {
 	@Then("user should be able to view the memorable Word field in the web for iOS")
 	public void user_should_be_able_to_view_the_memorable_Word_field_in_the_web_for_iOS() {
 		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement("MEMERABLE_WORD_WEB_TXT")));
+		Reporter.addDeviceScreenshot("2FA Screen", "Mobile App Login Screen");
+	}
+	
+//	@Then("user should see six blank text boxes for iOS")
+//	public void user_should_see_six_blank_text_boxes_for_iOS() {
+//		String empty = DeviceActions.getText((MobileElement) action.getElement("SIGN_IN_NEW_PIN_INPUT"));
+//		Assert.assertEquals(empty, "");
+//	}
+	
+	@Then("user should not see the {string} for iOS")
+	public void user_should_not_see_the_for_iOS(String btnName) {
+		Assert.assertFalse(action.isPresent(btnName));
 		Reporter.addDeviceScreenshot("2FA Screen", "Mobile App Login Screen");
 	}
 	
