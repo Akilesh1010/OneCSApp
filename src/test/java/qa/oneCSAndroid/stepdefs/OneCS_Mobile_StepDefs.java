@@ -629,6 +629,18 @@ System.out.println(DeviceActions.getTestData(digit));
 		
 	}
 	
+	@Then("user verfies {string} button is disabled for Android")
+	public void user_verfies_button_is_disabled_for_Android(String confimPin) {
+	    OneCS.androidButtonDisabled(confimPin);
+	}
+
+	@Then("user should see {string} screen for Android")
+	public void user_should_see_screen_for_Android(String secureSignIn) {
+		Assert.assertTrue(action.isPresent(secureSignIn));
+	}
+	
+	
+	
 	
 	
 	

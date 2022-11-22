@@ -348,20 +348,31 @@ Feature: Sign In/Login
 		
 		@SignIn_Android @2.24_Android
   Scenario: To verify the "Sign In" Screen for  the new user login using 6 - digit PIN
+		Given user launch app "OneCS.apk" on "RealDevice" mobile device							
+    And user Clicks on "SIGN_IN" button
+		When user enters "Correct_Username" and "Correct_Password"
+    When user Clicks on "Continue_Button"
+		And user should see "Sign in step 2 of 4" from Signin Screen for Android
+		And user enters the "TWO_FA" code in input box
+  	When user clicks on Verify button
+		Then user should see "Sign in step 3 of 4" from Signin Screen for Android
+		And user should verify continue button Disabled in step three screen for Android
+		And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+		And user should verify continue button Enabled in step three screen for Android
+		And user taps on "STEP3_CONTINUE_BUTTON" for Android
+		Then user validates below details in step four of sign in screen for Android
+  				|Confirm your PIN																																										 |
+					|You’ll use this 6-digit PIN to log in to your OneCS account securely if you don’t enable Biometrics.|
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		Then user verfies "CONFIRM_PIN" button is disabled for Android
+		And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" in step four for Android
+		And user taps on "CONFIRM_PIN" button in step four of sigin screen for Android
+		Then user should see the continue button turning to "Loading_Spinner" for Android
+		Then user should see "SECURE_SIGN_IN" screen for Android
+		Then upon confirming user should see "Enable biometrics" and "Maybe later" options for Android
+		And user taps on "MAY_BE_LATER" option for Android
+		Then user should see Dashboard screen
+		And user closes "app" on mobile device
 		
 		
 		
@@ -409,7 +420,7 @@ Feature: Sign In/Login
     And user cliks on Continue Button
     And user Prefers to Cancel the Transaction
     And User Navigates to Accounts Page
-    And user Clicks on More Option
+    
     And user Signs Out the Mobile Application
     And user closes "app" on mobile device
     
