@@ -117,7 +117,6 @@ Feature: Sign in / Login feature validation on iOS app
     And user should see "Sign in step 2 of 4" from Signin Screen for iOS
     And user should see "BACK_BUTTON" on the top left corner of the screen for iOS
     Then user should see "VERIFY_YOUR_ACCOUNT_TWO_FA_TXT" screen for iOS
-    #Then user should see "WE_HAVE_SENT_A_6_DIGIT_CODE_TXT_2FA_SCREEN" screen for iOS
     And user should see a link stating "I need help verifying my account" in step two of sigin screen for iOS
     And user enters "ONE_DIGIT" code in six digit code box for iOS
     And user should verify "VERIFY_BTN" Disabled for iOS
@@ -217,11 +216,10 @@ Feature: Sign in / Login feature validation on iOS app
     When user Clicks on "CONTINUE_NEW_PIN_BTN" button for iOS
     Then user should see "Sign in step 4 of 4" from Signin Screen for iOS
     And user should see "BACK_BUTTON" on the top left corner of the screen for iOS
-    #	Then user validates below details in step four of sign in screen for Android
-    #				|Confirm your PIN																																										 |
-    #					|You’ll use this 6-digit PIN to log in to your OneCS account securely if you don’t enable Biometrics.|
-    #		Then user verifies the "CREATE_YOUR_PIN_BOX"  is empty for Android
-    #		Then user should verify "CONFIRM_PIN" button in step four of singin screen for Android
+    Then user should see "CONFIRM_PIN_LABEL_TXT_SIGN_IN_4" screen for iOS
+    Then user should see "YOU_WILL_USE_THIS_PIN_TXT_IN_SIGN3_SCREEN" screen for iOS
+    Then user should see "I_NEED_HELP_CONFIRMING_MY_PIN_LINK" screen for iOS
+    And user should verify "CONFIRM_PIN_BTN" Disabled for iOS
     And user closes "app" on mobile device
 
   @SignIn_iOS @2.12_iOS
@@ -234,14 +232,12 @@ Feature: Sign in / Login feature validation on iOS app
     When user Clicks on "VERIFY_BTN" button for iOS
     Then user enters value in "SIGN_IN_NEW_PIN_INPUT" field with "SIX_DIGIT" pin for iOS
     When user Clicks on "CONTINUE_NEW_PIN_BTN" button for iOS
-    #And user taps on "BACK_BUTTON" in step four of sign in screen for Android
-    #Then user should see "Sign in step 3 of 4" from Signin Screen for Android
+    When user Clicks on "BACK_BUTTON" button for iOS
+    Then user should see "Sign in step 3 of 4" from Signin Screen for iOS
     And user should verify "CONTINUE_NEW_PIN_BTN" Disabled for iOS
     Then user enters value in "SIGN_IN_NEW_PIN_INPUT" field with "SIX_DIGIT" pin for iOS
     When user Clicks on "CONTINUE_NEW_PIN_BTN" button for iOS
     Then user enters value in "CONFIRM_PIN_INPUT" field with "SIX_DIGIT" pin for iOS
-    When user Clicks on "CONFIRM_PIN_BTN" button for iOS
-    #Then upon confirming user should see "Enable biometrics" and "Maybe later" options for Android
     And user closes "app" on mobile device
 
   @SignIn_iOS @2.13_iOS
@@ -257,9 +253,11 @@ Feature: Sign in / Login feature validation on iOS app
     Then user should see "Sign in step 4 of 4" from Signin Screen for iOS
     Then user enters value in "CONFIRM_PIN_INPUT" field with "INCORRECT_SIX_DIGIT_PIN" pin for iOS
     When user Clicks on "CONFIRM_PIN_BTN" button for iOS
-    #		Then user should see "INCORRECT_PIN" pop up in step four of sigin screen for Android
-    #		Then user should validates "ERROR_MSG_STEP4" pop up in step four of sigin screen for Android
-    #		Then user should see "EDIT_DETAILS_STEP4" button for Android
+    Then user should see "INCORRECT_PIN_POP_UP_LABEL_TXT" text in the pop up for iOS
+    Then user should see "SORRY_PIN_DOES_NOT_MATCH_POP_UP_TXT" text in the pop up for iOS
+    When user Clicks on "EDIT_DETAILS_BTN" button for iOS
+    Then user should see "Sign in step 3 of 4" from Signin Screen for iOS
+    And user should verify "CONTINUE_NEW_PIN_BTN" Disabled for iOS
     And user closes "app" on mobile device
 
   @SignIn_iOS @2.16_iOS
@@ -272,12 +270,15 @@ Feature: Sign in / Login feature validation on iOS app
     When user Clicks on "VERIFY_BTN" button for iOS
     Then user enters value in "SIGN_IN_NEW_PIN_INPUT" field with "SIX_DIGIT" pin for iOS
     When user Clicks on "CONTINUE_NEW_PIN_BTN" button for iOS
-    Then user enters value in "CONFIRM_PIN_INPUT" field with "INCORRECT_SIX_DIGIT_PIN" pin for iOS
+    Then user enters value in "CONFIRM_PIN_INPUT" field with "SIX_DIGIT" pin for iOS
     When user Clicks on "CONFIRM_PIN_BTN" button for iOS
-    #		Then user should see "Secure Sign in" as header for Android
-    #		Then upon confirming user should see "Enable biometrics" and "Maybe later" options for Android
-    #		And user taps on "MAY_BE_LATER" option for Android
-    #		Then user should see Dashboard screen
+    Then user should see "Secure sign in" as header for iOS
+    Then upon confirming user should see "Enable biometrics" and "Maybe later" options for iOS
+    When user Clicks on "MAYBE_LATER_BIOMETRICS_BTN" button for iOS
+    Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    When user Clicks on "MORE_TAB" button for iOS
+    Then user should see "OneCS" as tittle in more options Screen for iOS
+    And user Signs Out the Mobile Application for iOS
     And user closes "app" on mobile device
 
   @SignIn_iOS @2.22_iOS
@@ -290,12 +291,13 @@ Feature: Sign in / Login feature validation on iOS app
     When user Clicks on "VERIFY_BTN" button for iOS
     Then user enters value in "SIGN_IN_NEW_PIN_INPUT" field with "SIX_DIGIT" pin for iOS
     When user Clicks on "CONTINUE_NEW_PIN_BTN" button for iOS
-    Then user enters value in "CONFIRM_PIN_INPUT" field with "INCORRECT_SIX_DIGIT_PIN" pin for iOS
+    Then user enters value in "CONFIRM_PIN_INPUT" field with "SIX_DIGIT" pin for iOS
     When user Clicks on "CONFIRM_PIN_BTN" button for iOS
     When user Clicks on "MAYBE_LATER_BIOMETRICS_BTN" button for iOS
-    #		And user Clicks on "More_Option" in Dashboard Screen for Android
-    #		Then user should see "OneCS" as tittle in more options Screen for Android
-    #		And user Signs Out the Mobile Application
+    Given user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    When user Clicks on "MORE_TAB" button for iOS
+    Then user should see "OneCS" as tittle in more options Screen for iOS
+    And user Signs Out the Mobile Application for iOS
     And user should see "CS_WELCOME_LOGO" in welcome screen for iOS
     And user closes "app" on mobile device
 
@@ -312,15 +314,13 @@ Feature: Sign in / Login feature validation on iOS app
     Then user enters value in "SIGN_IN_NEW_PIN_INPUT" field with "SIX_DIGIT" pin for iOS
     Then user should see "CONTINUE_NEW_PIN_BTN" Enabled for iOS
     When user Clicks on "CONTINUE_NEW_PIN_BTN" button for iOS
-    #		Then user validates below details in step four of sign in screen for Android
-    #				|Confirm your PIN																																										 |
-    #					|You’ll use this 6-digit PIN to log in to your OneCS account securely if you don’t enable Biometrics.|
-    #
     And user should verify "CONFIRM_PIN_BTN" Disabled for iOS
     Then user enters value in "CONFIRM_PIN_INPUT" field with "SIX_DIGIT" pin for iOS
     When user Clicks on "CONFIRM_PIN_BTN" button for iOS
-    #		Then user should see "SECURE_SIGN_IN" screen for Android
-    #		Then upon confirming user should see "Enable biometrics" and "Maybe later" options for Android
+    Then user should see "Secure sign in" as header for iOS
     When user Clicks on "MAYBE_LATER_BIOMETRICS_BTN" button for iOS
-    #		Then user should see Dashboard screen
+    Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    When user Clicks on "MORE_TAB" button for iOS
+    Then user should see "OneCS" as tittle in more options Screen for iOS
+    And user Signs Out the Mobile Application for iOS
     And user closes "app" on mobile device
