@@ -108,7 +108,8 @@ Feature: Sign in / Login feature validation on iOS app
     Then user should not see the "FORGOT_SIGN_IN_DETAILS_LABEL_TXT" pop up in Signin Screen for iOS
     And user closes "app" on mobile device
 
-  @SignIn_iOS @2.06_iOS
+  #2.06 and 2.06a have been covered togegther.
+  @SignIn_iOS @2.06_iOS @2.06_a_iOS
   Scenario: Verify the sign in step 2 of 4 screen details & validations [2FA Screen]
     Then user launch app "OneCSiOSApp" on "RealDevice" mobile device
     And user Clicks on "SIGN_IN_BTN" button for iOS
@@ -145,6 +146,7 @@ Feature: Sign in / Login feature validation on iOS app
     And user Clicks on "EDIT_DETAILS_BTN" button for iOS
     Then user should not see "INCORRECT_CODE_LABEL_TXT" overlay popup for iOS
     And user should see "Sign in step 2 of 4" from Signin Screen for iOS
+    Then user should navigate back to sign in one screen and come back and verify that updated TWOFA code is presented in screen for iOS
     And user closes "app" on mobile device
 
   @SignIn_iOS @2.07_iOS
@@ -323,4 +325,60 @@ Feature: Sign in / Login feature validation on iOS app
     When user Clicks on "MORE_TAB" button for iOS
     Then user should see "OneCS" as tittle in more options Screen for iOS
     And user Signs Out the Mobile Application for iOS
+    And user closes "app" on mobile device
+
+  @SignIn_iOS @2.26_iOS
+  Scenario: 2.26 - Verify the Sign In process validations when biometrics is turned off on the device
+    Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    Then user Clicks on "SIGN_IN_BTN" button for iOS
+    When user enters "Correct_Username" and "Correct_Password" for iOS
+    Then user Clicks on "CONTINUE_SIGN_IN_BTN" button for iOS
+    And user get the SIX digit code displayed on screen and enters in TWOFA input field for iOS
+    When user Clicks on "VERIFY_BTN" button for iOS
+    Then user should see "Sign in step 3 of 4" from Signin Screen for iOS
+    Then user enters value in "SIGN_IN_NEW_PIN_INPUT" field with "SIX_DIGIT" pin for iOS
+    When user Clicks on "CONTINUE_NEW_PIN_BTN" button for iOS
+    Then user enters value in "CONFIRM_PIN_INPUT" field with "SIX_DIGIT" pin for iOS
+    When user Clicks on "CONFIRM_PIN_BTN" button for iOS
+    Then user should see "Secure sign in" as header for iOS
+    When user Clicks on "ENABLE_BIOMETRICS_BTN" button for iOS
+    Then user should see "BIOMETRICS_DISABLED_LABEL_TXT" text in the pop up for iOS
+    Then user should see "PLEASE_GO_TO_DEVICE_SETTINGS_BIO_TXT" text in the pop up for iOS
+    When user Clicks on "BTN_OK_IN_POP_UP" button for iOS
+    Then user should see "Secure sign in" as header for iOS
+    When user Clicks on "MAYBE_LATER_BIOMETRICS_BTN" button for iOS
+    Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    When user Clicks on "MORE_TAB" button for iOS
+    Then user should see "OneCS" as tittle in more options Screen for iOS
+    And user Signs Out the Mobile Application for iOS
+    When user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
+    And user closes "app" on mobile device
+
+  @SignIn_iOS @2.31_iOS
+  Scenario: 2.31 - Verify the sign in screen - when PIN & Biometric is disabled
+    Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    Then user Clicks on "SIGN_IN_BTN" button for iOS
+    When user enters "Correct_Username" and "Correct_Password" for iOS
+    Then user Clicks on "CONTINUE_SIGN_IN_BTN" button for iOS
+    And user get the SIX digit code displayed on screen and enters in TWOFA input field for iOS
+    When user Clicks on "VERIFY_BTN" button for iOS
+    Then user should see "Sign in step 3 of 4" from Signin Screen for iOS
+    Then user enters value in "SIGN_IN_NEW_PIN_INPUT" field with "SIX_DIGIT" pin for iOS
+    When user Clicks on "CONTINUE_NEW_PIN_BTN" button for iOS
+    Then user enters value in "CONFIRM_PIN_INPUT" field with "SIX_DIGIT" pin for iOS
+    When user Clicks on "CONFIRM_PIN_BTN" button for iOS
+    Then user should see "Secure sign in" as header for iOS
+    When user Clicks on "ENABLE_BIOMETRICS_BTN" button for iOS
+    Then user should see "BIOMETRICS_DISABLED_LABEL_TXT" text in the pop up for iOS
+    Then user should see "PLEASE_GO_TO_DEVICE_SETTINGS_BIO_TXT" text in the pop up for iOS
+    When user Clicks on "BTN_OK_IN_POP_UP" button for iOS
+    Then user should see "Secure sign in" as header for iOS
+    When user Clicks on "MAYBE_LATER_BIOMETRICS_BTN" button for iOS
+    Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    When user Clicks on "MORE_TAB" button for iOS
+    Then user should see "OneCS" as tittle in more options Screen for iOS
+    And user Signs Out the Mobile Application for iOS
+    When user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
     And user closes "app" on mobile device

@@ -172,8 +172,6 @@ public class SignInScreeniOS {
 		return pageValues;
 	}
 	
-	
-	
 }
 	
 	
