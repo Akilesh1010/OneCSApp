@@ -346,13 +346,25 @@ public class IOSSignInStepDefs {
 		Assert.assertEquals(iOSSignInScreen.getTextiOS("ENABLE_BIOMETRICS_BTN"),bio);
 		Assert.assertEquals(iOSSignInScreen.getTextiOS("MAYBE_LATER_BIOMETRICS_BTN"),later);
 	}
-	
+
 	@Then("user should see {string} as header for iOS")
 	public void user_should_see_as_header_for_iOS(String headerTitle) {
 		Assert.assertEquals(headerTitle, iOSSignInScreen.getTextiOS("SECURE_SIGN_IN_LABEL_TXT_IN_BIOMETRICS"));
-		
-	   
+		Reporter.addDeviceScreenshot("2FA Screen", "Mobile App Login Screen");
 	}
+
+	@Then("user should navigate back to sign in one screen and come back and verify that updated TWOFA code is presented in screen for iOS")
+	public void user_should_navigate_back_to_sign_in_one_screen_and_come_back_and_verify_that_updated_TWOFA_code_is_presented_in_screen_for_iOS() {
+		String codeOld = DeviceActions.getText((MobileElement) action.getElement("SIGN_IN_CODE_2FA_TXT"));
+		DeviceActions.click((MobileElement) action.getElement("BACK_BUTTON"));
+		Assert.assertTrue(action.isPresent("SIGN_IN_STEP_1_OF_4_TITLE"));
+		DeviceActions.click((MobileElement) action.getElement("CONTINUE_SIGN_IN_BTN"));
+		String codeNew = DeviceActions.getText((MobileElement) action.getElement("SIGN_IN_CODE_2FA_TXT"));
+		Assert.assertNotEquals(codeNew, codeOld, "Error...Old code still retained.");
+
+	}
+
+
 
 
 
