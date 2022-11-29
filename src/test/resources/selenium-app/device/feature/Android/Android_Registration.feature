@@ -3,7 +3,7 @@ Feature: Sign In/Login
 
   @SignIn_Android @2.01_Android
   Scenario: verify the details displayed on the Sign In Welcome Screen
-    Given user launch app "OneCS.apk" on "RealDevice" mobile device
+    Given user launch app "OneCS.apk" on "Emulator" mobile device
     And user should see "CHARLES_STANLEY" logo in welcome screen for Android
     And user should see "CREATE_SECURE" text in welcome screen for Android
     Then user verifies "SIGN_IN" button in welcome screen for Android
@@ -18,9 +18,9 @@ Feature: Sign In/Login
     
     @SignIn_Android @2.02_Android
   Scenario: To verify the details displayed on the "Sign In Registration" Screens
-    Given user launch app "OneCS.apk" on "RealDevice" mobile device
+    Given user launch app "OneCS.apk" on "Emulator" mobile device
     And user Clicks on "SIGN_IN" button
-    And user should see "Sign in step 1 of 4" from Signin Screen for Android
+    And user should see "Sign in step 1 of 4" from Sign-in Screen for Android
     And user should see "X_Button" on the top left corner of the screen for Android
     And user should see progress bar as "Step1_of_4" in signin screen for Android
     And user should verify whether "Username & password" is present in sigin screen for Android
@@ -36,7 +36,7 @@ Feature: Sign In/Login
    	
    @SignIn_Android	@2.03_Android
   Scenario: To verify the Username/Password validation  on the "Registration" Screen
-    Given user launch app "OneCS.apk" on "RealDevice" mobile device
+    Given user launch app "OneCS.apk" on "Emulator" mobile device
     And user Clicks on "SIGN_IN" button
     And user enters "Correct_Username" in username field
     And user should verify continue button Disabled
@@ -81,7 +81,7 @@ Feature: Sign In/Login
     @SignIn_Android @2.04_Android
   Scenario: To verify the validation for the Progress bar present on the "Registration" and "2FA" Screen
 
-		Given user launch app "OneCS.apk" on "RealDevice" mobile device
+		Given user launch app "OneCS.apk" on "Emulator" mobile device
     And user Clicks on "SIGN_IN" button
     When user enters "Correct_Username" and "Correct_Password"
     Then user should see "Continue_Button" enabled
@@ -92,6 +92,7 @@ Feature: Sign In/Login
     And user clicks on Back Button for Android
     And user should see progress bar as "Step1_of_4" in signin screen for Android
     Then user should see the entered username and password retained in sigin Screen for Android
+    When user Clicks on "Continue_Button"
     Then user should see "TWO_FA" screen
 		And user closes "app" on mobile device
 
@@ -99,7 +100,7 @@ Feature: Sign In/Login
 	@SignIn_Android @2.05_Android
   Scenario: Verify the "I need help in entering details" link
 
-		Given user launch app "OneCS.apk" on "RealDevice" mobile device
+		Given user launch app "OneCS.apk" on "Emulator" mobile device
     And user Clicks on "SIGN_IN" button
     When user enters "Correct_Username" and "Correct_Password"
     And user taps on "I_need_help_in_entering_details" in Signin screen for Android
@@ -133,13 +134,13 @@ Feature: Sign In/Login
 		Then user should see the entered username and password retained in Login Screen for Android
 		And user taps on "I_need_help_in_entering_details" in Signin screen for Android
 		And user taps on "X_Button" on Forgot usrname popup for Android
-		Then user should not see the "FORGOT_USERNAME_PASSWORD" pop up in Signin Screen for Android
+		Then user should not see the "RECOVER_DETAILS" pop up in Signin Screen for Android
 		And user closes "app" on mobile device
 		
 		
 	@SignIn_Android @2.06_Android
   Scenario: Verify the sign in step 2 of 4 screen details & validations [2FA Screen]
-		Given user launch app "OneCS.apk" on "RealDevice" mobile device
+		Given user launch app "OneCS.apk" on "Emulator" mobile device
     And user Clicks on "SIGN_IN" button
     When user enters "Correct_Username" and "Correct_Password"
     When user Clicks on "Continue_Button"
@@ -182,7 +183,7 @@ Feature: Sign In/Login
 		
 	@SignIn_Android @2.07_Android
   Scenario: To verify the Sign In process when Mobile number is linked to account 2FA
-  	Given user launch app "OneCS.apk" on "RealDevice" mobile device
+  	Given user launch app "OneCS.apk" on "Emulator" mobile device
     And user Clicks on "SIGN_IN" button
     When user enters "Correct_Username" and "Correct_Password"
     When user Clicks on "Continue_Button"
@@ -206,6 +207,7 @@ Feature: Sign In/Login
   	When user Clicks on "LOGIN_BUTTON"
   	Then user should be able to login to web application for Android
   	And user clicks on Back Button for Android
+  	And user clicks on Back Button for Android
     And user taps on "CLOSE_BUTTON_RECOVER" on Recover Details popup for Android
     Then user should not see the "RECOVER_DETAILS" pop up in TwoFA Screen for Android
     And user closes "app" on mobile device
@@ -213,7 +215,7 @@ Feature: Sign In/Login
   	
   	@SignIn_Android @2.09_Android
   Scenario: To verify the "Sign in step 3 of 4" screen details
-  	Given user launch app "OneCS.apk" on "RealDevice" mobile device
+  	Given user launch app "OneCS.apk" on "Emulator" mobile device
     And user Clicks on "SIGN_IN" button
     When user enters "Correct_Username" and "Correct_Password"
     When user Clicks on "Continue_Button"
@@ -231,7 +233,7 @@ Feature: Sign In/Login
   	
 	@SignIn_Android @2.10_Android
   Scenario: To verify the "Sign in step 3 of 4" screen validations
-  	Given user launch app "OneCS.apk" on "RealDevice" mobile device							
+  	Given user launch app "OneCS.apk" on "Emulator" mobile device							
     And user Clicks on "SIGN_IN" button
     When user enters "Correct_Username" and "Correct_Password"
     When user Clicks on "Continue_Button"
@@ -251,7 +253,7 @@ Feature: Sign In/Login
   	
   @SignIn_Android @2.11_Android
   Scenario: To verify the "Sign in step 4 of 4" screen details	
-  	Given user launch app "OneCS.apk" on "RealDevice" mobile device							
+  	Given user launch app "OneCS.apk" on "Emulator" mobile device							
     And user Clicks on "SIGN_IN" button
     When user enters "Correct_Username" and "Correct_Password"
     When user Clicks on "Continue_Button"
@@ -271,7 +273,7 @@ Feature: Sign In/Login
 		
 		@SignIn_Android @2.12_Android
   Scenario: To verify the "Sign in step 4 of 4" screen validations
-  	Given user launch app "OneCS.apk" on "RealDevice" mobile device							
+  	Given user launch app "OneCS.apk" on "Emulator" mobile device							
     And user Clicks on "SIGN_IN" button
     When user enters "Correct_Username" and "Correct_Password"
     When user Clicks on "Continue_Button"
@@ -284,7 +286,7 @@ Feature: Sign In/Login
   	And user should verify "CONTINUE_BUTTON_DISABLED" buttom Disabled in step four screen for Android
 		And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
 		And user taps on "STEP3_CONTINUE_BUTTON" for Android
-		And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+		And user enters "SIX_DIGIT" pin in "CONFIRM_YOUR_PIN" box for Android
 		And user taps on "CONFIRM_PIN" button in step four of sigin screen for Android
 		Then user should see the continue button turning to "Loading_Spinner" for Android
 		Then upon confirming user should see "Enable biometrics" and "Maybe later" options for Android
@@ -292,7 +294,7 @@ Feature: Sign In/Login
 		
 		@SignIn_Android @2.13_Android
   Scenario: To verify the "Sign in step 4 of 4" screen validations
-		Given user launch app "OneCS.apk" on "RealDevice" mobile device							
+		Given user launch app "OneCS.apk" on "Emulator" mobile device							
     And user Clicks on "SIGN_IN" button
     When user enters "Correct_Username" and "Correct_Password"
     When user Clicks on "Continue_Button"
@@ -311,7 +313,7 @@ Feature: Sign In/Login
 		
 		@SignIn_Android @2.16_Android
   Scenario: To verify whether the user is able to skip the Fingerprint/Face ID authentication during Registration - Maybe later
-		Given user launch app "OneCS.apk" on "RealDevice" mobile device							
+		Given user launch app "OneCS.apk" on "Emulator" mobile device							
     And user Clicks on "SIGN_IN" button
     When user enters "Correct_Username" and "Correct_Password"
     When user Clicks on "Continue_Button"
@@ -329,7 +331,7 @@ Feature: Sign In/Login
 		
 		@SignIn_Android @2.22_Android
   Scenario: More - Verify the Sign out process for the PIN, Fingerprint and Face ID logins
-  	Given user launch app "OneCS.apk" on "RealDevice" mobile device							
+  	Given user launch app "OneCS.apk" on "Emulator" mobile device							
     And user Clicks on "SIGN_IN" button
     When user enters "Correct_Username" and "Correct_Password"
     When user Clicks on "Continue_Button"
@@ -348,7 +350,7 @@ Feature: Sign In/Login
 		
 		@SignIn_Android @2.24_Android
   Scenario: To verify the "Sign In" Screen for  the new user login using 6 - digit PIN
-		Given user launch app "OneCS.apk" on "RealDevice" mobile device							
+		Given user launch app "OneCS.apk" on "Emulator" mobile device							
     And user Clicks on "SIGN_IN" button
 		When user enters "Correct_Username" and "Correct_Password"
     When user Clicks on "Continue_Button"
@@ -373,54 +375,3 @@ Feature: Sign In/Login
 		And user taps on "MAY_BE_LATER" option for Android
 		Then user should see Dashboard screen
 		And user closes "app" on mobile device
-		
-		
-		
-		
-		
-		
-
-
-  @AndroidPOC1 @POC2
-  Scenario: Verification of user login functionality with Correct Username and Correct Password
-    Given user launch app "OneCS.apk" on mobile device
-    And user Clicks on "SIGN_IN" button
-    When user enters "Correct_Username" and "Correct_Password"
-    When user Clicks on "Continue_Button"
-    Then user should see "TWO_FA" screen
-    And user closes "app" on mobile device
-    
-    And user Clicks on "SIGN_IN" button
-    When user enters "Incorrect_Username" and "Incorrect_Password"
-    When user Clicks on "Continue_Button"
-    Then user should see "Error_Msg"
-    
-    @AndroidPOC1 @POC3
-  Scenario: Verification of user login functionality with Correct Username and Correct Password
-    Given user launch app "universal.apk" on mobile device
-    And user Clicks on "SIGN_IN" button
-    When user enters "Correct_Username" and "Correct_Password"
-    When user Clicks on "Continue_Button"
-    Then user should see "TWO_FA" screen
-    And user enters the "TWO_FA" code in input box
-    When user clicks on Verify button
-    And user should tap on "USE_SIX_DIGIT_PIN" in screen
-    And user should see "CREATE_YOUR_PIN" screen
-    And user enters a desired "SIX_DIGIT" pin
-    When user clicks on continue button
-    And user reenters the "SIX_DIGIT" pin again
-    When user clicks on "CONFIRM_PIN" button
-    Then user should see Dashboard screen
-    And user clicks on Accounts Tab
-    And user clicks on Preferred Accounts
-    When user clicks on Holdings Tab
-    Then user should see the list of Holdings
-    And user clicks on Buy Shares Button
-    And user buys share with Desired Amount
-    And user cliks on Continue Button
-    And user Prefers to Cancel the Transaction
-    And User Navigates to Accounts Page
-    
-    And user Signs Out the Mobile Application
-    And user closes "app" on mobile device
-    

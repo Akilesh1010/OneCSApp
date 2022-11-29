@@ -192,7 +192,7 @@ public class DeviceActions extends TouchAction {
 			Report.printStatus(status);
 		}
 	}
-	
+
 	public final boolean isDisplayed(WebElement element) {
 		boolean isDisplayed = false;
 		String status = "FAIL";
@@ -207,8 +207,6 @@ public class DeviceActions extends TouchAction {
 		}
 		return isDisplayed;
 	}
-	
-	
 
 	/**
 	 * Get Text
@@ -347,7 +345,7 @@ public class DeviceActions extends TouchAction {
 		}
 
 	}
-	
+
 	/**
 	 * ScrollAndClick
 	 * 
@@ -357,7 +355,18 @@ public class DeviceActions extends TouchAction {
 	final public static void scrollAndClick(String visibleText) {
 		@SuppressWarnings("unchecked")
 		AndroidDriver<WebElement> driver = (AndroidDriver<WebElement>) DeviceDriverManager.getDriver();
-		driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+visibleText+"\").instance(0))").click();
+		driver.findElementByAndroidUIAutomator(
+				"new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""
+						+ visibleText + "\").instance(0))")
+				.click();
+	}
+
+	final public static void scrollToElement(String visibleText) {
+		@SuppressWarnings("unchecked")
+		AndroidDriver<WebElement> driver = (AndroidDriver<WebElement>) DeviceDriverManager.getDriver();
+		driver.findElementByAndroidUIAutomator(
+				"new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""
+						+ visibleText + "\").instance(0))");
 	}
 
 	public final boolean isPresent(String key) {
@@ -410,7 +419,7 @@ public class DeviceActions extends TouchAction {
 			int position = (int) (end * desirePositionInPercent) / 100;
 
 			new TouchAction(driver).press(PointOption.point(start, y)).moveTo(PointOption.point(position, y)).release()
-			.perform();
+					.perform();
 
 			status = "PASS";
 		} catch (Exception e) {
@@ -452,14 +461,13 @@ public class DeviceActions extends TouchAction {
 	}
 
 	/**
-	 * Switch To Context 
+	 * Switch To Context
 	 * 
 	 * @author 10650956
 	 * @param context
 	 */
 	public static void switchToContext(String context) {
 		String status = "FAIL";
-
 
 		AppiumDriver<?> driver = (AppiumDriver<?>) DeviceDriverManager.getDriver();
 
@@ -474,8 +482,6 @@ public class DeviceActions extends TouchAction {
 			Report.printOperation("Switch To Context");
 			Report.printStatus(status);
 		}
-
-
 
 	}
 
@@ -533,9 +539,9 @@ public class DeviceActions extends TouchAction {
 		// execute swipe using TouchAction
 		try {
 			new TouchAction(driver).press(pointOptionStart)
-			// a bit more reliable when we add small wait
-			.waitAction(WaitOptions.waitOptions(Duration.ofMillis(PRESS_TIME))).moveTo(pointOptionEnd).release()
-			.perform();
+					// a bit more reliable when we add small wait
+					.waitAction(WaitOptions.waitOptions(Duration.ofMillis(PRESS_TIME))).moveTo(pointOptionEnd).release()
+					.perform();
 		} catch (Exception e) {
 			System.err.println("swipeElementAndroid(): TouchAction FAILED\n" + e.getMessage());
 			return;
@@ -548,14 +554,15 @@ public class DeviceActions extends TouchAction {
 			// ignore
 		}
 	}
+
 	public final synchronized static String getTestData(String dbkey) {
 		return getValue(dbkey, SQLDriver.TTestData.get());
 	}
-	
+
 	public synchronized final static String getValue(String dbkey, List<DBRowTO> data) {
 		for (DBRowTO temp : data) {
 			if (temp.getKey().equalsIgnoreCase(dbkey)) {
-				String priyanka=temp.getValue();
+				String priyanka = temp.getValue();
 				return temp.getValue();
 			}
 		}
