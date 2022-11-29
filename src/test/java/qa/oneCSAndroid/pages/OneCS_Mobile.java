@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.PerformsTouchActions;
@@ -22,6 +24,7 @@ import qa.framework.utils.Reporter;
 public class OneCS_Mobile {
 
 	static DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSAppAndroid_Android"));
+	static WebDriverWait wait = new WebDriverWait(DeviceDriverManager.getDriver(), 20);
 
 	public static String getDispalyText() {
 
@@ -139,7 +142,7 @@ public class OneCS_Mobile {
 
 	}
 
-	public void androidSwipe(MobileElement element, MobileElement element1) {
+	public static void androidSwipe(MobileElement element, MobileElement element1) {
 		TouchAction swipe = new TouchAction((PerformsTouchActions) DeviceDriverManager.getDriver());
 		swipe.press(ElementOption.element(element)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(800)))
 				.moveTo(ElementOption.element(element1)).release().perform();
@@ -191,14 +194,111 @@ public class OneCS_Mobile {
 
 		String empty = DeviceActions.getText((MobileElement) action.getElement("CREATE_YOUR_PIN_BOX"));
 		Assert.assertEquals(empty, "");
-		
+
 	}
-	
+
 	public static List<String> getStep4Screenvalues() {
 		List<String> pageValues = new ArrayList<String>();
 		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
 		listOfElements.add((MobileElement) action.getElement("CONFIRM_PIN_TEXT"));
 		listOfElements.add((MobileElement) action.getElement("CREATE_YOUR_PIN_TEXT"));
+
+		for (MobileElement element : listOfElements) {
+			pageValues.add(DeviceActions.getText((MobileElement) element));
+		}
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+		return pageValues;
+	}
+
+	public static List<String> getMoreScreenvalues() {
+		List<String> pageValues = new ArrayList<String>();
+
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("MORE_USER_SETTINGS")));
+
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("MORE_HELP_SUPPORT")));
+
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("MORE_MARKET_INFO")));
+		DeviceActions.scrollToElement("ABOUT CHARLES STANLEY");
+
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("MORE_ABOUT_CS")));
+
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+		return pageValues;
+	}
+	
+	public static List<String> getUserSettingsvalues() {
+		List<String> pageValues = new ArrayList<String>();
+		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("MORE_ACCOUNT_SETTINGS"));
+		listOfElements.add((MobileElement) action.getElement("MORE_USER_DOCUMENTS"));
+
+		for (MobileElement element : listOfElements) {
+			pageValues.add(DeviceActions.getText((MobileElement) element));
+		}
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+		return pageValues;
+	}
+	
+	public static List<String> getHelpSupportvalues() {
+		List<String> pageValues = new ArrayList<String>();
+		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("MORE_HELP_FAQ"));
+		listOfElements.add((MobileElement) action.getElement("MORE_HELP_CENTRE"));
+		listOfElements.add((MobileElement) action.getElement("MORE_HELP_GLOSSARY"));
+		listOfElements.add((MobileElement) action.getElement("MORE_HELP_NEW"));
+
+		for (MobileElement element : listOfElements) {
+			pageValues.add(DeviceActions.getText((MobileElement) element));
+		}
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+		return pageValues;
+	}
+	
+	public static List<String> getMarketInfovalues() {
+		List<String> pageValues = new ArrayList<String>();
+		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("MORE_MARKET_DATA"));
+		listOfElements.add((MobileElement) action.getElement("MORE_MARKET_CURRENCY"));
+
+		for (MobileElement element : listOfElements) {
+			pageValues.add(DeviceActions.getText((MobileElement) element));
+		}
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+		return pageValues;
+	}
+	
+	public static List<String> getAboutCSvalues() {
+		List<String> pageValues = new ArrayList<String>();
+		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("MORE_ABOUT_CONTACT_DET"));
+		listOfElements.add((MobileElement) action.getElement("MORE_ABOUT_IMPINFO"));
+		listOfElements.add((MobileElement) action.getElement("MORE_ABOUT_LICINFO"));
+		listOfElements.add((MobileElement) action.getElement("MORE_ABOUT_RATEUS"));
+
+		for (MobileElement element : listOfElements) {
+			pageValues.add(DeviceActions.getText((MobileElement) element));
+		}
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+		return pageValues;
+	}
+	public static List<String> getAccountManagementPopupvalues() {
+		List<String> pageValues = new ArrayList<String>();
+		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("ACCOUNT_MANAGEMENT_ACTIVITY"));
+		listOfElements.add((MobileElement) action.getElement("ACCOUNT_MANAGEMENT_BREAKDOWN"));
+
+		for (MobileElement element : listOfElements) {
+			pageValues.add(DeviceActions.getText((MobileElement) element));
+		}
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+		return pageValues;
+	}
+	
+	public static List<String> getActivityScreenvalues() {
+		List<String> pageValues = new ArrayList<String>();
+		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("ACCOUNT_MANAGEMENT_ACTIVITY"));
+		listOfElements.add((MobileElement) action.getElement("ACCOUNT_ACTITVITY_ORDERLIST"));
 
 		for (MobileElement element : listOfElements) {
 			pageValues.add(DeviceActions.getText((MobileElement) element));
