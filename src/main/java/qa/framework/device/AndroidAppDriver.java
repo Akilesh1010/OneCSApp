@@ -66,7 +66,7 @@ public class AndroidAppDriver {
 	 * @throws MalformedURLException
 	 */
 	public AndroidDriver<MobileElement> getDriver(String apkFile , String deviceType) throws MalformedURLException {
-		if(deviceType.equalsIgnoreCase("RealDevice")) {
+		if(deviceType.equalsIgnoreCase("Emulator")) {
 		String userDir = System.getProperty("user.dir");
 		String apkFilePath = null;
 
