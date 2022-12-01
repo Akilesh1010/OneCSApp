@@ -30,5 +30,6 @@ Feature: Sign in / Login feature validation on iOS app
     And user Clicks on "CONTACT_TAB" button in dashboard screen for iOS
     And user Clicks on "INVESTMENT_TAB" button in dashboard screen for iOS
     And user Clicks on "MORE_TAB" button in dashboard screen for iOS
-    #Then user clicks on "SIGNOUT_BTN" from more menu for iOS
+    Then user should see "OneCS" as tittle in more options Screen for iOS
+    And user Signs Out the Mobile Application for iOS
     And user closes "app" on mobile device

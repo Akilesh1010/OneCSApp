@@ -202,7 +202,7 @@ public class IOSSignInStepDefs {
 	@Then("user should not see {string} overlay popup for iOS")
 	public void user_should_not_see_overlay_popup_for_iOS(String label) {
 		Assert.assertFalse(action.isPresent(label));
-		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
+		
 	}
 
 	@Then("user should see {string} Enabled for iOS")
