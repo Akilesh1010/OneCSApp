@@ -2,7 +2,7 @@
 Feature: Sign in / Login feature validation on iOS app
 
   @SignIn_iOS @2.01_iOS
-  Scenario: verify the details displayed on the Sign In Welcome Screen
+  Scenario: 2.01 - verify the details displayed on the Sign In Welcome Screen
     Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
     And user should see "CS_WELCOME_LOGO" in welcome screen for iOS
     And user should see "CS_CREATE_A_SECURE" text in welcome screen for iOS
@@ -15,7 +15,7 @@ Feature: Sign in / Login feature validation on iOS app
     And user closes "app" on mobile device
 
   @SignIn_iOS @2.02_iOS
-  Scenario: To verify the details displayed on the "Sign In Registration" Screens
+  Scenario: 2.02 - To verify the details displayed on the "Sign In Registration" Screens
     Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
     And user Clicks on "SIGN_IN_BTN" button for iOS
     And user should see "Sign in step 1 of 4" from Signin Screen for iOS
@@ -31,7 +31,7 @@ Feature: Sign in / Login feature validation on iOS app
     And user closes "app" on mobile device
 
   @SignIn_iOS @2.03_iOS
-  Scenario: To verify the Username/Password validation  on the "Registration" Screen
+  Scenario: 2.03 - To verify the Username/Password validation  on the "Registration" Screen
     Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
     And user Clicks on "SIGN_IN_BTN" button for iOS
     And user enters "Correct_Username" in username field for iOS
@@ -72,7 +72,7 @@ Feature: Sign in / Login feature validation on iOS app
     And user closes "app" on mobile device
 
   @SignIn_iOS @2.05_iOS
-  Scenario: Verify the "I need help in entering details" link
+  Scenario: 2.05 - Verify the "I need help in entering details" link
     Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
     And user Clicks on "SIGN_IN_BTN" button for iOS
     When user enters "Correct_Username" and "Correct_Password" for iOS
@@ -110,7 +110,7 @@ Feature: Sign in / Login feature validation on iOS app
 
   #2.06 and 2.06a have been covered togegther.
   @SignIn_iOS @2.06_iOS @2.06_a_iOS
-  Scenario: Verify the sign in step 2 of 4 screen details & validations [2FA Screen]
+  Scenario: 2.06 - Verify the sign in step 2 of 4 screen details & validations [2FA Screen]
     Then user launch app "OneCSiOSApp" on "RealDevice" mobile device
     And user Clicks on "SIGN_IN_BTN" button for iOS
     When user enters "Correct_Username" and "Correct_Password" for iOS
@@ -150,7 +150,7 @@ Feature: Sign in / Login feature validation on iOS app
     And user closes "app" on mobile device
 
   @SignIn_iOS @2.07_iOS
-  Scenario: To verify the Sign In process when Mobile number is linked to account 2FA
+  Scenario: 2.07 - To verify the Sign In process when Mobile number is linked to account 2FA
     Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
     And user Clicks on "SIGN_IN_BTN" button for iOS
     When user enters "Correct_Username" and "Correct_Password" for iOS
@@ -174,7 +174,7 @@ Feature: Sign in / Login feature validation on iOS app
     And user closes "app" on mobile device
 
   @SignIn_iOS @2.09_iOS
-  Scenario: To verify the "Sign in step 3 of 4" screen details
+  Scenario: 2.09 - To verify the "Sign in step 3 of 4" screen details
     Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
     Then user Clicks on "SIGN_IN_BTN" button for iOS
     When user enters "Correct_Username" and "Correct_Password" for iOS
@@ -190,7 +190,7 @@ Feature: Sign in / Login feature validation on iOS app
     And user closes "app" on mobile device
 
   @SignIn_iOS @2.10_iOS
-  Scenario: To verify the "Sign in step 3 of 4" screen validations
+  Scenario: 2.10 -  To verify the "Sign in step 3 of 4" screen validations
     Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
     Then user Clicks on "SIGN_IN_BTN" button for iOS
     When user enters "Correct_Username" and "Correct_Password" for iOS
@@ -207,7 +207,7 @@ Feature: Sign in / Login feature validation on iOS app
     And user closes "app" on mobile device
 
   @SignIn_iOS @2.11_iOS
-  Scenario: To verify the "Sign in step 4 of 4" screen details
+  Scenario: 2.11 - To verify the "Sign in step 4 of 4" screen details
     Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
     Then user Clicks on "SIGN_IN_BTN" button for iOS
     When user enters "Correct_Username" and "Correct_Password" for iOS
@@ -225,7 +225,7 @@ Feature: Sign in / Login feature validation on iOS app
     And user closes "app" on mobile device
 
   @SignIn_iOS @2.12_iOS
-  Scenario: To verify the "Sign in step 4 of 4" screen validations
+  Scenario: 2.12 - To verify the "Sign in step 4 of 4" screen validations
     Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
     Then user Clicks on "SIGN_IN_BTN" button for iOS
     When user enters "Correct_Username" and "Correct_Password" for iOS
@@ -243,7 +243,7 @@ Feature: Sign in / Login feature validation on iOS app
     And user closes "app" on mobile device
 
   @SignIn_iOS @2.13_iOS
-  Scenario: To verify the "Sign in step 4 of 4" screen validations
+  Scenario: 2.13 - To verify the "Sign in step 4 of 4" screen validations
     Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
     Then user Clicks on "SIGN_IN_BTN" button for iOS
     When user enters "Correct_Username" and "Correct_Password" for iOS
@@ -263,7 +263,7 @@ Feature: Sign in / Login feature validation on iOS app
     And user closes "app" on mobile device
 
   @SignIn_iOS @2.16_iOS
-  Scenario: To verify whether the user is able to skip the Fingerprint/Face ID authentication during Registration - Maybe later
+  Scenario: 2.16 - To verify whether the user is able to skip the Fingerprint/Face ID authentication during Registration - Maybe later
     Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
     Then user Clicks on "SIGN_IN_BTN" button for iOS
     When user enters "Correct_Username" and "Correct_Password" for iOS
@@ -284,7 +284,7 @@ Feature: Sign in / Login feature validation on iOS app
     And user closes "app" on mobile device
 
   @SignIn_iOS @2.22_iOS
-  Scenario: More - Verify the Sign out process for the PIN, Fingerprint and Face ID logins
+  Scenario: 2.22 - More - Verify the Sign out process for the PIN, Fingerprint and Face ID logins
     Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
     Then user Clicks on "SIGN_IN_BTN" button for iOS
     When user enters "Correct_Username" and "Correct_Password" for iOS
@@ -304,7 +304,7 @@ Feature: Sign in / Login feature validation on iOS app
     And user closes "app" on mobile device
 
   @SignIn_iOS @2.24_iOS
-  Scenario: To verify the "Sign In" Screen for  the new user login using 6 - digit PIN
+  Scenario: 2.24 - To verify the "Sign In" Screen for  the new user login using 6 - digit PIN
     Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
     Then user Clicks on "SIGN_IN_BTN" button for iOS
     When user enters "Correct_Username" and "Correct_Password" for iOS

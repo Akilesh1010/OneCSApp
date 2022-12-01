@@ -36,11 +36,6 @@ public class IOSDashboardSreenStepDefs {
 		Assert.assertTrue(flag, "Error...Expected fields do not appear in Dashboard screen...");
 	}
 
-	@Then("user clicks on {string} from more menu for iOS")
-	public void user_clicks_on_from_more_menu_for_iOS(String btnName) {
-
-	}
-
 	@Given("user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS")
 	public void user_is_on_the_dashboard_screen_they_should_be_displayed_with_pillbox_with_down_arrow() {
 		boolean flag = dashboardScreeniOS.pillBoxDisplayiOS();
@@ -57,12 +52,14 @@ public class IOSDashboardSreenStepDefs {
 	public void user_should_be_displayed_with_Portfolio_summary_value_details_on_iOS() {
 		boolean flag = dashboardScreeniOS.portfolioSummaryValueDetailsDisplayiOS();
 		Assert.assertTrue(flag, "Error...Expected summary value fields do not appear on the Dashboard screen...");
+		Reporter.addDeviceScreenshot("Dashboard Screen", "Mobile App Dashboard Screen");
 	}
 
 	@Then("user should be displayed with bottom naviagation options for portfolio,contact,investments,insights and more on iOS")
 	public void user_should_be_displayed_with_bottom_naviagation_options_for_portfolio_contact_investments_insights_and_more_on_iOS() {
 		boolean flag = dashboardScreeniOS.bottomNavigationDisplayiOS();
 		Assert.assertTrue(flag, "Error...Expected bottom navigation options do not appear on the Dashboard screen...");
+		Reporter.addDeviceScreenshot("Dashboard Screen", "Mobile App Dashboard Screen");
 	}
 
 	@Then("user should be able to pull down the screen to refresh the details for iOS")
@@ -73,6 +70,7 @@ public class IOSDashboardSreenStepDefs {
 		dashboardScreeniOS.swipeiOS(startingElement, endingElement);   
 		boolean flag = dashboardScreeniOS.dashboardScreenFieldValidationsiOS();
 		Assert.assertTrue(flag, "Error...Expected fields do not appear in Dashboard screen...");
+		Reporter.addDeviceScreenshot("Dashboard Screen", "Mobile App Dashboard Screen");
 	}
 
 	@Then("user should verify the value of date format displayed on screen for iOS")
@@ -96,11 +94,19 @@ public class IOSDashboardSreenStepDefs {
 		String actualTime = hours +"."+ minutes;
 
 		Assert.assertEquals(timeOnScreen, actualTime, "Error... Time mismatch between system and app.");
+		Reporter.addDeviceScreenshot("Dashboard Screen", "Mobile App Dashboard Screen");
 
 		//		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
 		//		String formattedDate = sdf.format(date);
 		//		System.out.println(formattedDate);
 
+	}
+	
+	@Then("user selects one of the Account from yours Accounts screen for iOS")
+	public void user_selects_one_of_the_Account_from_yours_Accounts_screen_for_iOS() {
+		DeviceActions.click((MobileElement) action.getElement("PORTFOLIO_ACCOUNT_NAME_YOUR_ACCOUNTS_1"));
+		Reporter.addDeviceScreenshot("Dashboard Screen", "Mobile App Dashboard Screen");
+	    
 	}
 
 }
