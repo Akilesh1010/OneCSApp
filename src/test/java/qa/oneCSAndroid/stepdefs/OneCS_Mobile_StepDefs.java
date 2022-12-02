@@ -106,11 +106,14 @@ public class OneCS_Mobile_StepDefs {
 
 	@Then("user enters the {string} code in input box")
 	public void user_enters_the_code_in_input_box(String otp) throws InterruptedException {
-		wait.until(ExpectedConditions.textToBePresentInElement((MobileElement) action.getElement("VERIFY_ACCOUNT_TEXT"),
-				"Verify your account"));
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("VERIFY_ACCOUNT_TEXT")));
+		// String text = OneCS.androidGetText("CODE_TO_TYPE");
+		while (OneCS.androidGetText("CODE_TO_TYPE") == "Code to type: Waiting...") {
+			System.out.println(OneCS.androidGetText("CODE_TO_TYPE"));	
+			continue;
+		}
 		String codetext = DeviceActions.getText((MobileElement) action.getElement("CODE_TO_TYPE"));
 		DeviceActions.sendKeys((MobileElement) action.getElement("SIX_DIGIT_INPUT_BOX"), codetext);
-
 	}
 
 	@And("user should see {string} on the top left corner of the screen for Android")
@@ -277,6 +280,12 @@ public class OneCS_Mobile_StepDefs {
 		OneCS.AndroidInputText("PASSWORD_INPUT_FIELD", password);
 
 		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
+	}
+
+	@When("user logins with {string} and {string} for Android")
+	public void user_logins_with_and_for_Android(String user, String pass) {
+		OneCS.AndroidInputUserPass("USERNAME_INPUT_FIELD", user);
+		OneCS.AndroidInputUserPass("PASSWORD_INPUT_FIELD", pass);
 	}
 
 	@When("user Clicks on {string}")
@@ -528,8 +537,7 @@ public class OneCS_Mobile_StepDefs {
 
 	@Then("user enters {string} pin in {string} box for Android")
 	public void user_enters_pin_in_box_for_Android(String code, String pinbox) {
-		wait.until(ExpectedConditions.textToBePresentInElement((MobileElement) action.getElement("CONFIRM_PIN_TEXT"),
-				"Confirm your PIN"));
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("CONFIRM_PIN_TEXT")));
 		OneCS.AndroidInputText(pinbox, code);
 	}
 
@@ -736,7 +744,7 @@ public class OneCS_Mobile_StepDefs {
 
 	@When("user selects Mr.Lucas Investment Account from yours Accounts screen for Android")
 	public void user_selects_Mr_Lucas_Investment_Account_from_yours_Accounts_screen_for_Android() {
-		
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("YOUR_ACCOUNTS")));
 		DeviceActions.click((MobileElement) action.getElement("MR_LUCAS_ISA"));
 	}
 
@@ -791,7 +799,7 @@ public class OneCS_Mobile_StepDefs {
 	public void user_taps_the_in_account_management_popup_screen_for_Android(String closeButton) {
 		DeviceActions.click((MobileElement) action.getElement(closeButton));
 	}
-	
+
 	@When("user taps on {string} in account management bottom sheet for Android")
 	public void user_taps_on_in_account_management_bottom_sheet_for_Android(String activity) {
 		DeviceActions.click((MobileElement) action.getElement(activity));
@@ -801,7 +809,7 @@ public class OneCS_Mobile_StepDefs {
 	public void user_should_see_below_tabs_in_Activity_screen_for_Android(DataTable dataTable) {
 		List<String> data = dataTable.asList();
 		List<String> pageValues = OneCS_Mobile.getActivityScreenvalues();
-		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");  
+		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
 	}
 
 	@When("user taps on {string} in Activity screen for Android")
@@ -813,6 +821,58 @@ public class OneCS_Mobile_StepDefs {
 	public void user_should_selected_Account_in_screen_for_Android(String accountDashboard) {
 		Assert.assertTrue(action.isPresent(accountDashboard));
 	}
+
+	@Then("under Activity bar blank page should be displayed for Android")
+	public void under_Activity_bar_blank_page_should_be_displayed_for_Android() {
+		Assert.assertEquals(OneCS.androidGetText("ACTIVITY_BLANK_PAGE"), "");
+	}
+
+	@When("user taps on {string} in Account Activity sheet for Android")
+	public void user_taps_on_in_Account_Activity_sheet_for_Android(String orderList) {
+		DeviceActions.click((MobileElement) action.getElement("ACCOUNT_ACTITVITY_ORDERLIST"));
+	}
+
+	@Then("under order or fund name below details should be there with > arrow")
+	public void under_order_or_fund_name_below_details_should_be_there_with_arrow(DataTable dataTable) {
+		List<String> data = dataTable.asList();
+		List<String> pageValues = OneCS_Mobile.getActivityOrderListvalues();
+		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
+	}
+
+	@Then("user minimized Holdings bottom sheet should be displayed for Android")
+	public void user_minimized_Holdings_bottom_sheet_should_be_displayed_for_Android() {
+		Assert.assertTrue(action.isPresent("MINIMIZED_HOLDINGS"));
+	}
+
+	@Then("{string} as Header should be displayed in the middle of the minimized sheet for Android")
+	public void as_Header_should_be_displayed_in_the_middle_of_the_minimized_sheet_for_Android(String holdings) {
+		Assert.assertEquals(OneCS.androidGetText("MINIMIZED_HOLDINGS"), holdings);
+	}
+
+	@Then("{string} should be displayed on the extreme right beside to Holdings title for Android")
+	public void should_be_displayed_on_the_extreme_right_beside_to_Holdings_title_for_Android(String threeLines) {
+
+		Assert.assertTrue(action.isPresent(threeLines));
+	}
+
+	@Then("Holding name and details container with > right chevron on the extreme right for Android")
+	public void holding_name_and_details_container_with_right_chevron_on_the_extreme_right_for_Android() {
+		Assert.assertTrue(action.isPresent("HOLDINGS_DETAIL_CONTAINER"));
+	}
+
+	@Then("user verifes below fields are present in Holdings name")
+	public void user_verifes_below_fields_are_present_in_Holdings_name(DataTable dataTable) {
+		DeviceActions.click((MobileElement) action.getElement("MINIMIZED_HOLDINGS"));
+		List<String> data = dataTable.asList();
+		List<String> pageValues = OneCS_Mobile.getHoldingAccountvalues();
+		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
+	}
+
+	@Then("user verifies all the Holdings are arranged in alphabetical order for Android")
+	public void user_verifies_all_the_Holdings_are_arranged_in_alphabetical_order_for_Android() throws InterruptedException {
+		boolean flag=OneCS_Mobile.sorting();
+		Assert.assertTrue(flag);
+	}
 	
 	
 	
@@ -837,6 +897,8 @@ public class OneCS_Mobile_StepDefs {
 	
 	
 	
+	
+
 	@When("user clicks on continue button")
 	public void user_clicks_on_continue_button() throws InterruptedException {
 		DeviceActions.click((MobileElement) action.getElement("NEXT_BUTTON"));

@@ -2,7 +2,7 @@
 Feature: MORE
 
   @More_Android @8.01_Android
-  Scenario: verify the details displayed on the Sign In Welcome Screen
+  Scenario: 8.01 - Verify the  MORE screen details
     Given user launch app "OneCS.apk" on "Emulator" mobile device
     And user Clicks on "SIGN_IN" button
     When user enters "Correct_Username" and "Correct_Password"

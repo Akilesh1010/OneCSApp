@@ -2,6 +2,8 @@ package qa.oneCSAndroid.pages;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -62,6 +64,10 @@ public class OneCS_Mobile {
 
 	public void AndroidInputText(String btnName, String text) {
 		DeviceActions.sendKeys((MobileElement) action.getElement(btnName), DeviceActions.getTestData(text));
+	}
+	
+	public void AndroidInputUserPass(String btnName, String text) {
+		DeviceActions.sendKeys((MobileElement) action.getElement(btnName), text);
 	}
 
 	public void androidButtonDisabled(String btnName) {
@@ -212,16 +218,11 @@ public class OneCS_Mobile {
 
 	public static List<String> getMoreScreenvalues() {
 		List<String> pageValues = new ArrayList<String>();
-
 		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("MORE_USER_SETTINGS")));
-
 		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("MORE_HELP_SUPPORT")));
-
 		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("MORE_MARKET_INFO")));
 		DeviceActions.scrollToElement("ABOUT CHARLES STANLEY");
-
 		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("MORE_ABOUT_CS")));
-
 		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
 		return pageValues;
 	}
@@ -305,6 +306,57 @@ public class OneCS_Mobile {
 		}
 		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
 		return pageValues;
+	}
+	
+	public static List<String> getActivityOrderListvalues() {
+		List<String> pageValues = new ArrayList<String>();
+		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("ORDER_LIST_DATE"));
+		listOfElements.add((MobileElement) action.getElement("ORDER_LIST_REF"));
+		listOfElements.add((MobileElement) action.getElement("ORDER_LIST_TYPE"));
+		listOfElements.add((MobileElement) action.getElement("ORDER_LIST_CURRSTAT"));
+
+		for (MobileElement element : listOfElements) {
+			pageValues.add(DeviceActions.getText((MobileElement) element));
+		}
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+		return pageValues;
+	}
+	
+	public static List<String> getHoldingAccountvalues() {
+		List<String> pageValues = new ArrayList<String>();
+		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("HOLDINGS_VALUE"));
+		listOfElements.add((MobileElement) action.getElement("HOLDINGS_PRICE"));
+		listOfElements.add((MobileElement) action.getElement("HOLDINGS_VALUE_CHANGE"));
+		listOfElements.add((MobileElement) action.getElement("HOLDINGS_COST"));
+
+		for (MobileElement element : listOfElements) {
+			pageValues.add(DeviceActions.getText((MobileElement) element));
+		}
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+		return pageValues;
+	}
+	
+	public static boolean sorting() throws InterruptedException
+	{
+		List<String> list = new ArrayList<String>();
+		Thread.sleep(2000);
+		list.add(DeviceActions.getText((MobileElement) action.getElement("HOLDINGS_ACCOUNTS1")));
+		list.add(DeviceActions.getText((MobileElement) action.getElement("HOLDINGS_ACCOUNTS2")));
+		list.add(DeviceActions.getText((MobileElement) action.getElement("HOLDINGS_ACCOUNTS3")));
+		if (!list.isEmpty()) {
+			  Iterator<String> it = list.iterator();
+			  String prev = it.next();
+			  while (it.hasNext()) {
+			    String next = it.next();
+			    if (prev.compareTo(next) > 0) {
+			      return false;
+			    }
+			    prev = next;
+			  }
+			}
+			return true;
 	}
 
 }
