@@ -3,6 +3,8 @@ package qa.oneCSiOS.stepDefs;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
 import org.testng.Assert;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -84,7 +86,7 @@ public class IOSDashboardSreenStepDefs {
 
 		@SuppressWarnings("deprecation")
 		int hours = date.getHours()-12;
-		
+
 		@SuppressWarnings("deprecation")
 		int year = date.getYear();
 		System.out.println(year);
@@ -101,12 +103,29 @@ public class IOSDashboardSreenStepDefs {
 		//		System.out.println(formattedDate);
 
 	}
-	
+
 	@Then("user selects one of the Account from yours Accounts screen for iOS")
 	public void user_selects_one_of_the_Account_from_yours_Accounts_screen_for_iOS() {
 		DeviceActions.click((MobileElement) action.getElement("PORTFOLIO_ACCOUNT_NAME_YOUR_ACCOUNTS_1"));
 		Reporter.addDeviceScreenshot("Dashboard Screen", "Mobile App Dashboard Screen");
-	    
+
+	}
+
+	@Then("user should verify the Total Portfolio value is matching with sum of all portfolio values for iOS")
+	public void user_should_verify_the_Total_Portfolio_value_is_matching_with_sum_of_all_portfolio_values_for_iOS() {
+		
+		List<Object> accounts = action.getElements("TOTAL_ACCOUNTS_IN_ACCOUNTS_SCREEN");
+		int totalAccounts = accounts.size()-1;
+		System.out.println(totalAccounts);
+		String value1 = "$12,123,45";
+		String value2 = "$12,123,50";
+		int x = Integer.parseInt(value1.substring(1).replace(",", ""));
+		int y = Integer.parseInt(value2.substring(1).replace(",", ""));
+		System.out.println(x + y);
+		for (int i=0; i<totalAccounts; i++) {
+			
+			
+		}
 	}
 
 }

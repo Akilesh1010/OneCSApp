@@ -62,6 +62,11 @@ public class IOSSignInStepDefs {
 
 	@Then("user get the SIX digit code displayed on screen and enters in TWOFA input field for iOS")
 	public void user_get_the_SIX_digit_code_displayed_on_screen_and_enters_in_TWOFA_input_field_for_iOS() throws InterruptedException {
+//		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("VERIFY_ACCOUNT_TEXT")));
+		while (iOSSignInScreen.getTextiOS("SIGN_IN_CODE_2FA_TXT") == "code loading") {
+//			System.out.println(iOSSignInScreen.getTextiOS("CODE_TO_TYPE"));	
+			continue;
+		}
 		iOSSignInScreen.input2FA();  
 	}
 
@@ -226,7 +231,7 @@ public class IOSSignInStepDefs {
 	}
 
 	@Then("user should be displayed with secure sign in page for iOS")
-	public void user_should_be_displayed_with_secure_sign_in_page_for_iOS() {
+	public void user_should_be_displayed_with_secure_sign_in_page_for_iOS() {	
 		boolean flag = iOSSignInScreen.secureSignInScreenFieldsDisplayiOS();
 		Assert.assertTrue(flag, "Error...Secure sign in screen fields not displayed.");
 		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
@@ -362,6 +367,12 @@ public class IOSSignInStepDefs {
 		String codeNew = DeviceActions.getText((MobileElement) action.getElement("SIGN_IN_CODE_2FA_TXT"));
 		Assert.assertNotEquals(codeNew, codeOld, "Error...Old code still retained.");
 
+	}
+	
+	@When("user logins with {string} and {string} for iOS")
+	public void user_logins_with_and_for_iOS(String userName, String pwd) {
+		DeviceActions.sendKeys((MobileElement) action.getElement("USERNAME_EDIT"), userName );
+		DeviceActions.sendKeys((MobileElement) action.getElement("PWD_EDIT"), pwd);	
 	}
 
 
