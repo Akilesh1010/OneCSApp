@@ -44,44 +44,43 @@ public class IOSAccountManagementStepDefs {
 
 		Reporter.addDeviceScreenshot("Account Management Screen", "Mobile App Acc Management Screen");
 	}
-	
+
 	@Then("upon swiping up Account Management popup should go to fullscreen for iOS")
 	public void upon_swiping_up_Account_Management_popup_should_go_to_fullscreen_for_iOS() {
 		MobileElement startingElement= (MobileElement) action.getElement("ACCOUNT_MANAGEMENT_DRAG_UP_BTN");
 		MobileElement endingElement= (MobileElement) action.getElement("ACCOUNT_DASHBOARD_SELECT_ACCOUNT_BTN");
 		dashboardScreeniOS.swipeiOS(startingElement, endingElement);   
-		
+
 		Reporter.addDeviceScreenshot("Account Management Screen", "Mobile App Acc Management Screen");
 	}
-	
+
 	@When("upon swiping down Account Management popup should go to fullscreen for iOS")
 	public void upon_swiping_down_Account_Management_popup_should_go_to_fullscreen_for_iOS() {
 		MobileElement startingElement= (MobileElement) action.getElement("ACCOUNT_MANAGEMENT_DRAG_UP_BTN");
 		MobileElement endingElement= (MobileElement) action.getElement("ACCOUNT_BREAKDOWN_BTN");
 		dashboardScreeniOS.swipeiOS(startingElement, endingElement);   
 		dashboardScreeniOS.swipeiOS(startingElement, endingElement);  
-		
+
 		Reporter.addDeviceScreenshot("Account Management Screen", "Mobile App Acc Management Screen");
-	   
+
 	}
-	
+
 	@Then("user should see below tabs in Activity screen for iOS")
 	public void user_should_see_below_tabs_in_Activity_screen_for_iOS(DataTable dataTable) {
 		List<String> data = dataTable.asList();
 		List<String> pageValues = accountManagementiOS.getActivityScreenTabNamesiOS();
 
 		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
-
 		Reporter.addDeviceScreenshot("Account Management Screen", "Mobile App Acc Management Screen");
-	    
+
 	}
-	
+
 	@Then("user should be see {string} screen for iOS")
 	public void user_should_be_see_screen_for_iOS(String screenName) {
 		Assert.assertTrue(action.isPresent(screenName));
 		Reporter.addDeviceScreenshot(screenName, "Mobile App "+screenName+ "Acc Activity Screen");
 	}
-	
+
 	@Then("user should be able to pull down the Activity tab to refresh the screen for iOS")
 	public void user_should_be_able_to_pull_down_the_Activity_tab_to_refresh_the_screen_for_iOS() {
 		MobileElement startingElement= (MobileElement) action.getElement("ACCOUNT_ACTIVITY_1ST_ACTIVITY_NAME_TXT");
@@ -92,5 +91,10 @@ public class IOSAccountManagementStepDefs {
 		Reporter.addDeviceScreenshot("Dashboard Screen", "Mobile App Dashboard Screen");
 	}
 
+	@Then("under Activity bar blank page should be displayed for iOS")
+	public void under_Activity_bar_blank_page_should_be_displayed_for_iOS() {
+		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement("EMPTY_LIST_ACTIVITY_TAB")));
+		Reporter.addDeviceScreenshot("Activity tab", "Mobile App Activity tab Screen");		
+	}
 
 }
