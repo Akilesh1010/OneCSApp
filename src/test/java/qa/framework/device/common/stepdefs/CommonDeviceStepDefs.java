@@ -10,10 +10,10 @@ import qa.framework.utils.Reporter;
 public class CommonDeviceStepDefs {
 
 	@Given("user launch app {string} on mobile device")
-    public void user_launch_app_on_mobile_device(String string) throws MalformedURLException {
+	public void user_launch_app_on_mobile_device(String string) throws MalformedURLException {
 
-       DeviceDriverManager.createBrowserSession();
-    }
+		DeviceDriverManager.createBrowserSession();
+	}
 
 	@And("user closes {string} on mobile device")
 	public void user_closes_browser_on_mobile_device(String type) {
@@ -28,7 +28,6 @@ public class CommonDeviceStepDefs {
 			DeviceDriverManager.quit();
 
 		} else if (type.equalsIgnoreCase("app")) {
-			DeviceDriverManager.closeApp();
 			DeviceDriverManager.quit();
 
 		}
@@ -44,7 +43,7 @@ public class CommonDeviceStepDefs {
 	@Given("^user launch app with appPackage \"([^\"]*)\" and activity \"([^\"]*)\" on mobile device$")
 	public void user_launch_app_with_apppackage_something_and_activity_something_on_mobile_device(String appPackage,
 			String appActivity,String deviceType) throws MalformedURLException {
-		
+
 		DeviceDriverManager.createAppSession(appPackage, appActivity, deviceType);
 
 	}

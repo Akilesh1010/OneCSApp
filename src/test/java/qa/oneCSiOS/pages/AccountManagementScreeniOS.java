@@ -66,6 +66,40 @@ public class AccountManagementScreeniOS {
 
 		return flag;
 	}
+	
+	
+	public List<String> getActivityOrderListLabelsiOS() {
+		List<String> pageValues = new ArrayList<String>();
+		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("ORDER_DATE_ORDER_LIST_LABEL"));
+		listOfElements.add((MobileElement) action.getElement("ORDER_REF_ORDER_LIST_LABEL"));
+		listOfElements.add((MobileElement) action.getElement("ORDER_TYPE_ORDER_LIST_LABEL"));
+		listOfElements.add((MobileElement) action.getElement("CURRENT_STATUS_ORDER_LIST_LABEL"));
+
+		for (MobileElement element : listOfElements) {
+			pageValues.add(DeviceActions.getText((MobileElement) element));
+		}
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+		return pageValues;
+	}
+	
+	public boolean orderListValuesiOS() {
+		boolean flag = false;
+
+		List<MobileElement> fields = new ArrayList<MobileElement>();
+
+		fields.add((MobileElement) action.getElement("ORDER_NAME_ORDER_LIST_LABEL"));
+		fields.add((MobileElement) action.getElement("ORDER_DATE_ORDER_LIST_VALUE"));
+		fields.add((MobileElement) action.getElement("ORDER_REF_ORDER_LIST_VALUE"));
+		fields.add((MobileElement) action.getElement("ORDER_TYPE_ORDER_LIST_VALUE"));
+		fields.add((MobileElement) action.getElement("CURRENT_STATUS_ORDER_LIST_VALUE"));
+
+		for (MobileElement element : fields) {
+			flag = element.isDisplayed();
+		}	
+
+		return flag;
+	}
 
 
 }

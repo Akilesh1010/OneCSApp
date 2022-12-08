@@ -36,6 +36,8 @@ Feature: Validate the Account Management module validation on iOS app
     Then user should see "ACCOUNT_MANAGEMENT_DRAG_UP_BTN" in the popup screen for iOS
     Then user Clicks on "ACCOUNT_MANAGEMENT_CLOSE_BTN" button for iOS
     Then user should not see "ACCOUNT_MANAGEMENT_DRAG_UP_BTN" overlay popup for iOS
+    When user Clicks on "MORE_TAB" button for iOS
+    And user Signs Out the Mobile Application for iOS
     And user closes "app" on mobile device
 
   @Account_Management_iOS @7.02_iOS
@@ -63,6 +65,8 @@ Feature: Validate the Account Management module validation on iOS app
     Then user should see below tabs in Activity screen for iOS
       | Activity   |
       | Order list |
+    When user Clicks on "MORE_TAB" button for iOS
+    And user Signs Out the Mobile Application for iOS
     And user closes "app" on mobile device
 
   @Account_Management_iOS @7.03_iOS
@@ -94,6 +98,8 @@ Feature: Validate the Account Management module validation on iOS app
     When user Clicks on "ACCOUNT_ACTIVITY_BTN" button for iOS
     Then user should be see "ACCOUNT_ACTIVITY_SCREEN_LABEL_TXT" screen for iOS
     Then user should be able to pull down the Activity tab to refresh the screen for iOS
+    When user Clicks on "MORE_TAB" button for iOS
+    And user Signs Out the Mobile Application for iOS
     And user closes "app" on mobile device
 
   @Account_Management_iOS @7.04_iOS
@@ -117,13 +123,15 @@ Feature: Validate the Account Management module validation on iOS app
     Then user should see "ACCOUNT_MANAGEMENT_DRAG_UP_BTN" in the popup screen for iOS
     When user Clicks on "ACCOUNT_ACTIVITY_BTN" button for iOS
     Then under Activity bar blank page should be displayed for iOS
+    When user Clicks on "MORE_TAB" button for iOS
+    And user Signs Out the Mobile Application for iOS
     And user closes "app" on mobile device
 
   @Account_Management_iOS @7.13_iOS
   Scenario: 7.13 - verify the order details listed  in the order list screen
-   Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
     Then user Clicks on "SIGN_IN_BTN" button for iOS
-    When user logins with "testest" and "Cupholder1" for iOS
+    When user logins with "edinburgh" and "Cupholder1" for iOS
     Then user Clicks on "CONTINUE_SIGN_IN_BTN" button for iOS
     And user get the SIX digit code displayed on screen and enters in TWOFA input field for iOS
     When user Clicks on "VERIFY_BTN" button for iOS
@@ -140,9 +148,11 @@ Feature: Validate the Account Management module validation on iOS app
     Then user should see "ACCOUNT_MANAGEMENT_DRAG_UP_BTN" in the popup screen for iOS
     When user Clicks on "ACCOUNT_ACTIVITY_BTN" button for iOS
     When user Clicks on "ORDER_LIST_TAB" button for iOS
-    #Then under order or fund name below details should be there with > arrow
-      #| Date           |
-      #| Ref            |
-      #| Type           |
-      #| Current status |
+    Then under order or fund name below details should be displayed for iOS
+    | Date           |
+    | Ref            |
+    | Type           |
+    | Current status |
+    When user Clicks on "MORE_TAB" button for iOS
+    And user Signs Out the Mobile Application for iOS
     And user closes "app" on mobile device

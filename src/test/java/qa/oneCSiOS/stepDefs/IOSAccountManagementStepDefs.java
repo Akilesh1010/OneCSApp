@@ -17,6 +17,7 @@ import qa.framework.assertions.AssertLogger;
 import qa.framework.dbutils.SQLDriver;
 import qa.framework.device.DeviceActions;
 import qa.framework.utils.Reporter;
+import qa.oneCSAndroid.pages.OneCS_Mobile;
 import qa.oneCSiOS.pages.AccountManagementScreeniOS;
 import qa.oneCSiOS.pages.DashboardScreeniOS;
 import qa.oneCSiOS.pages.SignInScreeniOS;
@@ -95,6 +96,17 @@ public class IOSAccountManagementStepDefs {
 	public void under_Activity_bar_blank_page_should_be_displayed_for_iOS() {
 		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement("EMPTY_LIST_ACTIVITY_TAB")));
 		Reporter.addDeviceScreenshot("Activity tab", "Mobile App Activity tab Screen");		
+	}
+
+	@Then("under order or fund name below details should be displayed for iOS")
+	public void under_order_or_fund_name_below_details_should_be_displayed_for_iOS(io.cucumber.datatable.DataTable dataTable) {
+		List<String> data = dataTable.asList();
+		List<String> pageValues = accountManagementiOS.getActivityOrderListLabelsiOS();
+		AssertLogger.assertEquals(pageValues, data, "Error..... Order list screen values does not match");
+		boolean flag = accountManagementiOS.orderListValuesiOS();
+		Assert.assertTrue(flag, "Error...Expected fields do not appear in Order list screen...");
+		Reporter.addDeviceScreenshot("Order list tab", "Mobile App Order list tab Screen");	
+
 	}
 
 }
