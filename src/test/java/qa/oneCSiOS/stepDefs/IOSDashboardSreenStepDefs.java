@@ -1,19 +1,33 @@
 package qa.oneCSiOS.stepDefs;
 
+import java.math.BigDecimal;
+import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.math3.analysis.function.Add;
+import org.openqa.selenium.By;
+import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
+import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.ios.IOSElement;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import qa.framework.assertions.AssertLogger;
 import qa.framework.dbutils.SQLDriver;
 import qa.framework.device.DeviceActions;
+import qa.framework.device.DeviceDriverManager;
 import qa.framework.utils.Reporter;
 import qa.oneCSiOS.pages.DashboardScreeniOS;
 import qa.oneCSiOS.pages.SignInScreeniOS;
@@ -23,6 +37,9 @@ public class IOSDashboardSreenStepDefs {
 	DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSAppiOS_iOS"));
 	SignInScreeniOS iOSSignInScreen = new SignInScreeniOS();
 	DashboardScreeniOS dashboardScreeniOS = new DashboardScreeniOS();
+	WebDriverWait wait = new WebDriverWait(DeviceDriverManager.getDriver(), 20);
+
+	//	private IOSDriver<MobileElement> driver;	
 
 	@Given("user Clicks on {string} button in dashboard screen for iOS")
 	public void user_Clicks_on_button_in_dashboard_screen_for_iOS(String btnName) throws InterruptedException {
@@ -40,6 +57,7 @@ public class IOSDashboardSreenStepDefs {
 
 	@Given("user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS")
 	public void user_is_on_the_dashboard_screen_they_should_be_displayed_with_pillbox_with_down_arrow() {
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("PORTFOLIO_SHOWALL_TXT")));
 		boolean flag = dashboardScreeniOS.pillBoxDisplayiOS();
 		Assert.assertTrue(flag, "Error...Expected pillbox fields do not appear on the Dashboard screen...");
 	}
@@ -111,21 +129,220 @@ public class IOSDashboardSreenStepDefs {
 
 	}
 
-	@Then("user should verify the Total Portfolio value is matching with sum of all portfolio values for iOS")
-	public void user_should_verify_the_Total_Portfolio_value_is_matching_with_sum_of_all_portfolio_values_for_iOS() {
-		
-		List<Object> accounts = action.getElements("TOTAL_ACCOUNTS_IN_ACCOUNTS_SCREEN");
-		int totalAccounts = accounts.size()-1;
-		System.out.println(totalAccounts);
-		String value1 = "$12,123,45";
-		String value2 = "$12,123,50";
-		int x = Integer.parseInt(value1.substring(1).replace(",", ""));
-		int y = Integer.parseInt(value2.substring(1).replace(",", ""));
-		System.out.println(x + y);
-		for (int i=0; i<totalAccounts; i++) {
-			
-			
-		}
+	//*************PORTFOLIO TOTAL VALUE --VS-- SUM OF ALL PORTFOLIO VALUES****************
+	@Then("user should see the Total Portfolio value is matching with sum of all portfolio values for iOS")
+	public void user_should_see_the_Total_Portfolio_value_is_matching_with_sum_of_all_portfolio_values_for_iOS() {
+
+		String totalPortfolioValue = DeviceActions.getText((MobileElement) action.getElement("PORTFOLIO_SUMMARY_TOTAL_VALUE_TXT"));
+		Double PortfolioValue = Double.parseDouble(totalPortfolioValue.substring(1).replace(",", ""));
+		BigDecimal portValue = BigDecimal.valueOf(PortfolioValue);
+		System.out.println(portValue);
+
+		DeviceActions.click((MobileElement) action.getElement("YOUR_ACCOUNTS_TAB"));
+
+		//		List<Object> accounts = action.getElements("TOTAL_ACCOUNTS_IN_ACCOUNTS_SCREEN");
+		//		int totalAccounts = accounts.size()-1;
+		//		System.out.println(totalAccounts);	
+
+		//		for (int i=0; i<totalAccounts; i++) {
+		String value1 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+0+"-total-value\"]")));
+		Double sumValue1 = Double.parseDouble(value1.substring(1).replace(",", ""));
+		BigDecimal bd1 = BigDecimal.valueOf(sumValue1);
+		System.out.println(bd1);
+
+		String value2 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+1+"-total-value\"]")));
+		Double sumValue2 = Double.parseDouble(value2.substring(1).replace(",", ""));
+		BigDecimal bd2 = BigDecimal.valueOf(sumValue2);
+		System.out.println(bd2);
+
+		String value3 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+2+"-total-value\"]")));
+		Double sumValue3 = Double.parseDouble(value3.substring(1).replace(",", ""));
+		BigDecimal bd3 = BigDecimal.valueOf(sumValue3);
+		System.out.println(bd3);
+
+		String value4 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+3+"-total-value\"]")));
+		Double sumValue4 = Double.parseDouble(value4.substring(1).replace(",", ""));
+		BigDecimal bd4 = BigDecimal.valueOf(sumValue4);
+		System.out.println(bd4);
+
+		DeviceActions.scroll("down");
+
+		String value5 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+4+"-total-value\"]")));
+		Double sumValue5 = Double.parseDouble(value5.substring(1).replace(",", ""));
+		BigDecimal bd5 = BigDecimal.valueOf(sumValue5);
+		System.out.println(bd5);
+
+		String value6 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+5+"-total-value\"]")));
+		Double sumValue6 = Double.parseDouble(value6.substring(1).replace(",", ""));
+		BigDecimal bd6 = BigDecimal.valueOf(sumValue6);
+		System.out.println(bd6);
+
+		String value7 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+6+"-total-value\"]")));
+		Double sumValue7 = Double.parseDouble(value7.substring(1).replace(",", ""));
+		BigDecimal bd7 = BigDecimal.valueOf(sumValue7);
+		System.out.println(bd7);
+
+		BigDecimal totalAccountValues = bd1.add(bd2).add(bd3).add(bd4).add(bd5).add(bd6).add(bd7);
+
+		System.out.println(totalAccountValues);
+
+		DeviceActions.click((MobileElement) action.getElement("YOUR_ACCOUNTS_TAB"));
+
+		AssertLogger.assertEquals(totalAccountValues, portValue, "Error..... Portfolio & Account values does not match");
+		//		}
+	}
+
+	//	*************PORTFOLIO TOTAL VALUE CHANGE --VS-- SUM OF ALL PORTFOLIO VALUE CHANGE ****************
+	@Then("user should see the Total Portfolio Value Change is matching with sum of all Portfolio Value Change for iOS")
+	public void user_should_see_the_Total_Portfolio_Value_Change_is_matching_with_sum_of_all_Portfolio_Value_Change_for_iOS() {
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("PORTFOLIO_SUMMARY_TOTAL_VALUE_TXT")));
+		String totalPortfolioValue = DeviceActions.getText((MobileElement) action.getElement("PORTFOLIO_SUMMARY_VALUE_CHANGE_TXT"));
+		String[] splitTotal = totalPortfolioValue.substring(2).split(" ");
+		Double PortfolioValue = Double.parseDouble(splitTotal[0].replace(",", ""));
+		BigDecimal portValueChange = BigDecimal.valueOf(PortfolioValue);
+		System.out.println(portValueChange);
+
+		DeviceActions.click((MobileElement) action.getElement("YOUR_ACCOUNTS_TAB"));
+
+		String value1 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+0+"-value-change\"]")));
+		String[] split1 = value1.substring(2).split(" ");
+		Double sumValue1 = Double.parseDouble(split1[0].replace(",", ""));
+		BigDecimal bd1 = BigDecimal.valueOf(sumValue1);
+		System.out.println(bd1);
+
+		String value2 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+1+"-value-change\"]")));
+		String[] split2 = value2.substring(2).split(" ");
+		Double sumValue2 = Double.parseDouble(split2[0].replace(",", ""));
+		BigDecimal bd2 = BigDecimal.valueOf(sumValue2);
+		System.out.println(bd2);
+
+		String value3 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+2+"-value-change\"]")));
+		String[] split3 = value3.substring(2).split(" ");
+		Double sumValue3 = Double.parseDouble(split3[0].replace(",", ""));
+		BigDecimal bd3 = BigDecimal.valueOf(sumValue3);
+		System.out.println(bd3);
+
+		String value4 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+3+"-value-change\"]")));
+		String[] split4 = value4.substring(2).split(" ");
+		Double sumValue4 = Double.parseDouble(split4[0].replace(",", ""));
+		BigDecimal bd4 = BigDecimal.valueOf(sumValue4);
+		System.out.println(bd4);
+
+		DeviceActions.scroll("down");
+
+		String value5 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+4+"-value-change\"]")));
+		String[] split5 = value5.substring(2).split(" ");
+		Double sumValue5 = Double.parseDouble(split5[0].replace(",", ""));
+		BigDecimal bd5 = BigDecimal.valueOf(sumValue5);
+		System.out.println(bd5);
+
+		String value6 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+5+"-value-change\"]")));
+		String[] split6 = value6.substring(2).split(" ");
+		Double sumValue6 = Double.parseDouble(split6[0].replace(",", ""));
+		BigDecimal bd6 = BigDecimal.valueOf(sumValue6);
+		System.out.println(bd6);
+
+		String value7 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+6+"-value-change\"]")));
+		String[] split7 = value7.substring(2).split(" ");
+		Double sumValue7 = Double.parseDouble(split7[0].replace(",", ""));
+		BigDecimal bd7 = BigDecimal.valueOf(sumValue7);
+		System.out.println(bd7);
+
+		BigDecimal totalAccountValueChange = bd1.add(bd2).add(bd3).add(bd4).add(bd5).add(bd6).add(bd7);
+
+		System.out.println(totalAccountValueChange);
+
+		AssertLogger.assertEquals(totalAccountValueChange, portValueChange, "Error..... Total Portfolio Value Change & Sum of Account Value Change does not match");
+
+
+	}
+
+	@Then("user selects the {string} from Your accounts screen for iOS")
+	public void user_selects_the_from_Your_accounts_screen_for_iOS(String accountName) {
+		//		DeviceActions.click((MobileElement) action.getElement("PORTFOLIO_ACCOUNT_NAME_YOUR_ACCOUNTS_1"));
+		//		wait.until(ExpectedConditions.textToBePresentInElement((MobileElement) action.getElement("RECOVER_DETAILS"),
+		//				"Recover details"));
+		DeviceActions.click((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@value=\""+accountName+"\"]")));
+	}
+
+	//	*************ACCOUNT DASHBOARD TOTAL VALUE --VS-- SUM OF ALL HOLDING VALUES ****************
+	@Then("user should see the Account Dashboard value is matching with holdings value of the same account for iOS")
+	public void user_should_see_the_Account_Dashboard_value_is_matching_with_holdings_value_of_the_same_account_for_iOS() {
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("ACCOUNT_SUMMARY_TOTAL_VALUE_LABEL")));
+
+		String accountSummaryValue = DeviceActions.getText((MobileElement) action.getElement("ACCOUNT_SUMMARY_TOTAL_VALUE_LABEL"));
+		Double accountValue = Double.parseDouble(accountSummaryValue.substring(1).replace(",", ""));
+		BigDecimal accValue = BigDecimal.valueOf(accountValue);
+		System.out.println(accValue);
+
+		DeviceActions.click((MobileElement) action.getElement("HOLDINGS_DRAG_UP_BTN"));
+
+		String value1 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"account-holding-"+0+"-value\"]")));
+		Double sumValue1 = Double.parseDouble(value1.substring(1).replace(",", ""));
+		BigDecimal bd1 = BigDecimal.valueOf(sumValue1);
+		System.out.println(bd1);
+
+		String value2 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"account-holding-"+1+"-value\"]")));
+		Double sumValue2 = Double.parseDouble(value2.substring(1).replace(",", ""));
+		BigDecimal bd2 = BigDecimal.valueOf(sumValue2);
+		System.out.println(bd2);
+
+		String value3 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"account-holding-"+2+"-value\"]")));
+		Double sumValue3 = Double.parseDouble(value3.substring(1).replace(",", ""));
+		BigDecimal bd3 = BigDecimal.valueOf(sumValue3);
+		System.out.println(bd3);
+
+		String value4 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"account-holding-"+3+"-value\"]")));
+		Double sumValue4 = Double.parseDouble(value4.substring(1).replace(",", ""));
+		BigDecimal bd4 = BigDecimal.valueOf(sumValue4);
+		System.out.println(bd4);
+
+		BigDecimal totalHoldingsValues = bd1.add(bd2).add(bd3).add(bd4);
+
+		System.out.println(totalHoldingsValues);
+
+		DeviceActions.click((MobileElement) action.getElement("HOLDINGS_DRAG_UP_BTN"));
+
+		AssertLogger.assertEquals(totalHoldingsValues, accValue, "Error..... Account dashboard and Holdings values does not match");
+	}
+	//	*************ACCOUNT DASHBOARD TOTAL VALUE CHANGE --VS-- SUM OF ALL HOLDING VALUE CHANGE ****************
+	@Then("user should see the Account Dashboard Value Change is matching with Sum of All Holdings Value Change for iOS")
+	public void user_should_see_the_Account_Dashboard_Value_Change_is_matching_with_Sum_of_All_Holdings_Value_Change_for_iOS() {
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("ACCOUNT_SUMMARY_TOTAL_VALUE_LABEL")));
+		String totalPortfolioValue = DeviceActions.getText((MobileElement) action.getElement("ACCOUNT_SUMMARY_VALUE_CHANGE_LABEL"));
+		String[] splitTotal = totalPortfolioValue.substring(2).split(" ");
+		Double PortfolioValue = Double.parseDouble(splitTotal[0].replace(",", ""));
+		BigDecimal accValueChange = BigDecimal.valueOf(PortfolioValue);
+		System.out.println(accValueChange);
+
+		DeviceActions.click((MobileElement) action.getElement("HOLDINGS_DRAG_UP_BTN"));
+
+		String value1 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"account-holding-"+0+"-value-change\"]")));
+		Double sumValue1 = Double.parseDouble(value1.substring(2).replace(",", ""));
+		BigDecimal bd1 = BigDecimal.valueOf(sumValue1);
+		System.out.println(bd1);
+
+		String value2 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"account-holding-"+1+"-value-change\"]")));
+		Double sumValue2 = Double.parseDouble(value2.substring(2).replace(",", ""));
+		BigDecimal bd2 = BigDecimal.valueOf(sumValue2);
+		System.out.println(bd2);
+
+		String value3 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"account-holding-"+2+"-value-change\"]")));
+		Double sumValue3 = Double.parseDouble(value3.substring(2).replace(",", ""));
+		BigDecimal bd3 = BigDecimal.valueOf(sumValue3);
+		System.out.println(bd3);
+
+		String value4 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"account-holding-"+3+"-value-change\"]")));
+		Double sumValue4 = Double.parseDouble(value4.substring(2).replace(",", ""));
+		BigDecimal bd4 = BigDecimal.valueOf(sumValue4);
+		System.out.println(bd4);;
+
+		BigDecimal totalHoldingsValueChange = bd1.add(bd2).add(bd3).add(bd4);
+
+		System.out.println(totalHoldingsValueChange);
+
+		AssertLogger.assertEquals(totalHoldingsValueChange, accValueChange, "Error..... Total Portfolio Value Change & Sum of Account Value Change does not match");
+
 	}
 
 }

@@ -1,9 +1,11 @@
 package qa.oneCSiOS.pages;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -95,7 +97,7 @@ public class DashboardScreeniOS {
 		fields.add((MobileElement) action.getElement("PORTFOLIO_EYE_ICON_BTN"));
 		fields.add((MobileElement) action.getElement("PORTFOLIO_SUMMARY_VALUE_CHANGE_TXT"));
 		fields.add((MobileElement) action.getElement("PORTFOLIO_SUMMARY_REFRESH_TIME_TXT"));
-		
+
 
 		for (MobileElement element : fields) {
 			flag = element.isDisplayed();
@@ -104,7 +106,7 @@ public class DashboardScreeniOS {
 		return flag;
 
 	}
-	
+
 	public boolean bottomNavigationDisplayiOS() {
 		boolean flag = false;
 
@@ -116,7 +118,7 @@ public class DashboardScreeniOS {
 		fields.add((MobileElement) action.getElement("INVESTMENT_TAB"));
 		fields.add((MobileElement) action.getElement("INSIGHTS_TAB"));
 		fields.add((MobileElement) action.getElement("MORE_TAB"));
-		
+
 
 		for (MobileElement element : fields) {
 			flag = element.isDisplayed();
@@ -125,18 +127,33 @@ public class DashboardScreeniOS {
 		return flag;
 
 	} 
-	
+
 	public void swipeiOS(MobileElement startingElement, MobileElement endingElement) {
 		TouchAction swipe = new TouchAction((PerformsTouchActions) DeviceDriverManager.getDriver());
 		swipe.press(ElementOption.element(startingElement)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1500)))
-				.moveTo(ElementOption.element(endingElement)).release().perform();
+		.moveTo(ElementOption.element(endingElement)).release().perform();
 	}
 
-
-
-
-
-
+//	public static BigDecimal test() {
+//		List<Object> accounts = action.getElements("TOTAL_ACCOUNTS_IN_ACCOUNTS_SCREEN");
+//		int totalAccounts = accounts.size()-1;
+//		System.out.println(totalAccounts);	
+//		BigDecimal total = null;
+//
+//		for (int i=0; i<totalAccounts; i++) {
+//			String value = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+i+"-total-value\"]")));
+//			Double sumValue = Double.parseDouble(value.substring(1).replace(",", ""));
+//			BigDecimal bd = BigDecimal.valueOf(sumValue);
+//			System.out.println(bd);
+//			total = total.add(bd);
+//			
+//		}
+//		return null;
+//		
+//
+//	}
+	
+	
 
 
 
