@@ -358,5 +358,20 @@ public class OneCS_Mobile {
 			}
 			return true;
 	}
+	public static List<String> getOrderTypesvalues() {
+		List<String> pageValues = new ArrayList<String>();
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ACTIVITY_ORDER_PROCESSING")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ACTIVITY_ORDER_DEALT")));
+		DeviceActions.scrollToElement("CANCELLED");
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ACTIVITY_ORDER_CANCELLED")));
+		DeviceActions.scrollToElement("COMPLETE");
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ACTIVITY_ORDER_COMPLETE")));
+		DeviceActions.scrollToElement("REJECTED");
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ACTIVITY_ORDER_REJECTED")));
+		DeviceActions.scrollToElement("EXPIRED");
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ACTIVITY_ORDER_EXPIRED")));
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+		return pageValues;
+	}
 
 }

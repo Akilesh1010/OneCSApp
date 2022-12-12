@@ -747,6 +747,11 @@ public class OneCS_Mobile_StepDefs {
 		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("YOUR_ACCOUNTS")));
 		DeviceActions.click((MobileElement) action.getElement("MR_LUCAS_ISA"));
 	}
+	@When("user selects a account from the list of accounts in Accounts screen for Android")
+	public void user_selects_a_account_from_the_list_of_accounts_in_Accounts_screen_for_Android() {
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("YOUR_ACCOUNTS")));
+		DeviceActions.click((MobileElement) action.getElement("MR_LUCAS_ISA"));
+	}
 
 	@Then("user should see {string} account management screen for Android")
 	public void user_should_see_account_management_screen_for_Android(String closeButton) {
@@ -786,7 +791,7 @@ public class OneCS_Mobile_StepDefs {
 
 	@Then("user taps on {string} in Account Dashboard screen for Android")
 	public void user_taps_on_in_Account_Dashboard_screen_for_Android(String editPencil) {
-		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("WAIT_EDIT_PENCIL")));
+		wait.until(ExpectedConditions.elementToBeClickable((MobileElement) action.getElement("WAIT_EDIT_PENCIL")));
 		DeviceActions.click((MobileElement) action.getElement(editPencil));
 	}
 
@@ -874,11 +879,41 @@ public class OneCS_Mobile_StepDefs {
 		Assert.assertTrue(flag);
 	}
 	
+	@Then("Confirm the orders of the below types")
+	public void confirm_the_orders_of_the_below_types(DataTable dataTable) {
+		List<String> data = dataTable.asList();
+		List<String> pageValues = OneCS_Mobile.getOrderTypesvalues();
+		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
+	}
 	
+	@Then("user verifies whether it lands on {string} screen for Android")
+	public void user_verifies_whether_it_lands_on_screen_for_Android(String screen) {
+		Assert.assertTrue(action.isPresent(screen));
+	}
 	
-	
-	
-	
+	@Then("user validates the details in the Account Dashboard screen for Android")
+	public void user_validates_the_details_in_the_Account_Dashboard_screen_for_Android() {
+		Assert.assertTrue(action.isPresent("VALUE_AS_OF_ACCOUNT"));
+	}
+
+	@Then("user the pulls down and refreshes the Accounts Dashboard screen for Android")
+	public void user_the_pulls_down_and_refreshes_the_Accounts_Dashboard_screen_for_Android() {
+	    
+		OneCS_Mobile.androidSwipe((MobileElement) action.getElement("ACCOUNT_DASHBOARD"),
+				(MobileElement) action.getElement("VALUE_AS_OF_ACCOUNT"));
+	}
+
+	@Then("user navigates to other tabs and should be able to find a change in values in Accounts Dashboard screen for Android")
+	public void user_navigates_to_other_tabs_and_should_be_able_to_find_a_change_in_values_in_Accounts_Dashboard_screen_for_Android() throws InterruptedException {
+		String text= OneCS.androidGetText("ACCOUNT_TOTAL_VALUE");
+		DeviceActions.click((MobileElement) action.getElement("More_Option"));
+		Thread.sleep(2000);
+		DeviceDriverManager.getDriver().navigate().back();
+		OneCS_Mobile.androidSwipe((MobileElement) action.getElement("ACCOUNT_DASHBOARD"),
+				(MobileElement) action.getElement("VALUE_AS_OF_ACCOUNT"));
+		String text1= OneCS.androidGetText("ACCOUNT_TOTAL_VALUE");
+		Assert.assertNotEquals(text, text1);
+	}
 	
 	
 	
