@@ -62,9 +62,9 @@ public class IOSDashboardSreenStepDefs {
 		Assert.assertTrue(flag, "Error...Expected pillbox fields do not appear on the Dashboard screen...");
 	}
 
-	@Then("user should be displayed with welcome back your current portfolio section including the performance arrow on iOS")
-	public void user_should_be_displayed_with_welcome_back_your_current_portfolio_section_including_the_performance_arrow_on_iOS() {
-		boolean flag = dashboardScreeniOS.welcomeBackPortfolioDisplayiOS();
+	@Then("user should be displayed with welcome back your current portfolio section including the {string} on iOS")
+	public void user_should_be_displayed_with_welcome_back_your_current_portfolio_section_including_the_on_iOS(String perfomanceIndicator) {
+		boolean flag = dashboardScreeniOS.welcomeBackPortfolioDisplayiOS(perfomanceIndicator);
 		Assert.assertTrue(flag, "Error...Expected welcome back fields do not appear on the Dashboard screen...");
 	}
 
@@ -253,15 +253,10 @@ public class IOSDashboardSreenStepDefs {
 		System.out.println(totalAccountValueChange);
 
 		AssertLogger.assertEquals(totalAccountValueChange, portValueChange, "Error..... Total Portfolio Value Change & Sum of Account Value Change does not match");
-
-
 	}
 
 	@Then("user selects the {string} from Your accounts screen for iOS")
 	public void user_selects_the_from_Your_accounts_screen_for_iOS(String accountName) {
-		//		DeviceActions.click((MobileElement) action.getElement("PORTFOLIO_ACCOUNT_NAME_YOUR_ACCOUNTS_1"));
-		//		wait.until(ExpectedConditions.textToBePresentInElement((MobileElement) action.getElement("RECOVER_DETAILS"),
-		//				"Recover details"));
 		DeviceActions.click((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@value=\""+accountName+"\"]")));
 	}
 
@@ -342,7 +337,47 @@ public class IOSDashboardSreenStepDefs {
 		System.out.println(totalHoldingsValueChange);
 
 		AssertLogger.assertEquals(totalHoldingsValueChange, accValueChange, "Error..... Total Portfolio Value Change & Sum of Account Value Change does not match");
-
 	}
+
+	@Then("user should see {string} Portfolio Value Change in the Dashboard screen for iOS")
+	public void user_should_see_Portfolio_Value_Change_in_the_Dashboard_screen_for_iOS(String performanceIndicator) {
+		String totalPortfolioValue = DeviceActions.getText((MobileElement) action.getElement("PORTFOLIO_SUMMARY_VALUE_CHANGE_TXT"));
+		String[] valueChangeSplit = totalPortfolioValue.split(" ");
+
+		if(performanceIndicator.equalsIgnoreCase("positive")) {
+			boolean postiveSign = valueChangeSplit[0].contains("+");
+			AssertLogger.assertTrue(postiveSign, "Postive sign does not appear in Portfolio Value Change field..");
+			System.out.println(postiveSign);
+		}
+		else if(performanceIndicator.equalsIgnoreCase("negative")) {
+			boolean negativeSign = valueChangeSplit[0].contains("-");
+			AssertLogger.assertTrue(negativeSign, "Negative sign does not appear in Portfolio Value Change field..");
+		}
+	}
+
+	@Then("user should see {string} Sign in the Percentage value on the Dashboard screen for iOS")
+	public void user_should_see_Sign_in_the_Percentage_value_on_the_Dashboard_screen_for_iOS(String performanceIndicator) {
+		String totalPortfolioValue = DeviceActions.getText((MobileElement) action.getElement("PORTFOLIO_SUMMARY_VALUE_CHANGE_TXT"));
+		String[] valueChangeSplit = totalPortfolioValue.split(" ");
+		
+		if(performanceIndicator.equalsIgnoreCase("Positive")) {
+			boolean postivepPrcentageSign = valueChangeSplit[2].contains("+");
+			AssertLogger.assertTrue(postivepPrcentageSign, "Postive sign does not appear in Portfolio Percentage field..");
+		}
+		else if(performanceIndicator.equalsIgnoreCase("Negative")) {
+			boolean negativePercentageSign = valueChangeSplit[2].contains("-");
+			AssertLogger.assertTrue(negativePercentageSign, "Negative sign does not appear in Portfolio Percentage field..");
+		}
+		
+	}
+	
+	@Then("user should see a back button and Portfolio Breakdown Title at the top of the screen for iOS")
+	public void user_should_see_a_back_button_and_Portfolio_Breakdown_Title_at_the_top_of_the_screen_for_iOS() {
+		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement("BACK_BUTTON")));
+		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement("PORTFOLIO_BREAKDOWN_SCREEN_TITLE")));
+		Reporter.addDeviceScreenshot("Portfolio Breakdown", "Portfolio Breakdown Screen");
+	}
+
+
 
 }

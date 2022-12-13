@@ -71,14 +71,14 @@ public class DashboardScreeniOS {
 
 	}
 
-	public boolean welcomeBackPortfolioDisplayiOS() {
+	public boolean welcomeBackPortfolioDisplayiOS(String performanceIndicator) {
 		boolean flag = false;
 
 		List<MobileElement> fields = new ArrayList<MobileElement>();
 
 		fields.add((MobileElement) action.getElement("WELCOME_BACK_TXT"));
 		fields.add((MobileElement) action.getElement("YOUR_CURRENT_PORTFOLIO_VALUE_IS_TXT"));
-		fields.add((MobileElement) action.getElement("PORTFOLIO_PERFORMANCE_ARROW"));
+		fields.add((MobileElement) action.getElement(performanceIndicator));
 
 		for (MobileElement element : fields) {
 			flag = element.isDisplayed();
