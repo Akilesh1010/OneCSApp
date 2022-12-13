@@ -1,6 +1,9 @@
 package qa.oneCSAndroid.stepdefs;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -109,7 +112,7 @@ public class OneCS_Mobile_StepDefs {
 		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("VERIFY_ACCOUNT_TEXT")));
 		// String text = OneCS.androidGetText("CODE_TO_TYPE");
 		while (OneCS.androidGetText("CODE_TO_TYPE") == "Code to type: Waiting...") {
-			System.out.println(OneCS.androidGetText("CODE_TO_TYPE"));	
+			System.out.println(OneCS.androidGetText("CODE_TO_TYPE"));
 			continue;
 		}
 		String codetext = DeviceActions.getText((MobileElement) action.getElement("CODE_TO_TYPE"));
@@ -747,6 +750,7 @@ public class OneCS_Mobile_StepDefs {
 		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("YOUR_ACCOUNTS")));
 		DeviceActions.click((MobileElement) action.getElement("MR_LUCAS_ISA"));
 	}
+
 	@When("user selects a account from the list of accounts in Accounts screen for Android")
 	public void user_selects_a_account_from_the_list_of_accounts_in_Accounts_screen_for_Android() {
 		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("YOUR_ACCOUNTS")));
@@ -874,23 +878,24 @@ public class OneCS_Mobile_StepDefs {
 	}
 
 	@Then("user verifies all the Holdings are arranged in alphabetical order for Android")
-	public void user_verifies_all_the_Holdings_are_arranged_in_alphabetical_order_for_Android() throws InterruptedException {
-		boolean flag=OneCS_Mobile.sorting();
+	public void user_verifies_all_the_Holdings_are_arranged_in_alphabetical_order_for_Android()
+			throws InterruptedException {
+		boolean flag = OneCS_Mobile.sorting();
 		Assert.assertTrue(flag);
 	}
-	
+
 	@Then("Confirm the orders of the below types")
 	public void confirm_the_orders_of_the_below_types(DataTable dataTable) {
 		List<String> data = dataTable.asList();
 		List<String> pageValues = OneCS_Mobile.getOrderTypesvalues();
 		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
 	}
-	
+
 	@Then("user verifies whether it lands on {string} screen for Android")
 	public void user_verifies_whether_it_lands_on_screen_for_Android(String screen) {
 		Assert.assertTrue(action.isPresent(screen));
 	}
-	
+
 	@Then("user validates the details in the Account Dashboard screen for Android")
 	public void user_validates_the_details_in_the_Account_Dashboard_screen_for_Android() {
 		Assert.assertTrue(action.isPresent("VALUE_AS_OF_ACCOUNT"));
@@ -898,22 +903,112 @@ public class OneCS_Mobile_StepDefs {
 
 	@Then("user the pulls down and refreshes the Accounts Dashboard screen for Android")
 	public void user_the_pulls_down_and_refreshes_the_Accounts_Dashboard_screen_for_Android() {
-	    
+
 		OneCS_Mobile.androidSwipe((MobileElement) action.getElement("ACCOUNT_DASHBOARD"),
 				(MobileElement) action.getElement("VALUE_AS_OF_ACCOUNT"));
 	}
 
 	@Then("user navigates to other tabs and should be able to find a change in values in Accounts Dashboard screen for Android")
-	public void user_navigates_to_other_tabs_and_should_be_able_to_find_a_change_in_values_in_Accounts_Dashboard_screen_for_Android() throws InterruptedException {
-		String text= OneCS.androidGetText("ACCOUNT_TOTAL_VALUE");
+	public void user_navigates_to_other_tabs_and_should_be_able_to_find_a_change_in_values_in_Accounts_Dashboard_screen_for_Android()
+			throws InterruptedException {
+		String text = OneCS.androidGetText("ACCOUNT_TOTAL_VALUE");
 		DeviceActions.click((MobileElement) action.getElement("More_Option"));
 		Thread.sleep(2000);
 		DeviceDriverManager.getDriver().navigate().back();
 		OneCS_Mobile.androidSwipe((MobileElement) action.getElement("ACCOUNT_DASHBOARD"),
 				(MobileElement) action.getElement("VALUE_AS_OF_ACCOUNT"));
-		String text1= OneCS.androidGetText("ACCOUNT_TOTAL_VALUE");
+		String text1 = OneCS.androidGetText("ACCOUNT_TOTAL_VALUE");
 		Assert.assertNotEquals(text, text1);
 	}
+
+	@Then("user should see a {string} with a down arrow for Android")
+	public void user_should_see_a_with_a_down_arrow_for_Android(String pillBox) {
+		boolean flag = action.isDisplayed((MobileElement) action.getElement(pillBox));
+		Assert.assertTrue(flag, "Error...Expected pillbox fields do not appear on the Dashboard screen...");
+	}
+
+	@Then("user should see welcome back your current portfolio section including the performance arrow on Android")
+	public void user_should_see_welcome_back_your_current_portfolio_section_including_the_performance_arrow_on_Android() {
+		boolean flag = OneCS.welcomeBackPortfolioDisplay();
+		Assert.assertTrue(flag, "Error...Expected welcome back fields do not appear on the Dashboard screen...");
+	}
+
+	@Then("user should be displayed with Portfolio summary value details on Android")
+	public void user_should_be_displayed_with_Portfolio_summary_value_details_on_Android() {
+		boolean flag = OneCS.portfolioSummaryValueDetails();
+		Assert.assertTrue(flag, "Error...Expected summary value fields do not appear on the Dashboard screen...");
+		Reporter.addDeviceScreenshot("Dashboard Screen", "Mobile App Dashboard Screen");
+	}
+
+	@Then("user should be displayed with bottom naviagation options for portfolio,contact,investments,insights and more on Android")
+	public void user_should_be_displayed_with_bottom_naviagation_options_for_portfolio_contact_investments_insights_and_more_on_Android() {
+		boolean flag = OneCS.bottomNavigationDisplay();
+		Assert.assertTrue(flag, "Error...Expected bottom navigation options do not appear on the Dashboard screen...");
+		Reporter.addDeviceScreenshot("Dashboard Screen", "Mobile App Dashboard Screen");
+	}
+
+	@Then("user should be able to pull down the screen to refresh the details for Android")
+	public void user_should_be_able_to_pull_down_the_screen_to_refresh_the_details_for_Android() {
+		OneCS_Mobile.androidSwipe((MobileElement) action.getElement("PORTFOLIO_SELECTOR_PILLBOX"),
+				(MobileElement) action.getElement("PORTFOLIO_SUMMARY_REFRESH_TIME_TXT"));
+	}
+
+	@Then("user should verify the value of date format displayed on screen for Android")
+	public void user_should_verify_the_value_of_date_format_displayed_on_screen_for_Android() {
+		Date date = new Date();
+
+		String timeValueString = DeviceActions
+				.getText((MobileElement) action.getElement("PORTFOLIO_SUMMARY_REFRESH_TIME_TXT"));
+		String splitValues[] = timeValueString.split("2022");
+		String split = splitValues[1];
+		String timeOnScreen = split.substring(2, 6);
+
+		@SuppressWarnings("deprecation")
+		int hours = date.getHours() - 12;
+
+		@SuppressWarnings("deprecation")
+		int year = date.getYear();
+		System.out.println(year);
+
+		@SuppressWarnings("deprecation")
+		int minutes = date.getMinutes();
+		String actualTime = hours + "." + minutes;
+
+		Assert.assertEquals(timeOnScreen, actualTime, "Error... Time mismatch between system and app.");
+		Reporter.addDeviceScreenshot("Dashboard Screen", "Mobile App Dashboard Screen");
+
+	}
+
+	@Then("user should see the Total Portfolio value is matching with sum of all portfolio values for Android")
+	public void user_should_see_the_Total_Portfolio_value_is_matching_with_sum_of_all_portfolio_values_for_Android() {
+		String totalPortfolioValue = DeviceActions.getText((MobileElement) action.getElement("PORTFOLIO_VALUE_TXT"));
+		String TotalValue = totalPortfolioValue.substring(1).replace(",", "");
+		DeviceActions.click((MobileElement) action.getElement("YOUR_ACCOUNTS"));
+		List<Object> accounts = action.getElements("TOTAL_ACCOUNTS_IN_ACCOUNTS_SCREEN");
+		
+		Double total = 0.0;
+		for (int i = 0; i <accounts.size(); i++) {
+
+			String value1 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(
+					By.xpath("//android.widget.TextView[@resource-id='portfolio-account-" + i + "-total-value']")));
+			Double sumValue1 = Double.parseDouble(value1.substring(1).replace(",", ""));
+			total = total + sumValue1;
+
+		}
+		DecimalFormat df = new DecimalFormat("#");
+		df.setMaximumFractionDigits(8);
+		String IndividualAccountsTotal = df.format(total);
+		Assert.assertEquals(TotalValue, IndividualAccountsTotal);
+
+	}
+	
+	@Then("user should see the Total Portfolio Value Change is matching with sum of all Portfolio Value Change for Android")
+	public void user_should_see_the_Total_Portfolio_Value_Change_is_matching_with_sum_of_all_Portfolio_Value_Change_for_Android() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+	
+	
 	
 	
 	
