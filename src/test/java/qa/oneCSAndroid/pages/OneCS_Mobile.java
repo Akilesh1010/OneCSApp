@@ -358,5 +358,77 @@ public class OneCS_Mobile {
 			}
 			return true;
 	}
+	public static List<String> getOrderTypesvalues() {
+		List<String> pageValues = new ArrayList<String>();
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ACTIVITY_ORDER_PROCESSING")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ACTIVITY_ORDER_DEALT")));
+		DeviceActions.scrollToElement("CANCELLED");
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ACTIVITY_ORDER_CANCELLED")));
+		DeviceActions.scrollToElement("COMPLETE");
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ACTIVITY_ORDER_COMPLETE")));
+		DeviceActions.scrollToElement("REJECTED");
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ACTIVITY_ORDER_REJECTED")));
+		DeviceActions.scrollToElement("EXPIRED");
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ACTIVITY_ORDER_EXPIRED")));
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+		return pageValues;
+	}
+	
+	public boolean welcomeBackPortfolioDisplay() {
+		boolean flag = false;
+
+		List<MobileElement> fields = new ArrayList<MobileElement>();
+
+		fields.add((MobileElement) action.getElement("DASHBOARD_SCREEN"));
+		fields.add((MobileElement) action.getElement("YOUR_CURRENT_PORTFOLIO_VALUE_IS_TXT"));
+		fields.add((MobileElement) action.getElement("PORTFOLIO_PERFORMANCE_ARROW"));
+
+		for (MobileElement element : fields) {
+			flag = element.isDisplayed();
+		}	
+
+		return flag;
+
+	}
+	
+	public boolean portfolioSummaryValueDetails() {
+		boolean flag = false;
+
+		List<MobileElement> fields = new ArrayList<MobileElement>();
+
+		fields.add((MobileElement) action.getElement("PORTFOLIO_VALUE_TXT"));
+		fields.add((MobileElement) action.getElement("PORTFOLIO_EYE_ICON_BTN"));
+		fields.add((MobileElement) action.getElement("PORTFOLIO_SUMMARY_VALUE_CHANGE_TXT"));
+		fields.add((MobileElement) action.getElement("PORTFOLIO_SUMMARY_REFRESH_TIME_TXT"));
+
+
+		for (MobileElement element : fields) {
+			flag = element.isDisplayed();
+		}	
+
+		return flag;
+
+	}
+	
+	public boolean bottomNavigationDisplay() {
+		boolean flag = false;
+
+		List<MobileElement> fields = new ArrayList<MobileElement>();
+
+		fields.add((MobileElement) action.getElement("YOUR_ACCOUNTS"));
+		fields.add((MobileElement) action.getElement("PORTFOLIO_TAB"));
+		fields.add((MobileElement) action.getElement("CONTACT_TAB"));
+		fields.add((MobileElement) action.getElement("INVESTMENT_TAB"));
+		fields.add((MobileElement) action.getElement("INSIGHTS_TAB"));
+		fields.add((MobileElement) action.getElement("MORE_TAB"));
+
+
+		for (MobileElement element : fields) {
+			flag = element.isDisplayed();
+		}	
+
+		return flag;
+
+	}
 
 }
