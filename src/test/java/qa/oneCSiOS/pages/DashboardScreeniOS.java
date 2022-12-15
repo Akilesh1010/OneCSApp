@@ -15,6 +15,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.ElementOption;
+import io.appium.java_client.touch.offset.PointOption;
 import qa.framework.dbutils.SQLDriver;
 import qa.framework.device.DeviceActions;
 import qa.framework.device.DeviceDriverManager;
@@ -112,7 +113,7 @@ public class DashboardScreeniOS {
 
 		List<MobileElement> fields = new ArrayList<MobileElement>();
 
-		fields.add((MobileElement) action.getElement("YOUR_ACCOUNTS_TAB"));
+//		fields.add((MobileElement) action.getElement("YOUR_ACCOUNTS_TAB"));
 		fields.add((MobileElement) action.getElement("PORTFOLIO_TAB"));
 		fields.add((MobileElement) action.getElement("CONTACT_TAB"));
 		fields.add((MobileElement) action.getElement("INVESTMENT_TAB"));
@@ -152,6 +153,49 @@ public class DashboardScreeniOS {
 //		
 //
 //	}
+	
+
+	@SuppressWarnings("rawtypes")
+	public void swipeByCooardinatesiOS(int startX, int startY, int endX, int endY) {
+		new TouchAction((PerformsTouchActions) DeviceDriverManager.getDriver()).longPress(PointOption.point(startX, startY))
+	    .moveTo(PointOption.point(endX, endY))
+	    .release().perform();
+	}
+	
+	public boolean fieldsDisplayiOS(String field1, String field2, String field3) {
+		boolean flag = false;
+
+		List<MobileElement> fields = new ArrayList<MobileElement>();
+
+		fields.add((MobileElement) action.getElement(field1));
+		fields.add((MobileElement) action.getElement(field2));
+		fields.add((MobileElement) action.getElement(field3));
+	
+
+		for (MobileElement element : fields) {
+			flag = element.isDisplayed();
+		}	
+
+		return flag;
+
+	}
+	
+	public boolean twoFieldsDisplayiOS(String field1, String field2) {
+		boolean flag = false;
+
+		List<MobileElement> fields = new ArrayList<MobileElement>();
+
+		fields.add((MobileElement) action.getElement(field1));
+		fields.add((MobileElement) action.getElement(field2));
+	
+		for (MobileElement element : fields) {
+			flag = element.isDisplayed();
+		}	
+
+		return flag;
+
+	}
+	
 	
 	
 
