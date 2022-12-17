@@ -3,6 +3,7 @@ package qa.framework.device;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
@@ -437,6 +438,10 @@ public class DeviceDriverManager {
 	public static void closeApp() {
 		flag=false;
 		((AppiumDriver<?>)driver).closeApp();
+	}
+	
+	public static void runAppInBackground(int seconds) {
+		((AppiumDriver<?>)driver).runAppInBackground(Duration.ofSeconds(seconds));
 	}
 
 	public static void quit() {

@@ -1,9 +1,11 @@
 package qa.oneCSiOS.stepDefs;
 
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -44,8 +46,6 @@ public class IOSDashboardSreenStepDefs {
 	SignInScreeniOS iOSSignInScreen = new SignInScreeniOS();
 	DashboardScreeniOS dashboardScreeniOS = new DashboardScreeniOS();
 	WebDriverWait wait = new WebDriverWait(DeviceDriverManager.getDriver(), 30);
-
-	//	private IOSDriver<MobileElement> driver;	
 
 	@Given("user Clicks on {string} button in dashboard screen for iOS")
 	public void user_Clicks_on_button_in_dashboard_screen_for_iOS(String btnName) throws InterruptedException {
@@ -494,31 +494,39 @@ public class IOSDashboardSreenStepDefs {
 
 		else if(fieldName.equalsIgnoreCase("PORTFOLIO_SUMMARY_VALUE_CHANGE_TXT")) {
 			String[] split = actual.split(" ");
-//			System.out.println(split[0]);
-//			System.out.println(split[1]);
-//			System.out.println(split[2]);
-////			boolean flag = split[0].matches("(?i)^£,\.\+\-$");
-//			final Pattern pattern = Pattern.compile("\\+-£,\\.", Pattern.CASE_INSENSITIVE);
-//			final Matcher matcher = pattern.matcher(split[0]);
-//			boolean flag = matcher.matches();
-	
-//			Assert.assertTrue(flag, "Error..... Expected field not displayed..");
-//			AssertLogger.assertEquals(matcher, "", "Error..... Expected field not displayed.");
-			
+			//			System.out.println(split[0]);
+			//			System.out.println(split[1]);
+			//			System.out.println(split[2]);
+			////			boolean flag = split[0].matches("(?i)^£,\.\+\-$");
+			//			final Pattern pattern = Pattern.compile("\\+-£,\\.", Pattern.CASE_INSENSITIVE);
+			//			final Matcher matcher = pattern.matcher(split[0]);
+			//			boolean flag = matcher.matches();
+
+			//			Assert.assertTrue(flag, "Error..... Expected field not displayed..");
+			//			AssertLogger.assertEquals(matcher, "", "Error..... Expected field not displayed.");
+
 			AssertLogger.assertEquals(split[0], "+£-,---,---.--", "Error..... Expected field not displayed.");
 		}
-		
+
 		Reporter.addDeviceScreenshot("Portfolio screen", "Portfolio Summmary value and Value change fileds display in portfolio screen");
 	}
 
 	@Then("user should still see the Percentage value is retained in the field {string} for iOS")
 	public void user_should_still_see_the_Percentage_value_is_retained_in_the_field_for_iOS(String fieldName) {
 		String actual= DeviceActions.getAttribute((MobileElement) action.getElement(fieldName), "value");
-		String[] split = actual.split(" ");
-		boolean flag = split[2].matches(".*[0-9].*");
+		boolean flag = false;
+		if(fieldName.equalsIgnoreCase("PORTFOLIO_SUMMARY_VALUE_CHANGE_TXT")) {
+			String[] split = actual.split(" ");
+			flag = split[2].matches(".*[0-9].*");
+		}
+		else {
+			flag = actual.matches(".*[0-9].*");
+		}
+
 		Assert.assertTrue(flag, "Error...Error..... Percentage field not retained.");
+		Reporter.addDeviceScreenshot("Portfolio screen", "");
 	}
-	
+
 	@Then("user should see the {string} field value is hidden on the breakdown screen for iOS")
 	public void user_should_see_the_field_value_is_hidden_on_the_breakdown_screen_for_iOS(String fieldName) {
 		String actual= DeviceActions.getAttribute((MobileElement) action.getElement(fieldName), "value");
@@ -529,7 +537,22 @@ public class IOSDashboardSreenStepDefs {
 		else if(fieldName.equalsIgnoreCase("PORTFOLIO_CASH_VALUE_IN_PORTFOLIO_BREAKDOWN")) {
 			AssertLogger.assertEquals(actual, "£--,---.--", "Error..... Expected breakdown field displayed on screen.");
 		}
-		
+		Reporter.addDeviceScreenshot("Portfolio screen", "");
+
+	}
+	
+	@Then("user push the app to background for {int} seconds and relaunch the app again for iOS")
+	public void user_push_the_app_to_background_and_relaunch_the_app_again_for_iOS(int seconds) throws MalformedURLException {
+		DeviceDriverManager.runAppInBackground(seconds);
+		Reporter.addDeviceScreenshot("Portfolio screen", "");
+	}
+	
+	@Then("user should see the {string} field value is NOT hidden on the screen for iOS")
+	public void user_should_see_the_field_value_is_NOT_hidden_on_the_screen_for_iOS(String fieldName) {
+		String actual= DeviceActions.getAttribute((MobileElement) action.getElement(fieldName), "value");
+		boolean flag = actual.matches(".*[0-9].*");
+		Assert.assertTrue(flag, "Error... Portfolio total value is retained on screen."); 
+		Reporter.addDeviceScreenshot("Portfolio screen", "");
 	}
 
 
