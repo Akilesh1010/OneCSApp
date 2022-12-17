@@ -133,6 +133,71 @@ Feature: Portfolio Dashboard feature validation on iOS app
     Then user should be displayed with Portfolio summary value details on iOS
     #Then user should see the "PORTFOLIO_VALUE_TXT" field value is hidden on the screen for iOS
     And user closes "app" on mobile device
+
+  @PortfolioDashboard_iOS @4.13_iOS
+  Scenario: 4.13 - Your Accounts - To Verify the Number formatting & styling, when switching between the show/hide state.
+    Given user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    Then user Clicks on "PORTFOLIO_EYE_ICON_BTN" button for iOS
+    Then verify the "closed eye" symbol is displayed for iOS
+    Then user swipe up the Your Accounts screen to the full screen for iOS
+    Then user should see the "PORTFOLIO_ACCOUNT_TOTAL_VALUE_1" field value is hidden on the screen for iOS
+    Then user should see the "PORTFOLIO_ACCOUNT_VALUE_CHANGE_1" field value is hidden on the screen for iOS
+    Then user should see the "PORTFOLIO_ACCOUNT_CODE_1" field value is hidden on the screen for iOS
+    Then user should still see the Percentage value is retained in the field "PORTFOLIO_ACCOUNT_PERCENTAGE_CHANGE_1" for iOS
+    And user closes "app" on mobile device
+
+  @PortfolioDashboard_iOS @4.14_iOS
+  Scenario: 4.14 - Verify the Number formatting & styling, when user is backgrounding the app and foregrounding it again.
+    Given user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    Then user Clicks on "PORTFOLIO_EYE_ICON_BTN" button for iOS
+    Then verify the "closed eye" symbol is displayed for iOS
+    Then user push the app to background for 10 seconds and relaunch the app again for iOS
+    Then user should see the "PORTFOLIO_VALUE_TXT" field value is hidden on the screen for iOS
+    And user should see the "PORTFOLIO_SUMMARY_VALUE_CHANGE_TXT" field value is hidden on the screen for iOS
+    Then user swipe up the Your Accounts screen to the full screen for iOS
+    Then user should see the "PORTFOLIO_ACCOUNT_TOTAL_VALUE_1" field value is hidden on the screen for iOS
+    Then user should see the "PORTFOLIO_ACCOUNT_VALUE_CHANGE_1" field value is hidden on the screen for iOS
+    Then user should see the "PORTFOLIO_ACCOUNT_CODE_1" field value is hidden on the screen for iOS
+    Then user Clicks on "YOUR_ACCOUNTS_TAB_MINIMIZE_BTN" button for iOS
+    And user Clicks on "PORTFOLIO_BREAKDOWN_I_BTN" button for iOS
+    Then user should see a back button and Portfolio Breakdown Title at the top of the screen for iOS
+    Then user should see the "PORTFOLIO_VALUE_IN_PORTFOLIO_BREAKDOWN" field value is hidden on the breakdown screen for iOS
+    Then user should see the "PORTFOLIO_CASH_VALUE_IN_PORTFOLIO_BREAKDOWN" field value is hidden on the breakdown screen for iOS
+    And user closes "app" on mobile device
+
+  @PortfolioDashboard_iOS @4.16_iOS
+  Scenario: 4.16 - Verify the Number formatting & styling, when user is logging out the OneCS app and logging in it again.
+    Given user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    Then user Clicks on "PORTFOLIO_EYE_ICON_BTN" button for iOS
+    Then verify the "closed eye" symbol is displayed for iOS
+    When user Clicks on "MORE_TAB" button for iOS
+    Then user should see "OneCS" as tittle in more options Screen for iOS
+    And user Signs Out the Mobile Application for iOS
+    Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
+    Then user Clicks on "SIGN_IN_BTN" button for iOS
+    When user enters "Correct_Username" and "Correct_Password" for iOS
+    Then user Clicks on "CONTINUE_SIGN_IN_BTN" button for iOS
+    And user get the SIX digit code displayed on screen and enters in TWOFA input field for iOS
+    When user Clicks on "VERIFY_BTN" button for iOS
+    Then user enters value in "SIGN_IN_NEW_PIN_INPUT" field with "SIX_DIGIT" pin for iOS
+    When user Clicks on "CONTINUE_NEW_PIN_BTN" button for iOS
+    Then user enters value in "CONFIRM_PIN_INPUT" field with "SIX_DIGIT" pin for iOS
+    When user Clicks on "CONFIRM_PIN_BTN" button for iOS
+    When user Clicks on "MAYBE_LATER_BIOMETRICS_BTN" button for iOS
+    Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    Then user should see the "PORTFOLIO_VALUE_TXT" field value is NOT hidden on the screen for iOS
+    Then user should see the "PORTFOLIO_SUMMARY_VALUE_CHANGE_TXT" field value is NOT hidden on the screen for iOS
+    Then user swipe up the Your Accounts screen to the full screen for iOS
+    Then user should see the "PORTFOLIO_ACCOUNT_TOTAL_VALUE_1" field value is NOT hidden on the screen for iOS
+    Then user should see the "PORTFOLIO_ACCOUNT_VALUE_CHANGE_1" field value is NOT hidden on the screen for iOS
+    Then user should see the "PORTFOLIO_ACCOUNT_CODE_1" field value is NOT hidden on the screen for iOS
+    Then user Clicks on "YOUR_ACCOUNTS_TAB_MINIMIZE_BTN" button for iOS
+    And user Clicks on "PORTFOLIO_BREAKDOWN_I_BTN" button for iOS
+    Then user should see a back button and Portfolio Breakdown Title at the top of the screen for iOS
+    Then user should see the "PORTFOLIO_VALUE_IN_PORTFOLIO_BREAKDOWN" field value is NOT hidden on the screen for iOS
+    Then user should see the "PORTFOLIO_CASH_VALUE_IN_PORTFOLIO_BREAKDOWN" field value is NOT hidden on the screen for iOS
+    And user closes "app" on mobile device
+    
     
     
     
