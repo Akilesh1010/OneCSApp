@@ -3,6 +3,7 @@ package qa.framework.device;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
@@ -431,6 +432,7 @@ public class DeviceDriverManager {
 		return driver;
 	}
 
+	
 	/**
 	 * Close all the application open in devices
 	 */

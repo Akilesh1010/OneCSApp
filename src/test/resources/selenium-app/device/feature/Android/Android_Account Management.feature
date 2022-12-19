@@ -90,13 +90,40 @@ Feature: Account Management Screen
 		And user taps on "CONFIRM_PIN" button in step four of sigin screen for Android
 		And user taps on "MAY_BE_LATER" option for Android
 		And user taps on "YOUR_ACCOUNTS" in Dashboard screen for Android
-		And user selects Mr.Lucas Investment Account from yours Accounts screen for Android
+		And user selects a account from the list of accounts in Accounts screen for Android
 		And user taps on "EDIT_PENCIL" in Account Dashboard screen for Android
 		And user taps on "ACTIVITY" in account management bottom sheet for Android
 		Then under Activity bar blank page should be displayed for Android
 		And user closes "app" on mobile device
 		
+		@Account_Management_Android @7.06_Android
+  Scenario: 7.06 - Verify the "Cash Movement" details when the "Cash Movement value" is positive in case of Money in
+    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    And user Clicks on "SIGN_IN" button
+    When user logins with "execution" and "Cupholder1" for Android
+    When user Clicks on "Continue_Button"
+  	And user enters the "TWO_FA" code in input box
+  	When user clicks on Verify button
+  	And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+		And user taps on "STEP3_CONTINUE_BUTTON" for Android
+		And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" in step four for Android
+		And user taps on "CONFIRM_PIN" button in step four of sigin screen for Android
+		And user taps on "MAY_BE_LATER" option for Android
+		And user taps on "YOUR_ACCOUNTS" in Dashboard screen for Android
+		And user selects Mr.Lucas Investment Account from yours Accounts screen for Android
+		And user taps on "EDIT_PENCIL" in Account Dashboard screen for Android
+		And user taps on "ACTIVITY" in account management bottom sheet for Android
+		Then in extreme left right arrow in square bracket "CASH_MOVEMENT_ICON" should be displayed for Android
+		Then besides to cash movement icon "Cash movement" title should be displayed for Android
+		Then beneath cash movement title "Money in" subtype should be displayed for Android
+		Then in extreme right cash movement value should be displayed in pounds for Android
+		Then user shoud see "+" symbol infront of currency symbol for Android
+		And user closes "app" on mobile device
+	
+	
+	
 		
+			
 		@Account_Management_Android @7.13_Android
   Scenario: 7.13 - verify the order details listed  in the order list screen 
     Given user launch app "OneCS.apk" on "Emulator" mobile device
@@ -149,6 +176,106 @@ Feature: Account Management Screen
 											|REJECTED 	|
 											|EXPIRED	  |
 		And user closes "app" on mobile device
+		
+		@Account_Management_Android @7.16_Android
+  Scenario: 7.16 - Verify loading status of the pages
+    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    And user Clicks on "SIGN_IN" button
+    When user logins with "execution" and "Cupholder1" for Android
+    When user Clicks on "Continue_Button"
+  	And user enters the "TWO_FA" code in input box
+  	When user clicks on Verify button
+  	And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+		And user taps on "STEP3_CONTINUE_BUTTON" for Android
+		And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" in step four for Android
+		And user taps on "CONFIRM_PIN" button in step four of sigin screen for Android
+		And user taps on "MAY_BE_LATER" option for Android
+		And user taps on "YOUR_ACCOUNTS" in Dashboard screen for Android
+		And user selects Mr.Lucas Investment Account from yours Accounts screen for Android
+		And user taps on "EDIT_PENCIL" in Account Dashboard screen for Android
+		And user taps on "ACTIVITY" in account management bottom sheet for Android
+		Then user should see Loading spinner while navigating in Android
+		And user closes "app" on mobile device
+		
+		@Account_Management_Android @7.17_Android
+  Scenario: 7.17 - Verify loading status of the pages
+    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    And user Clicks on "SIGN_IN" button
+    When user logins with "execution" and "Cupholder1" for Android
+    When user Clicks on "Continue_Button"
+  	And user enters the "TWO_FA" code in input box
+  	When user clicks on Verify button
+  	And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+		And user taps on "STEP3_CONTINUE_BUTTON" for Android
+		And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" in step four for Android
+		And user taps on "CONFIRM_PIN" button in step four of sigin screen for Android
+		And user taps on "MAY_BE_LATER" option for Android
+		And user taps on "YOUR_ACCOUNTS" in Dashboard screen for Android
+		And user selects Mr.Lucas Investment Account from yours Accounts screen for Android
+		And user taps on "EDIT_PENCIL" in Account Dashboard screen for Android
+		And user taps on "ACTIVITY" in account management bottom sheet for Android
+		And user taps on "ORDER_LIST" in Account Activity sheet for Android
+		Then user clicks on any order from orderlist for Android
+		Then user should see "CLOSE_BUTTON" in top left corner of order list screen for Android
+		Then user see below details in selected order for Android
+										|Status					|
+										|Order reference|
+										|Trade type			|
+										|Date						|
+										|Settlement date|
+										|Price					|
+										|Quantity				|
+										|Consideration	|
+										|Other					|
+										|Dealing fee		|
+										|Estimated value|
+		Then user should see "CANCEL_0RDER" button at the bottom of the order details screen for Android								
+		And user closes "app" on mobile device
+		
+		@Account_Management_Android @7.18_Android
+  Scenario: 7.18 - Verify the details of each order status in order list
+    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    And user Clicks on "SIGN_IN" button
+    When user logins with "execution" and "Cupholder1" for Android
+    When user Clicks on "Continue_Button"
+  	And user enters the "TWO_FA" code in input box
+  	When user clicks on Verify button
+  	And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+		And user taps on "STEP3_CONTINUE_BUTTON" for Android
+		And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" in step four for Android
+		And user taps on "CONFIRM_PIN" button in step four of sigin screen for Android
+		And user taps on "MAY_BE_LATER" option for Android
+		And user taps on "YOUR_ACCOUNTS" in Dashboard screen for Android
+		And user selects Mr.Lucas Investment Account from yours Accounts screen for Android
+		And user taps on "EDIT_PENCIL" in Account Dashboard screen for Android
+		And user taps on "ACTIVITY" in account management bottom sheet for Android
+		And user taps on "ORDER_LIST" in Account Activity sheet for Android
+		Then user should be able to swipe down and refresh the screen
+		And user closes "app" on mobile device
+		
+		@Account_Management_Android @7.19_Android
+  Scenario: 7.19 - Verify the transition of the bottom sheet- View Order
+    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    And user Clicks on "SIGN_IN" button
+    When user logins with "execution" and "Cupholder1" for Android
+    When user Clicks on "Continue_Button"
+  	And user enters the "TWO_FA" code in input box
+  	When user clicks on Verify button
+  	And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" for Android
+		And user taps on "STEP3_CONTINUE_BUTTON" for Android
+		And user enters "SIX_DIGIT" pin in "CREATE_YOUR_PIN_BOX" in step four for Android
+		And user taps on "CONFIRM_PIN" button in step four of sigin screen for Android
+		And user taps on "MAY_BE_LATER" option for Android
+		And user taps on "YOUR_ACCOUNTS" in Dashboard screen for Android
+		And user selects a account from the list of accounts in Accounts screen for Android
+		And user taps on "EDIT_PENCIL" in Account Dashboard screen for Android
+		And user taps on "ACTIVITY" in account management bottom sheet for Android
+		And user taps on "ORDER_LIST" in Account Activity sheet for Android
+		Then user clicks on any order from orderlist for Android
+		Then user should see Order Details displayed in fullscreen for Android
+		And user closes "app" on mobile device
+		
+		
 		
 		@Account_Management_Android @7.25_Android
   Scenario: 7.25 - Verify when the account is having no orders
