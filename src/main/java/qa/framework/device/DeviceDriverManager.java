@@ -432,6 +432,7 @@ public class DeviceDriverManager {
 		return driver;
 	}
 
+	
 	/**
 	 * Close all the application open in devices
 	 */
