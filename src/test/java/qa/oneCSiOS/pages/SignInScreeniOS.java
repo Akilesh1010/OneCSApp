@@ -48,6 +48,10 @@ public class SignInScreeniOS {
 		DeviceActions.sendKeys((MobileElement) action.getElement("USERNAME_EDIT"), userName);
 		DeviceActions.sendKeys((MobileElement) action.getElement("PWD_EDIT"), pwd);
 		DeviceActions.click((MobileElement) action.getElement("CONTINUE_SIGN_IN_BTN"));
+		while (DeviceActions.getText((MobileElement) action.getElement("SIGN_IN_CODE_2FA_TXT")) == "code loading") {
+//			System.out.println(iOSSignInScreen.getTextiOS("CODE_TO_TYPE"));	
+			continue;
+		}
 		String codetext = DeviceActions.getText((MobileElement) action.getElement("SIGN_IN_CODE_2FA_TXT"));
         DeviceActions.sendKeys((MobileElement) action.getElement("SIGN_IN_2FA_CODE_INPUT_FIELD"), codetext);
         DeviceActions.click((MobileElement) action.getElement("VERIFY_BTN"));

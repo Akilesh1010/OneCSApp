@@ -196,8 +196,24 @@ public class DashboardScreeniOS {
 
 	}
 	
-	
-	
+	public boolean showAllScreenPortfolioSettingsiOS() {
+		boolean flag = false;
+
+		List<MobileElement> fields = new ArrayList<MobileElement>();
+
+		fields.add((MobileElement) action.getElement("SHOW_TOTAL_FOR_SCREEN_TITLE"));
+		fields.add((MobileElement) action.getElement("IC_CLOSE_BTN"));
+		fields.add((MobileElement) action.getElement("ALL_ACCOUNTS_LABEL_IN_SHOW_ALL_SCREEN"));
+		fields.add((MobileElement) action.getElement("TOGGLE_BTN_SHOW_ALL_SCREEN"));
+		fields.add((MobileElement) action.getElement("UPDATE_TOTAL_BTN_SHOW_ALL_SCREEN"));
+		
+		for (MobileElement element : fields) {
+			flag = element.isDisplayed();
+		}	
+
+		return flag;
+
+	}
 
 
 

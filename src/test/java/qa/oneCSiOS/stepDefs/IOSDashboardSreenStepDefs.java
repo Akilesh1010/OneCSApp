@@ -167,76 +167,77 @@ public class IOSDashboardSreenStepDefs {
 		String totalPortfolioValue = DeviceActions.getText((MobileElement) action.getElement("PORTFOLIO_SUMMARY_TOTAL_VALUE_TXT"));
 		Double portfolioValue = Double.parseDouble(totalPortfolioValue.substring(1).replace(",", ""));
 		System.out.println("Portfolio value is: "+ portfolioValue);
-		//		BigDecimal portValue = BigDecimal.valueOf(portfolioValue);
+		BigDecimal portValue = BigDecimal.valueOf(portfolioValue);
 		//		System.out.println(portValue);
 
 		dashboardScreeniOS.swipeByCooardinatesiOS(150, 700, 100, 200);
 
-		//		DeviceActions.click((MobileElement) action.getElement("YOUR_ACCOUNTS_TAB"));
-
-		List<Object> accounts = action.getElements("TOTAL_ACCOUNTS_IN_ACCOUNTS_SCREEN");
-		Double total = 0.0;
-		int totalAccounts = accounts.size()-1;
-		System.out.println(totalAccounts);	
-
-		for (int i=0; i<totalAccounts; i++) {
-			String accountValues = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+i+"-total-value\"]")));
-			Double sumValue = Double.parseDouble(accountValues.substring(1).replace(",", ""));
-			System.out.println(sumValue);
-			total = total.doubleValue() + sumValue;
-			System.out.println("Total value is: " +total);
-		}
-
-		DecimalFormat df = new DecimalFormat("0.00");
-		//		df.setMaximumFractionDigits(2);
-		String IndividualAccountsTotal = df.format(total);
-		Assert.assertEquals(IndividualAccountsTotal, portfolioValue, "Error..... Portfolio & Account values does not match");
-
-
-		//		String value1 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+0+"-total-value\"]")));
-		//		Double sumValue1 = Double.parseDouble(value1.substring(1).replace(",", ""));
-		//		BigDecimal bd1 = BigDecimal.valueOf(sumValue1);
-		//		System.out.println(bd1);
 		//
-		//		String value2 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+1+"-total-value\"]")));
-		//		Double sumValue2 = Double.parseDouble(value2.substring(1).replace(",", ""));
-		//		BigDecimal bd2 = BigDecimal.valueOf(sumValue2);
-		//		System.out.println(bd2);
-		//
-		//		String value3 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+2+"-total-value\"]")));
-		//		Double sumValue3 = Double.parseDouble(value3.substring(1).replace(",", ""));
-		//		BigDecimal bd3 = BigDecimal.valueOf(sumValue3);
-		//		System.out.println(bd3);
-		//
-		//		String value4 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+3+"-total-value\"]")));
-		//		Double sumValue4 = Double.parseDouble(value4.substring(1).replace(",", ""));
-		//		BigDecimal bd4 = BigDecimal.valueOf(sumValue4);
-		//		System.out.println(bd4);
+		//		List<Object> accounts = action.getElements("TOTAL_ACCOUNTS_IN_ACCOUNTS_SCREEN");
+		//		Double total = 0.0;
+		//		int totalAccounts = accounts.size()-1;
+		//		System.out.println(totalAccounts);	
+
+		//		for (int i=0; i<totalAccounts; i++) {
+		//			String accountValues = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+i+"-total-value\"]")));
+		//			Double sumValue = Double.parseDouble(accountValues.substring(1).replace(",", ""));
+		//			System.out.println(sumValue);
+		//			total = total.doubleValue() + sumValue;
+		//			System.out.println("Total value is: " +total);
+		//		}
+
+		//		DecimalFormat df = new DecimalFormat("0.00");
+		//		//		df.setMaximumFractionDigits(2);
+		//		String IndividualAccountsTotal = df.format(total);
+		//		Assert.assertEquals(IndividualAccountsTotal, portfolioValue, "Error..... Portfolio & Account values does not match");
+
+
+		String value1 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+0+"-total-value\"]")));
+		Double sumValue1 = Double.parseDouble(value1.substring(1).replace(",", ""));
+		BigDecimal bd1 = BigDecimal.valueOf(sumValue1);
+		System.out.println(bd1);
+
+		String value2 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+1+"-total-value\"]")));
+		Double sumValue2 = Double.parseDouble(value2.substring(1).replace(",", ""));
+		BigDecimal bd2 = BigDecimal.valueOf(sumValue2);
+		System.out.println(bd2);
+
+		String value3 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+2+"-total-value\"]")));
+		Double sumValue3 = Double.parseDouble(value3.substring(1).replace(",", ""));
+		BigDecimal bd3 = BigDecimal.valueOf(sumValue3);
+		System.out.println(bd3);
+
+		String value4 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+3+"-total-value\"]")));
+		Double sumValue4 = Double.parseDouble(value4.substring(1).replace(",", ""));
+		BigDecimal bd4 = BigDecimal.valueOf(sumValue4);
+		System.out.println(bd4);
 
 		DeviceActions.scroll("down");
 
-		//		String value5 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+4+"-total-value\"]")));
-		//		Double sumValue5 = Double.parseDouble(value5.substring(1).replace(",", ""));
-		//		BigDecimal bd5 = BigDecimal.valueOf(sumValue5);
-		//		System.out.println(bd5);
-		//
-		//		String value6 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+5+"-total-value\"]")));
-		//		Double sumValue6 = Double.parseDouble(value6.substring(1).replace(",", ""));
-		//		BigDecimal bd6 = BigDecimal.valueOf(sumValue6);
-		//		System.out.println(bd6);
-		//
-		//		String value7 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+6+"-total-value\"]")));
-		//		Double sumValue7 = Double.parseDouble(value7.substring(1).replace(",", ""));
-		//		BigDecimal bd7 = BigDecimal.valueOf(sumValue7);
-		//		System.out.println(bd7);
+		String value5 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+4+"-total-value\"]")));
+		Double sumValue5 = Double.parseDouble(value5.substring(1).replace(",", ""));
+		BigDecimal bd5 = BigDecimal.valueOf(sumValue5);
+		System.out.println(bd5);
 
-		//		BigDecimal totalAccountValues = bd1.add(bd2).add(bd3).add(bd4).add(bd5).add(bd6).add(bd7);
+		String value6 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+5+"-total-value\"]")));
+		Double sumValue6 = Double.parseDouble(value6.substring(1).replace(",", ""));
+		BigDecimal bd6 = BigDecimal.valueOf(sumValue6);
+		System.out.println(bd6);
 
-		//		System.out.println(totalAccountValues);
+		String value7 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+6+"-total-value\"]")));
+		Double sumValue7 = Double.parseDouble(value7.substring(1).replace(",", ""));
+		BigDecimal bd7 = BigDecimal.valueOf(sumValue7);
+		System.out.println(bd7);
 
-		DeviceActions.click((MobileElement) action.getElement("YOUR_ACCOUNTS_TAB"));
+		BigDecimal totalAccountValues = bd1.add(bd2).add(bd3).add(bd4).add(bd5).add(bd6).add(bd7);
 
-		//		AssertLogger.assertEquals(totalAccountValues, portValue, "Error..... Portfolio & Account values does not match");
+		System.out.println(totalAccountValues);
+		
+		DeviceActions.click((MobileElement) action.getElement("HOLDINGS_DRAG_UP_BTN"));
+		
+//		Assert.assertTrue(totalAccountValues.compareTo(totalAccountValues), "");
+
+		AssertLogger.assertEquals(totalAccountValues.compareTo(totalAccountValues), portValue, "Error..... Portfolio & Account values does not match");
 	}
 
 	//	*************PORTFOLIO TOTAL VALUE CHANGE --VS-- SUM OF ALL PORTFOLIO VALUE CHANGE ****************
@@ -249,7 +250,7 @@ public class IOSDashboardSreenStepDefs {
 		BigDecimal portValueChange = BigDecimal.valueOf(PortfolioValue);
 		System.out.println(portValueChange);
 
-		DeviceActions.click((MobileElement) action.getElement("YOUR_ACCOUNTS_TAB"));
+		dashboardScreeniOS.swipeByCooardinatesiOS(150, 700, 100, 200);
 
 		String value1 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"portfolio-account-"+0+"-value-change\"]")));
 		String[] split1 = value1.substring(2).split(" ");
@@ -317,7 +318,7 @@ public class IOSDashboardSreenStepDefs {
 		BigDecimal accValue = BigDecimal.valueOf(accountValue);
 		System.out.println(accValue);
 
-		DeviceActions.click((MobileElement) action.getElement("HOLDINGS_DRAG_UP_BTN"));
+		DeviceActions.click((MobileElement) action.getElement("YOUR_ACCOUNTS_TAB_MINIMIZE_BTN"));
 
 		String value1 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"account-holding-"+0+"-value\"]")));
 		Double sumValue1 = Double.parseDouble(value1.substring(1).replace(",", ""));
@@ -422,11 +423,13 @@ public class IOSDashboardSreenStepDefs {
 	public void user_should_see_a_back_button_and_Portfolio_Breakdown_Title_at_the_top_of_the_screen_for_iOS() {
 		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement("BACK_BUTTON")));
 		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement("PORTFOLIO_BREAKDOWN_SCREEN_TITLE")));
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("INVESTMENT_BREAKDOWN_LABEL_TXT")));
 		Reporter.addDeviceScreenshot("Portfolio Breakdown", "Portfolio Breakdown Screen");
 	}
 
 	@Then("user should see the {string} is displayed for iOS")
 	public void user_should_see_the_Investment_breakdown_chart_is_displayed_for_iOS(String label) {
+		
 		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement(label)));
 		Reporter.addDeviceScreenshot(label, "Screen name: "+label);
 	}
@@ -489,23 +492,17 @@ public class IOSDashboardSreenStepDefs {
 
 		if(fieldName.equalsIgnoreCase("PORTFOLIO_VALUE_TXT")|| fieldName.equalsIgnoreCase("PORTFOLIO_ACCOUNT_TOTAL_VALUE_1")|| 
 				fieldName.equalsIgnoreCase("PORTFOLIO_ACCOUNT_VALUE_CHANGE_1")||fieldName.equalsIgnoreCase("PORTFOLIO_ACCOUNT_CODE_1")) {
-			AssertLogger.assertEquals(actual, "Hidden value", "Error..... Expected field not displayed.");
+			boolean flag = actual.matches(".*[0-9].*");
+			Assert.assertFalse(flag, "Error..... Expected field not displayed.");
+//			AssertLogger.assertEquals(actual, "Hidden value", "Error..... Expected field not displayed.");
 		}
 
 		else if(fieldName.equalsIgnoreCase("PORTFOLIO_SUMMARY_VALUE_CHANGE_TXT")) {
 			String[] split = actual.split(" ");
-			//			System.out.println(split[0]);
-			//			System.out.println(split[1]);
-			//			System.out.println(split[2]);
-			////			boolean flag = split[0].matches("(?i)^£,\.\+\-$");
-			//			final Pattern pattern = Pattern.compile("\\+-£,\\.", Pattern.CASE_INSENSITIVE);
-			//			final Matcher matcher = pattern.matcher(split[0]);
-			//			boolean flag = matcher.matches();
+			boolean flag = split[0].matches(".*[0-9].*");
+			Assert.assertFalse(flag, "Error...Expected field not displayed.");
 
-			//			Assert.assertTrue(flag, "Error..... Expected field not displayed..");
-			//			AssertLogger.assertEquals(matcher, "", "Error..... Expected field not displayed.");
-
-			AssertLogger.assertEquals(split[0], "+£-,---,---.--", "Error..... Expected field not displayed.");
+//			AssertLogger.assertEquals(split[0], "+£-,---,---.--", "Error..... Expected field not displayed.");
 		}
 
 		Reporter.addDeviceScreenshot("Portfolio screen", "Portfolio Summmary value and Value change fileds display in portfolio screen");
@@ -523,7 +520,7 @@ public class IOSDashboardSreenStepDefs {
 			flag = actual.matches(".*[0-9].*");
 		}
 
-		Assert.assertTrue(flag, "Error...Error..... Percentage field not retained.");
+		Assert.assertTrue(flag, "Error...Percentage field not retained.");
 		Reporter.addDeviceScreenshot("Portfolio screen", "");
 	}
 
@@ -540,13 +537,13 @@ public class IOSDashboardSreenStepDefs {
 		Reporter.addDeviceScreenshot("Portfolio screen", "");
 
 	}
-	
+
 	@Then("user push the app to background for {int} seconds and relaunch the app again for iOS")
 	public void user_push_the_app_to_background_and_relaunch_the_app_again_for_iOS(int seconds) throws MalformedURLException {
 		DeviceDriverManager.runAppInBackground(seconds);
 		Reporter.addDeviceScreenshot("Portfolio screen", "");
 	}
-	
+
 	@Then("user should see the {string} field value is NOT hidden on the screen for iOS")
 	public void user_should_see_the_field_value_is_NOT_hidden_on_the_screen_for_iOS(String fieldName) {
 		String actual= DeviceActions.getAttribute((MobileElement) action.getElement(fieldName), "value");
@@ -554,6 +551,156 @@ public class IOSDashboardSreenStepDefs {
 		Assert.assertTrue(flag, "Error... Portfolio total value is retained on screen."); 
 		Reporter.addDeviceScreenshot("Portfolio screen", "");
 	}
+
+	@Then("user should see Show Total for, Close button, All accounts label along with toggle button and Update Total button for iOS")
+	public void user_should_see_Show_Total_for_Close_button_All_accounts_label_along_with_toggle_button_and_Update_Total_button_for_iOS() {
+		boolean flag = dashboardScreeniOS.showAllScreenPortfolioSettingsiOS();
+		Assert.assertTrue(flag, "Error... Portfolio Show all screen fields are not displayed.");
+		Reporter.addDeviceScreenshot("Portfolio Show All screen", "");
+	}
+
+	@Then("user should see the list accouunts are matching with the accounts displayed in your accounts screen for iOS")
+	public void user_should_see_the_list_accouunts_are_matching_with_the_accounts_displayed_in_your_accounts_screen_for_iOS() {
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("ACCOUNTS_LIST_SHOWALL_SCREEN")));
+		List<Object> showAllAccounts = action.getElements("ACCOUNTS_LIST_SHOWALL_SCREEN");
+		int totalShowAllAccounts = showAllAccounts.size();
+
+		DeviceActions.click((MobileElement) action.getElement("IC_CLOSE_BTN"));
+		dashboardScreeniOS.swipeByCooardinatesiOS(150, 700, 100, 200);
+		List<Object> yourAccounts = action.getElements("TOTAL_ACCOUNTS_IN_ACCOUNTS_SCREEN");
+		int totalYourAccounts = yourAccounts.size()-1;
+		AssertLogger.assertEquals(totalYourAccounts, totalShowAllAccounts, "Error...The accounts did not match.");
+		DeviceActions.click((MobileElement) action.getElement("YOUR_ACCOUNTS_TAB_MINIMIZE_BTN"));
+
+	}
+
+	@Then("user should not see the Show total for screen for iOS")
+	public void user_should_not_see_the_Show_total_for_screen_for_iOS() {
+		Assert.assertFalse(action.isPresent("SHOW_TOTAL_FOR_SCREEN_TITLE"), "Error... Portfolio Show all screen fields are not displayed."); 
+		Reporter.addDeviceScreenshot("Portfolio Show All screen", "");
+	}
+
+	@Then("user should be able to swipe down the screen to minimize the Portfolio Show all screen for iOS")
+	public void user_should_be_able_to_swipe_down_the_screen_to_minimize_the_Portfolio_Show_all_screen_for_iOS() {
+		MobileElement startingElement= (MobileElement) action.getElement("SHOW_TOTAL_FOR_SCREEN_TITLE");
+		MobileElement endingElement= (MobileElement) action.getElement("UPDATE_TOTAL_BTN_SHOW_ALL_SCREEN");
+		dashboardScreeniOS.swipeiOS(startingElement, endingElement);
+		Reporter.addDeviceScreenshot("Portfolio Show All screen", "");
+
+	}
+
+	@Then("user should see All accounts toggle button is switched ON by default and list of accounts should be ticked for iOS")
+	public void user_should_see_All_accounts_toggle_button_is_switched_ON_by_default_and_list_of_accounts_should_be_ticked_for_iOS() {
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("ACCOUNTS_LIST_SHOWALL_SCREEN")));
+
+
+		String actual= DeviceActions.getAttribute((MobileElement) action.getElement("TOGGLE_BTN_SHOW_ALL_SCREEN"), "value");
+		AssertLogger.assertEquals(actual, "1", "Error..... Toggle button is not switched On by default on screen.");
+
+		Assert.assertTrue(action.isPresent("TICKS_IN_SHOWALL_SCREEN"), "Error... Account tick is not displayed.");
+		List<Object> showAllAccounts = action.getElements("ACCOUNTS_LIST_SHOWALL_SCREEN");
+		int totalShowAllAccounts = showAllAccounts.size();
+
+		List<Object> tickedAccounts = action.getElements("TICKS_IN_SHOWALL_SCREEN");
+		int totalTickedAccounts = tickedAccounts.size();
+		AssertLogger.assertEquals(totalShowAllAccounts, totalTickedAccounts, "Error...The ticked accounts did not match.");
+
+		Reporter.addDeviceScreenshot("Portfolio Show All screen", "");
+	}
+
+	@Then("user should see Update total button is disabled when no account is selected for iOS")
+	public void user_should_see_Update_total_button_is_disabled_when_no_account_is_selected_for_iOS() {
+		DeviceActions.click((MobileElement) action.getElement("TOGGLE_BTN_SHOW_ALL_SCREEN"));
+		String actual= DeviceActions.getAttribute((MobileElement) action.getElement("TOGGLE_BTN_SHOW_ALL_SCREEN"), "enabled");
+		boolean flag = Boolean.valueOf(actual);
+		Assert.assertTrue(flag, "Error... Portfolio Show all screen fields are not displayed.");
+		Reporter.addDeviceScreenshot("Portfolio Show All screen", "");
+		DeviceActions.click((MobileElement) action.getElement("TOGGLE_BTN_SHOW_ALL_SCREEN"));
+	}
+
+	@Then("user should untick an account from list and closed the Show total for screen without clicking on Update total button for iOS")
+	public void user_should_untick_an_account_from_list_and_closed_the_Show_total_for_screen_without_clicking_on_Update_total_button_for_iOS() {
+		DeviceActions.click((MobileElement) action.getElement("CHECK_BOX_1_SHOW_TOTAL_FOR_SCREEN"));
+		Reporter.addDeviceScreenshot("Portfolio Show Total for screen", "");
+		DeviceActions.click((MobileElement) action.getElement("IC_CLOSE_BTN"));
+	}
+
+	@Then("user toggle Off All accounts and see ticked sign is removed from all accounts displayed for iOS")
+	public void user_toggle_Off_All_accounts_and_see_ticked_sign_is_removed_from_all_accounts_displayed_for_iOS() {
+		DeviceActions.click((MobileElement) action.getElement("TOGGLE_BTN_SHOW_ALL_SCREEN"));
+
+		String actual= DeviceActions.getAttribute((MobileElement) action.getElement("TOGGLE_BTN_SHOW_ALL_SCREEN"), "value");
+		AssertLogger.assertEquals(actual, "0", "Error..... Toggle button is not switched On by default on screen.");
+
+		Assert.assertFalse(action.isPresent("TICKS_IN_SHOWALL_SCREEN"), "Error... Account tick is not displayed.");
+		Reporter.addDeviceScreenshot("Portfolio Show Total for screen", "");
+	}
+
+	@When("user clicks on one of the accounts then All accounts toggle button remains off on the screen for iOS")
+	public void user_clicks_on_one_of_the_accounts_then_All_accounts_toggle_button_remains_off_on_the_screen_for_iOS() {
+		DeviceActions.click((MobileElement) action.getElement("CHECK_BOX_1_SHOW_TOTAL_FOR_SCREEN"));
+
+		String actual= DeviceActions.getAttribute((MobileElement) action.getElement("TOGGLE_BTN_SHOW_ALL_SCREEN"), "value");
+		AssertLogger.assertEquals(actual, "0", "Error..... Toggle button is switched ON on the screen.");
+		Reporter.addDeviceScreenshot("Portfolio Show Total for screen", "");
+
+	}
+
+	@Then("user selects all displayed accounts then All accounts toggle button should turn On for iOS")
+	public void user_selects_all_displayed_accounts_then_All_accounts_toggle_button_should_turn_On_for_iOS() {
+		DeviceActions.click((MobileElement) action.getElement("CHECK_BOX_1_SHOW_TOTAL_FOR_SCREEN"));
+		List<Object> showAllAccounts = action.getElements("ACCOUNTS_LIST_SHOWALL_SCREEN");
+
+		for ( Object element: showAllAccounts) {
+			DeviceActions.click((MobileElement) element);
+		}
+
+		String actual= DeviceActions.getAttribute((MobileElement) action.getElement("TOGGLE_BTN_SHOW_ALL_SCREEN"), "value");
+		AssertLogger.assertEquals(actual, "1", "Error..... Toggle button is not switched On by default on then screen.");
+		Reporter.addDeviceScreenshot("Portfolio Show Total for screen", "");
+	}
+
+	@When("user navigate to other screen and return again to show total screen the user selection should be retained for iOS")
+	public void user_navigate_to_other_screen_and_return_again_to_show_total_screen_the_user_selection_should_be_retained_for_iOS() {
+		DeviceActions.click((MobileElement) action.getElement("IC_CLOSE_BTN"));
+		DeviceActions.click((MobileElement) action.getElement("MORE_TAB"));
+		Assert.assertEquals("OneCS", iOSSignInScreen.getTextiOS("ONECS_TXT_MORE_MENU"));
+		DeviceActions.click((MobileElement) action.getElement("PORTFOLIO_TAB"));
+		DeviceActions.click((MobileElement) action.getElement("PORTFOLIO_SHOWALL_TXT"));
+
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("ACCOUNTS_LIST_SHOWALL_SCREEN")));
+
+		String actual= DeviceActions.getAttribute((MobileElement) action.getElement("TOGGLE_BTN_SHOW_ALL_SCREEN"), "value");
+		AssertLogger.assertEquals(actual, "1", "Error..... Toggle button is NOT switched ON on the screen.");
+		Reporter.addDeviceScreenshot("Portfolio Show Total for screen", "");
+	}
+
+	@Then("user should see {string} field value displayed as {string} on dashboard screen for iOS")
+	public void user_should_see_field_value_displayed_as_on_dashboard_screen_for_iOS(String fieldName, String value) {
+		Assert.assertEquals(iOSSignInScreen.getTextiOS(fieldName), value, "Error... Zero value not displayed on screen.");
+		Reporter.addDeviceScreenshot("Portfolio Show Total for screen", "");
+	}
+
+	@Then("user should see {string} displayed on screen for iOS")
+	public void user_should_see_displayed_on_screen_for_iOS(String fieldName) {
+		Assert.assertTrue(action.isPresent(fieldName), "Error... Timestamp field not displayed.");
+		Reporter.addDeviceScreenshot("Portfolio dashboard screen", "");
+	}
+
+	@Then("user should not see any accounts on the Your accounts screen for iOS")
+	public void user_should_not_see_any_accounts_on_the_Your_accounts_screen_for_iOS() {
+		Assert.assertFalse(action.isPresent("TOTAL_ACCOUNTS_IN_ACCOUNTS_SCREEN"), "Error... List of accounts not displayed.");
+		Reporter.addDeviceScreenshot("Your accounts screen", "");
+	}
+
+	@Then("user should not see any accounts listed on the Show total for screen for iOS")
+	public void user_should_not_see_any_accounts_listed_on_the_Show_total_for_screen_for_iOS() {
+		Assert.assertFalse(action.isPresent("ACCOUNTS_LIST_SHOWALL_SCREEN"), "Error... List of accounts not displayed.");
+		Reporter.addDeviceScreenshot("Show total for screen", "");
+	}
+
+
+
 
 
 

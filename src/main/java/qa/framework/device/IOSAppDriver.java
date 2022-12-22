@@ -32,6 +32,7 @@ public class IOSAppDriver {
 			capabilities.setCapability("deviceName", DeviceDriverManager.getDeviceName());
 			//			capabilities.setCapability("app", DeviceDriverManager.getApp());
 			//			capabilities.setCapability("bundleId","uk.co.charles-stanley.ios.qa");
+			capabilities.setCapability("forceAppLaunch","true");
 			capabilities.setCapability("bundleId", DeviceDriverManager.getDeviceBundleId());
 
 
