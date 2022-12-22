@@ -105,7 +105,7 @@ public class IOSSignInStepDefs {
 	public void user_should_be_Navigated_to_the_website_for_iOS(String url) {
 		//		Assert.assertEquals(iOSSignInScreen.getTextiOS("BROWSER_URL"), DeviceActions.getTestData("CS_SECURE_URL"));
 		String text = iOSSignInScreen.getTextiOS("BROWSER_URL");
-		System.out.println(text);
+		
 		softAssert.assertEquals(url, iOSSignInScreen.getTextiOS("BROWSER_URL"));
 
 		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
