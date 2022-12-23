@@ -1187,13 +1187,46 @@ public class OneCS_Mobile_StepDefs {
 			AssertLogger.assertTrue(negativeSign, "Negative sign does not appear in Portfolio Value Change field..");
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	@Then("user should see {string} arrow in Portfolio Dashboard for Android")
+	public void user_should_see_arrow_in_Portfolio_Dashboard_for_Android(String arrow) {
+		Assert.assertTrue(action.isPresent(arrow));
+	}
+
+	@Then("user should see {string} Portfolio Value Change in the Portfolio Dashboard screen for Android")
+	public void user_should_see_Portfolio_Value_Change_in_the_Portfolio_Dashboard_screen_for_Android(
+			String performanceIndicator) {
+		String totalChangeValue = OneCS.androidGetText("PORTFOLIO_SUMMARY_VALUE_CHANGE_TXT");
+
+		if (performanceIndicator.equalsIgnoreCase("positive")) {
+			boolean postiveSign = totalChangeValue.contains("+");
+			AssertLogger.assertTrue(postiveSign, "Postive sign does not appear in Portfolio Value Change field..");
+		} else if (performanceIndicator.equalsIgnoreCase("negative")) {
+			boolean negativeSign = totalChangeValue.contains("-");
+			AssertLogger.assertTrue(negativeSign, "Negative sign does not appear in Portfolio Value Change field..");
+		}
+	}
+
+	@Then("user should see {string} Sign in the Percentage value on the Portfolio Dashboard screen for Android")
+	public void user_should_see_Sign_in_the_Percentage_value_on_the_Portfolio_Dashboard_screen_for_Android(
+			String performanceIndicator) {
+		String totalChangePercenatge = OneCS.androidGetText("PORTFOLIO_DASH_PERCENTAGE_CHANGE");
+
+		if (performanceIndicator.equalsIgnoreCase("positive")) {
+			boolean postiveSign = totalChangePercenatge.contains("+");
+			AssertLogger.assertTrue(postiveSign, "Postive sign does not appear in Portfolio Value Change field..");
+		} else if (performanceIndicator.equalsIgnoreCase("negative")) {
+			boolean negativeSign = totalChangePercenatge.contains("-");
+			AssertLogger.assertTrue(negativeSign, "Negative sign does not appear in Portfolio Value Change field..");
+		}
+	}
+
+	@Then("user confirms the value of the portfolio change is shown as a percentage figure in Portfolio Dashboard for Android")
+	public void user_confirms_the_value_of_the_portfolio_change_is_shown_as_a_percentage_figure_in_Portfolio_Dashboard_for_Android() {
+		String percentage = OneCS.androidGetText("PORTFOLIO_DASH_PERCENTAGE_CHANGE");
+		boolean flag = percentage.contains("%");
+		Assert.assertTrue(flag, "Error...value is not shown in percentage value");
+	}
 	
 	
 	
