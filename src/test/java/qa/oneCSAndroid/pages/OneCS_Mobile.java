@@ -430,5 +430,23 @@ public class OneCS_Mobile {
 		return flag;
 
 	}
+	
+		public static List<String> getOrderDetailvalues() {
+		List<String> pageValues = new ArrayList<String>();
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_STATUS")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_REFERENCE")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_TRADE")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_DATE")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_SETTLEMENT")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_PRICE")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_QUANTITY")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_CONSIDERATION")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_OTHER")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_DEALING")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_ESTIMATED_VALUE")));
+		
+		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+		return pageValues;
+	}
 
 }
