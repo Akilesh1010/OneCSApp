@@ -7,15 +7,18 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import cucumber.api.PendingException;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.Activity;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.touch.WaitOptions;
@@ -26,8 +29,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import jdk.jfr.Percentage;
 import qa.framework.assertions.AssertLogger;
 import qa.framework.dbutils.SQLDriver;
+import qa.framework.device.AndroidAppDriver;
 import qa.framework.device.DeviceActions;
 import qa.framework.device.DeviceDriverManager;
 import qa.framework.utils.Reporter;
@@ -38,7 +43,8 @@ public class OneCS_Mobile_StepDefs {
 	DeviceActions action = new DeviceActions(SQLDriver.getEleObjData("OneCSAppAndroid_Android"));
 	OneCS_Mobile OneCS = new OneCS_Mobile();
 	SoftAssert softAssert = new SoftAssert();
-	WebDriverWait wait = new WebDriverWait(DeviceDriverManager.getDriver(), 20);
+	WebDriverWait wait = new WebDriverWait(DeviceDriverManager.getDriver(), 30);
+	WebDriver driver = DeviceDriverManager.getDriver();
 
 	@Given("user should see {string} logo in welcome screen for Android")
 	public void user_should_see_logo_in_welcome_screen_for_Android(String Logo) {
@@ -110,13 +116,14 @@ public class OneCS_Mobile_StepDefs {
 	@Then("user enters the {string} code in input box")
 	public void user_enters_the_code_in_input_box(String otp) throws InterruptedException {
 		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("VERIFY_ACCOUNT_TEXT")));
-		// String text = OneCS.androidGetText("CODE_TO_TYPE");
-		while (OneCS.androidGetText("CODE_TO_TYPE") == "Code to type: Waiting...") {
-			System.out.println(OneCS.androidGetText("CODE_TO_TYPE"));
-			continue;
+		String text = OneCS.androidGetText("CODE_TO_TYPE");
+
+		if (!text.matches(".*[0-9].*")) {
+			Thread.sleep(10000);
 		}
 		String codetext = DeviceActions.getText((MobileElement) action.getElement("CODE_TO_TYPE"));
 		DeviceActions.sendKeys((MobileElement) action.getElement("SIX_DIGIT_INPUT_BOX"), codetext);
+
 	}
 
 	@And("user should see {string} on the top left corner of the screen for Android")
@@ -281,7 +288,6 @@ public class OneCS_Mobile_StepDefs {
 	public void user_enters_and(String username, String password) throws InterruptedException {
 		OneCS.AndroidInputText("USERNAME_INPUT_FIELD", username);
 		OneCS.AndroidInputText("PASSWORD_INPUT_FIELD", password);
-
 		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
 	}
 
@@ -301,7 +307,6 @@ public class OneCS_Mobile_StepDefs {
 	public void user_should_see_screen(String twofa) {
 		Assert.assertTrue(action.isPresent(twofa));
 		Reporter.addDeviceScreenshot("Login Scrren", "Mobile App Login Screen");
-
 	}
 
 	@Then("user should see {string}")
@@ -795,7 +800,8 @@ public class OneCS_Mobile_StepDefs {
 
 	@Then("user taps on {string} in Account Dashboard screen for Android")
 	public void user_taps_on_in_Account_Dashboard_screen_for_Android(String editPencil) {
-		wait.until(ExpectedConditions.elementToBeClickable((MobileElement) action.getElement("WAIT_EDIT_PENCIL")));
+		wait.until(
+				ExpectedConditions.invisibilityOf((MobileElement) action.getElement("ACTIVITY_SCREEN_LOADINGSPINNER")));
 		DeviceActions.click((MobileElement) action.getElement(editPencil));
 	}
 
@@ -811,7 +817,9 @@ public class OneCS_Mobile_StepDefs {
 
 	@When("user taps on {string} in account management bottom sheet for Android")
 	public void user_taps_on_in_account_management_bottom_sheet_for_Android(String activity) {
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement(activity)));
 		DeviceActions.click((MobileElement) action.getElement(activity));
+
 	}
 
 	@Then("user should see below tabs in Activity screen for Android")
@@ -833,6 +841,8 @@ public class OneCS_Mobile_StepDefs {
 
 	@Then("under Activity bar blank page should be displayed for Android")
 	public void under_Activity_bar_blank_page_should_be_displayed_for_Android() {
+//		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("REFRESH_CONTENT")));
+//		DeviceActions.click((MobileElement) action.getElement("REFRESH_CONTENT"));
 		Assert.assertEquals(OneCS.androidGetText("ACTIVITY_BLANK_PAGE"), "");
 	}
 
@@ -985,14 +995,14 @@ public class OneCS_Mobile_StepDefs {
 		String TotalValue = totalPortfolioValue.substring(1).replace(",", "");
 		DeviceActions.click((MobileElement) action.getElement("YOUR_ACCOUNTS"));
 		List<Object> accounts = action.getElements("TOTAL_ACCOUNTS_IN_ACCOUNTS_SCREEN");
-		
+
 		Double total = 0.0;
-		for (int i = 0; i <accounts.size(); i++) {
+		for (int i = 0; i < accounts.size(); i++) {
 
 			String value1 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(
 					By.xpath("//android.widget.TextView[@resource-id='portfolio-account-" + i + "-total-value']")));
-			Double sumValue1 = Double.parseDouble(value1.substring(1).replace(",", ""));
-			total = total + sumValue1;
+			Double sumValue = Double.parseDouble(value1.substring(1).replace(",", ""));
+			total = total + sumValue;
 
 		}
 		DecimalFormat df = new DecimalFormat("#");
@@ -1001,16 +1011,222 @@ public class OneCS_Mobile_StepDefs {
 		Assert.assertEquals(TotalValue, IndividualAccountsTotal);
 
 	}
-	
+
 	@Then("user should see the Total Portfolio Value Change is matching with sum of all Portfolio Value Change for Android")
 	public void user_should_see_the_Total_Portfolio_Value_Change_is_matching_with_sum_of_all_Portfolio_Value_Change_for_Android() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+		DeviceActions.click((MobileElement) action.getElement("CLOSE_BUTTON"));
+		String totalPortfolioValue = DeviceActions
+				.getText((MobileElement) action.getElement("PORTFOLIO_SUMMARY_VALUE_CHANGE_TXT"));
+		String TotalValueChange = totalPortfolioValue.substring(2).replace(",", "");
+		DeviceActions.click((MobileElement) action.getElement("YOUR_ACCOUNTS"));
+		List<Object> accounts = action.getElements("TOTAL_ACCOUNTS_IN_ACCOUNTS_SCREEN");
+
+		Double total = 0.0;
+		for (int i = 0; i < accounts.size(); i++) {
+
+			String value1 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(
+					By.xpath("//android.widget.TextView[@resource-id='portfolio-account-" + i + "-value-change']")));
+			Double sumValue = Double.parseDouble(value1.substring(2).replace(",", ""));
+			total = total + sumValue;
+
+		}
+		DecimalFormat df = new DecimalFormat("#");
+		df.setMaximumFractionDigits(8);
+		String IndividualAccountsTotalChange = df.format(total);
+		Assert.assertEquals(TotalValueChange, IndividualAccountsTotalChange);
 	}
-	
-	
-	
-	
+
+	@Then("user selects the {string} from Your accounts screen for Android")
+	public void user_selects_the_from_Your_accounts_screen_for_Android(String accountName) throws InterruptedException {
+		DeviceActions.click((MobileElement) DeviceDriverManager.getDriver()
+				.findElement(By.xpath("//android.widget.TextView[@text=\"" + accountName + "\"]")));
+
+	}
+
+	@Then("user should see the Account Dashboard value is matching with holdings value of the same account for Android")
+	public void user_should_see_the_Account_Dashboard_value_is_matching_with_holdings_value_of_the_same_account_for_Android() {
+		String totalPortfolioValue = DeviceActions
+				.getText((MobileElement) action.getElement("ACCOUNT_DASHBOARD_TOTAL_VALUE"));
+		String TotalValueChange = totalPortfolioValue.substring(1).replace(",", "");
+		DeviceActions.click((MobileElement) action.getElement("HOLDINGS_TAB"));
+		List<Object> accounts = action.getElements("TOTAL_HOLDINGS_IN_ACCOUNTS_SCREEN");
+
+		Double total = 0.0;
+		for (int i = 0; i < accounts.size(); i++) {
+
+			String value1 = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(
+					By.xpath("//android.widget.TextView[@resource-id='account-holding-" + i + "-total-value']")));
+			Double sumValue = Double.parseDouble(value1.substring(1).replace(",", ""));
+			total = total + sumValue;
+
+		}
+		DecimalFormat df = new DecimalFormat("#");
+		df.setMaximumFractionDigits(8);
+		String IndividualAccountsTotalChange = df.format(total);
+		Assert.assertEquals(TotalValueChange, IndividualAccountsTotalChange);
+
+	}
+
+	@Then("user should see the Account Dashboard Value Change is matching with Sum of All Holdings Value Change for Android")
+	public void user_should_see_the_Account_Dashboard_Value_Change_is_matching_with_Sum_of_All_Holdings_Value_Change_for_Android() {
+
+	}
+
+	@Then("in extreme left right arrow in square bracket {string} should be displayed for Android")
+	public void in_extreme_left_right_arrow_in_square_bracket_should_be_displayed_for_Android(String cashMoveIcon) {
+		wait.until(
+				ExpectedConditions.invisibilityOf((MobileElement) action.getElement("ACTIVITY_SCREEN_LOADINGSPINNER")));
+		Assert.assertTrue(action.isPresent(cashMoveIcon));
+	}
+
+	@Then("besides to cash movement icon {string} title should be displayed for Android")
+	public void besides_to_cash_movement_icon_title_should_be_displayed_for_Android(String title) {
+		Assert.assertEquals(title, OneCS.androidGetText("ACTIVITY_CASH_MOVEMENT"));
+	}
+
+	@Then("beneath cash movement title {string} subtype should be displayed for Android")
+	public void beneath_cash_movement_title_subtype_should_be_displayed_for_Android(String money) {
+		Assert.assertEquals(money, OneCS.androidGetText("ACTIVITY_MONEY_IN"));
+	}
+
+	@Then("in extreme right cash movement value should be displayed in pounds for Android")
+	public void in_extreme_right_cash_movement_value_should_be_displayed_in_pounds_for_Android() {
+		Assert.assertTrue(action.isPresent("ACTIVITY_CASH_MOVEMENT_POUNDS"));
+	}
+
+	@Then("user shoud see {string} symbol infront of currency symbol for Android")
+	public void user_shoud_see_symbol_infront_of_currency_symbol_for_Android(String plus) {
+		String txt = OneCS.androidGetText("ACTIVITY_CASH_MOVEMENT_POUNDS");
+		boolean flag = txt.contains(plus);
+		Assert.assertTrue(flag, "Error + sign Doesn't appear");
+	}
+
+	@Then("user see the Activity tab is fixed upon scrolling for Android")
+	public void user_see_the_Activity_tab_is_fixed_upon_scrolling_for_Android() {
+		DeviceActions.scroll("down");
+
+	}
+
+	@Then("user should see Loading spinner while navigating in Android")
+	public void user_should_see_Loading_spinner_while_navigating_in_Android() {
+		Assert.assertTrue(action.isPresent("ACTIVITY_SCREEN_LOADINGSPINNER"));
+	}
+
+	@Then("user should be able to swipe down and refresh the screen")
+	public void user_should_be_able_to_swipe_down_and_refresh_the_screen() {
+		OneCS_Mobile.androidSwipe((MobileElement) action.getElement("REFRESH_ORDERLIST_FROM"),
+				(MobileElement) action.getElement("REFRESH_ORDERLIST_TO"));
+		Assert.assertTrue(action.isPresent("ACTIVITY_SCREEN_LOADINGSPINNER"));
+	}
+
+	@Then("user clicks on any order from orderlist for Android")
+	public void user_clicks_on_any_order_from_orderlist_for_Android() {
+		DeviceActions.click((MobileElement) action.getElement("RANDOM_ORDER_ORDERLIST"));
+	}
+
+	@Then("user should see {string} in top left corner of order list screen for Android")
+	public void user_should_see_in_top_left_corner_of_order_list_screen_for_Android(String closeButton) {
+		Assert.assertTrue(action.isPresent(closeButton));
+	}
+
+	@Then("user see below details in selected order for Android")
+	public void user_see_below_details_in_selected_order_for_Android(DataTable dataTable) {
+		List<String> data = dataTable.asList();
+		List<String> pageValues = OneCS_Mobile.getOrderDetailvalues();
+		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
+	}
+
+	@Then("user should see {string} button at the bottom of the order details screen for Android")
+	public void user_should_see_button_at_the_bottom_of_the_order_details_screen_for_Android(String cancel) {
+		Assert.assertTrue(action.isPresent(cancel));
+	}
+
+	@Then("user should see Order Details displayed in fullscreen for Android")
+	public void user_should_see_Order_Details_displayed_in_fullscreen_for_Android() {
+		Assert.assertFalse(action.isPresent("ACCOUNT_ACTITVITY_ORDERLIST"));
+	}
+
+	@Then("user confirms the value of the portfolio change is shown as a percentage figure for Android")
+	public void user_confirms_the_value_of_the_portfolio_change_is_shown_as_a_percentage_figure_for_Android() {
+		wait.until(
+				ExpectedConditions.invisibilityOf((MobileElement) action.getElement("ACTIVITY_SCREEN_LOADINGSPINNER")));
+		String percentage = OneCS.androidGetText("ACC_DASH_PERCENTAGE_VALUE");
+		boolean flag = percentage.contains("%");
+		Assert.assertTrue(flag, "Error...value is not shown in percentage value");
+	}
+
+	@Then("user should see Zig Zag Arrow pointing up for Android")
+	public void user_should_see_Zig_Zag_Arrow_pointing_up_for_Android() {
+		Assert.assertTrue(action.isPresent("ACC_ZIGZAG_INCARROW"));
+	}
+
+	@Then("user should see {string} Portfolio Value Change in the Dashboard screen for Android")
+	public void user_should_see_Portfolio_Value_Change_in_the_Dashboard_screen_for_Android(
+			String performanceIndicator) {
+		String totalChangeValue = OneCS.androidGetText("ACC_DASH_CHANGE_VALUE");
+
+		if (performanceIndicator.equalsIgnoreCase("positive")) {
+			boolean postiveSign = totalChangeValue.contains("+");
+			AssertLogger.assertTrue(postiveSign, "Postive sign does not appear in Portfolio Value Change field..");
+		} else if (performanceIndicator.equalsIgnoreCase("negative")) {
+			boolean negativeSign = totalChangeValue.contains("-");
+			AssertLogger.assertTrue(negativeSign, "Negative sign does not appear in Portfolio Value Change field..");
+		}
+	}
+
+	@Then("user should see {string} Sign in the Percentage value on the Dashboard screen for Android")
+	public void user_should_see_Sign_in_the_Percentage_value_on_the_Dashboard_screen_for_Android(
+			String performanceIndicator) {
+		String totalChangePercenatge = OneCS.androidGetText("ACC_DASH_CHANGE_PERCENTAGE");
+
+		if (performanceIndicator.equalsIgnoreCase("positive")) {
+			boolean postiveSign = totalChangePercenatge.contains("+");
+			AssertLogger.assertTrue(postiveSign, "Postive sign does not appear in Portfolio Value Change field..");
+		} else if (performanceIndicator.equalsIgnoreCase("negative")) {
+			boolean negativeSign = totalChangePercenatge.contains("-");
+			AssertLogger.assertTrue(negativeSign, "Negative sign does not appear in Portfolio Value Change field..");
+		}
+	}
+
+	@Then("user should see {string} arrow in Portfolio Dashboard for Android")
+	public void user_should_see_arrow_in_Portfolio_Dashboard_for_Android(String arrow) {
+		Assert.assertTrue(action.isPresent(arrow));
+	}
+
+	@Then("user should see {string} Portfolio Value Change in the Portfolio Dashboard screen for Android")
+	public void user_should_see_Portfolio_Value_Change_in_the_Portfolio_Dashboard_screen_for_Android(
+			String performanceIndicator) {
+		String totalChangeValue = OneCS.androidGetText("PORTFOLIO_SUMMARY_VALUE_CHANGE_TXT");
+
+		if (performanceIndicator.equalsIgnoreCase("positive")) {
+			boolean postiveSign = totalChangeValue.contains("+");
+			AssertLogger.assertTrue(postiveSign, "Postive sign does not appear in Portfolio Value Change field..");
+		} else if (performanceIndicator.equalsIgnoreCase("negative")) {
+			boolean negativeSign = totalChangeValue.contains("-");
+			AssertLogger.assertTrue(negativeSign, "Negative sign does not appear in Portfolio Value Change field..");
+		}
+	}
+
+	@Then("user should see {string} Sign in the Percentage value on the Portfolio Dashboard screen for Android")
+	public void user_should_see_Sign_in_the_Percentage_value_on_the_Portfolio_Dashboard_screen_for_Android(
+			String performanceIndicator) {
+		String totalChangePercenatge = OneCS.androidGetText("PORTFOLIO_DASH_PERCENTAGE_CHANGE");
+
+		if (performanceIndicator.equalsIgnoreCase("positive")) {
+			boolean postiveSign = totalChangePercenatge.contains("+");
+			AssertLogger.assertTrue(postiveSign, "Postive sign does not appear in Portfolio Value Change field..");
+		} else if (performanceIndicator.equalsIgnoreCase("negative")) {
+			boolean negativeSign = totalChangePercenatge.contains("-");
+			AssertLogger.assertTrue(negativeSign, "Negative sign does not appear in Portfolio Value Change field..");
+		}
+	}
+
+	@Then("user confirms the value of the portfolio change is shown as a percentage figure in Portfolio Dashboard for Android")
+	public void user_confirms_the_value_of_the_portfolio_change_is_shown_as_a_percentage_figure_in_Portfolio_Dashboard_for_Android() {
+		String percentage = OneCS.androidGetText("PORTFOLIO_DASH_PERCENTAGE_CHANGE");
+		boolean flag = percentage.contains("%");
+		Assert.assertTrue(flag, "Error...value is not shown in percentage value");
+	}
 	
 	
 	
