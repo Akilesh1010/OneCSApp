@@ -29,6 +29,7 @@ public class AccountManagementScreeniOS {
 	public List<String> getAccountManagementPopupValuesiOS() {
 		List<String> pageValues = new ArrayList<String>();
 		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
+		listOfElements.add((MobileElement) action.getElement("PAY_MONEY_IN_BTN_ACC_MANAGEMENT"));
 		listOfElements.add((MobileElement) action.getElement("ACCOUNT_ACTIVITY_BTN"));
 		listOfElements.add((MobileElement) action.getElement("ACCOUNT_BREAKDOWN_BTN"));
 
@@ -41,11 +42,11 @@ public class AccountManagementScreeniOS {
 	public List<String> getActivityScreenTabNamesiOS() {
 		List<String> pageValues = new ArrayList<String>();
 		List<MobileElement> listOfElements = new ArrayList<MobileElement>();
-		listOfElements.add((MobileElement) action.getElement("ACCOUNT_ACTIVITY_BTN"));
+		listOfElements.add((MobileElement) action.getElement("ACTIVITY_TAB"));
 		listOfElements.add((MobileElement) action.getElement("ORDER_LIST_TAB"));
 
 		for (MobileElement element : listOfElements) {
-			pageValues.add(DeviceActions.getText((MobileElement) element));
+			pageValues.add(DeviceActions.getAttribute((MobileElement) element, "label"));
 		}
 		return pageValues;
 	}
@@ -96,9 +97,40 @@ public class AccountManagementScreeniOS {
 
 		for (MobileElement element : fields) {
 			flag = element.isDisplayed();
-		}	
+		}
 
 		return flag;
+	}
+	
+	public List<String> getOrderTypesvaluesiOS() {
+		List<String> pageValues = new ArrayList<String>();
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_TYPE_PROCESSING")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_TYPE_DEALT")));
+		DeviceActions.scrollToElement("CANCELLED");
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_TYPE_CANCELLED")));
+		DeviceActions.scrollToElement("COMPLETE");
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_TYPE_COMPLETE")));
+		DeviceActions.scrollToElement("REJECTED");
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_TYPE_REJECTED")));
+		DeviceActions.scrollToElement("EXPIRED");
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_TYPE_EXPIRED")));
+		return pageValues;
+	}
+	
+	public List<String> getOrderDetailsScreenFieldsiOS() {
+		List<String> pageValues = new ArrayList<String>();
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_STATUS_FIELD")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_TRADE_TYPE_FIELD")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_DATE_FIELD")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_SETTLEMENT_DATE_FIELD")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_PRICE_FIELD")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_QUANTITY_FIELD")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_CONSIDERATION_FIELD")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_OTHER_FIELD")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_DEALING_FEE_FIELD")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_ESTIMATED_VALUE_FIELD")));
+		pageValues.add(DeviceActions.getText((MobileElement) action.getElement("ORDER_DETAIL_CANCEL_ORDER_BTN")));
+		return pageValues;
 	}
 
 

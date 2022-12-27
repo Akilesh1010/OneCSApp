@@ -63,7 +63,10 @@ public class IOSDashboardSreenStepDefs {
 
 	@Given("user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS")
 	public void user_is_on_the_dashboard_screen_they_should_be_displayed_with_pillbox_with_down_arrow() {
-		wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("PROGRESS_CIRCLE_ICON")));
+		if(action.isPresent("PROGRESS_CIRCLE_ICON")) {
+			wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("PROGRESS_CIRCLE_ICON")));
+		}
+		
 		boolean flag = dashboardScreeniOS.pillBoxDisplayiOS();
 		Assert.assertTrue(flag, "Error...Expected pillbox fields do not appear on the Dashboard screen...");
 	}
@@ -149,8 +152,10 @@ public class IOSDashboardSreenStepDefs {
 	@Then("user selects one of the Account from yours Accounts screen for iOS")
 	public void user_selects_one_of_the_Account_from_yours_Accounts_screen_for_iOS() {
 		DeviceActions.click((MobileElement) action.getElement("PORTFOLIO_ACCOUNT_NAME_YOUR_ACCOUNTS_1"));
+//		if (action.isPresent("PROGRESS_CIRCLE_ICON")) {
+//			wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("PROGRESS_CIRCLE_ICON")));
+//		}
 		Reporter.addDeviceScreenshot("Dashboard Screen", "Mobile App Dashboard Screen");
-
 	}
 
 	//*************PORTFOLIO TOTAL VALUE --VS-- SUM OF ALL PORTFOLIO VALUES****************
@@ -305,6 +310,9 @@ public class IOSDashboardSreenStepDefs {
 
 	@Then("user selects the {string} from Your accounts screen for iOS")
 	public void user_selects_the_from_Your_accounts_screen_for_iOS(String accountName) {
+		if(action.isPresent("PROGRESS_CIRCLE_ICON")) {
+			wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("PROGRESS_CIRCLE_ICON")));
+		}
 		DeviceActions.click((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@value=\""+accountName+"\"]")));
 	}
 
