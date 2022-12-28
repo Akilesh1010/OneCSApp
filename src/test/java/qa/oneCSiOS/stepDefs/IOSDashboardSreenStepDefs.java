@@ -130,6 +130,24 @@ public class IOSDashboardSreenStepDefs {
 			//		String formattedDate = sdf.format(date);
 			//		System.out.println(formattedDate);
 		}
+		else if (screenName.equalsIgnoreCase("Account dashboard")) {
+			String timeValueString = iOSSignInScreen.getTextiOS("ACCOUNT_SUMMARY_REFRESH_AT_LABEL");
+			String splitValues[] = timeValueString.split("2022");
+			String timeInApp = splitValues[1].substring(2, 6);
+			@SuppressWarnings("deprecation")
+			int hours = date.getHours()-12;
+
+			//		@SuppressWarnings("deprecation")
+			//		int year = date.getYear();
+
+			@SuppressWarnings("deprecation")
+			int minutes = date.getMinutes();
+			String systemTime = hours +"."+ minutes;
+			//		System.out.println(actualTime);
+
+			AssertLogger.assertEquals(timeInApp, systemTime, "Error... Time mismatch between system and app");
+			Reporter.addDeviceScreenshot("Account Dashborad Screen", "Mobile App Dashboard Screen");
+		}
 		else if (screenName.equalsIgnoreCase("Your accounts")) {
 			String timeValueString = iOSSignInScreen.getTextiOS("YOUR_ACCOUNTS_TIME_STAMP_LABEL");
 			String splitValues[] = timeValueString.split("2022");
@@ -142,9 +160,7 @@ public class IOSDashboardSreenStepDefs {
 			String systemTime = hours +"."+ minutes;
 
 			AssertLogger.assertEquals(timeInApp, systemTime, "Error... Time mismatch between system and app.");
-
 			Reporter.addDeviceScreenshot("Dashboard Screen", "Mobile App Dashboard Screen");
-
 		}	
 
 	}
@@ -310,9 +326,9 @@ public class IOSDashboardSreenStepDefs {
 
 	@Then("user selects the {string} from Your accounts screen for iOS")
 	public void user_selects_the_from_Your_accounts_screen_for_iOS(String accountName) {
-		if(action.isPresent("PROGRESS_CIRCLE_ICON")) {
-			wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("PROGRESS_CIRCLE_ICON")));
-		}
+//		if(action.isPresent("PROGRESS_CIRCLE_ICON")){
+//			wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("PROGRESS_CIRCLE_ICON")));
+//		}
 		DeviceActions.click((MobileElement) DeviceDriverManager.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@value=\""+accountName+"\"]")));
 	}
 
