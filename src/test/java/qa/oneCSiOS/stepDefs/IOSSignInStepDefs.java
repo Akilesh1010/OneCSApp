@@ -54,10 +54,10 @@ public class IOSSignInStepDefs {
 	}
 
 	@Then("user should see {string} screen for iOS")
-	public void user_should_see_screen_for_iOS(String twoFA) throws InterruptedException {
-		//		Thread.sleep(3000);
-		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement(twoFA)));
-		Reporter.addDeviceScreenshot("2FA Screen", "Mobile App Login Screen");		
+	public void user_should_see_screen_for_iOS(String screenName) throws InterruptedException {
+				Thread.sleep(3000);
+		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement(screenName)));
+		Reporter.addDeviceScreenshot("MobileApp", "Mobile App Login Screen");		
 	}
 
 	@Then("user get the SIX digit code displayed on screen and enters in TWOFA input field for iOS")

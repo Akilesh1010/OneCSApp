@@ -212,7 +212,7 @@ Feature: Validate the Account Management module validation on iOS app
   Scenario: 7.19 - verify the transition of the bottom sheet- View Order
     #Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
     #Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
-    #Then user sign in with valid username "edinburgh" and password "Cupholder1" for iOS
+    Then user sign in with valid username "edinburgh" and password "Cupholder1" for iOS
     Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
     Then user swipe up the Your Accounts screen to the full screen for iOS
     Then user selects the "Mrs Lydia Jordan Mr Edinburgh Edinburgh SIPP" from Your accounts screen for iOS
