@@ -197,8 +197,8 @@ Feature: Account Management Screen
 		Then user should see Loading spinner while navigating in Android
 		And user closes "app" on mobile device
 		
-		@Account_Management_Android @7.17_Android
-  Scenario: 7.17 - Verify loading status of the pages
+		@Account_Management_Android @7.18_Android
+  Scenario: 7.18 - Verify the details of each order status in order list
     Given user launch app "OneCS.apk" on "Emulator" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "execution" and "Cupholder1" for Android
@@ -232,8 +232,8 @@ Feature: Account Management Screen
 		Then user should see "CANCEL_0RDER" button at the bottom of the order details screen for Android								
 		And user closes "app" on mobile device
 		
-		@Account_Management_Android @7.18_Android
-  Scenario: 7.18 - Verify the details of each order status in order list
+		@Account_Management_Android @7.17_Android
+  Scenario: 7.17 - To verify the manual refresh of the order list screen
     Given user launch app "OneCS.apk" on "Emulator" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "execution" and "Cupholder1" for Android
@@ -299,7 +299,7 @@ Feature: Account Management Screen
 		And user closes "app" on mobile device
 		
 		@Account_Management_Android @7.26_Android
-  Scenario: 7.14 - To verify the back button on the  "Order List" Screen 
+  Scenario: 7.26 - To verify the back button on the  "Order List" Screen 
     Given user launch app "OneCS.apk" on "Emulator" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "testest" and "Cupholder1" for Android

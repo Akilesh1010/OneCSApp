@@ -1,6 +1,7 @@
 package qa.oneCSAndroid.stepdefs;
 
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.Date;
@@ -1227,6 +1228,142 @@ public class OneCS_Mobile_StepDefs {
 		boolean flag = percentage.contains("%");
 		Assert.assertTrue(flag, "Error...value is not shown in percentage value");
 	}
+	
+	@Then("user is on the dashboard screen they should be displayed with pillbox with down arrow for Android")
+	public void user_is_on_the_dashboard_screen_they_should_be_displayed_with_pillbox_with_down_arrow_for_Android() {
+		boolean flag = OneCS.pillBoxDisplayAndroid();
+		Assert.assertTrue(flag, "Error...Expected pillbox fields do not appear on the Dashboard screen...");
+	}
+	
+	@Then("user Clicks on {string} button for Android")
+	public void user_Clicks_on_button_for_Android(String btnName) {
+		DeviceActions.click((MobileElement) action.getElement(btnName));
+	}
+	
+	@Then("user should see a back button and Portfolio Breakdown Title at the top of the screen for Android")
+	public void user_should_see_a_back_button_and_Portfolio_Breakdown_Title_at_the_top_of_the_screen_for_Android() {
+		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement("BACK_BUTTON")));
+		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement("PORTFOLIO_BREAKDOWN_SCREEN_TITLE")));
+		Reporter.addDeviceScreenshot("Portfolio Breakdown", "Portfolio Breakdown Screen");
+	}
+	
+	@Then("user should see the {string} is displayed for Android")
+	public void user_should_see_the_is_displayed_for_Android(String label) {
+		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement(label)));
+		Reporter.addDeviceScreenshot(label, "Screen name: "+label);
+	}
+	@Then("user should see {string},{string} and {string} fields are displayed for Android")
+	public void user_should_see_and_fields_are_displayed_for_Android(String field1, String field2, String field3) {
+		boolean flag = OneCS.fieldsDisplayAndroid(field1, field2, field3);
+		Assert.assertTrue(flag, "Error...The mentioned fields are not displayed.");
+		Reporter.addDeviceScreenshot(field1, "Screen name: "+field1);
+	}
+	@Then("user should see {string} text in the pop up for Android")
+	public void user_should_see_text_in_the_pop_up_for_Android(String popAlrert) {
+		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement(popAlrert)));
+		Reporter.addDeviceScreenshot("Pop up Alert", "Mobile App Login Screen");
+	}
+	
+	@Then("user swipe up the pop up to the full screen for Android")
+	public void user_swipe_up_the_pop_up_to_the_full_screen_for_Android() {
+		OneCS_Mobile.androidSwipe((MobileElement) action.getElement("COST_INFO_POP_UP_TITLE"),
+				(MobileElement) action.getElement("CI_FULLSCREEN"));
+	}
+	
+	@Then("user swipe up the Your Accounts screen to the full screen for Android")
+	public void user_swipe_up_the_Your_Accounts_screen_to_the_full_screen_for_Android() {
+		OneCS_Mobile.androidSwipe((MobileElement) action.getElement("YOUR_ACCOUNTS"),
+				(MobileElement) action.getElement("PORTFOLIO_SELECTOR_PILLBOX"));
+	}
+	@Then("user should verify the value of date format displayed correctly on the {string} screen for Android")
+	public void user_should_verify_the_value_of_date_format_displayed_correctly_on_the_screen_for_Android(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+	
+	@Then("user should see {string} and {string} fields are displayed for Android")
+	public void user_should_see_and_fields_are_displayed_for_Android(String field1, String field2) {
+		boolean flag = OneCS.twoFieldsDisplayAndroid(field1, field2);
+		Assert.assertTrue(flag, "Error...The mentioned fields are not displayed.");
+		Reporter.addDeviceScreenshot(field1, "Screen name: "+field2);
+	}
+
+	@Then("user should not see the {string} displayed on screen for Android")
+	public void user_should_not_see_the_displayed_on_screen_for_Android(String btnName) {
+		Assert.assertFalse(action.isPresent(btnName));
+		Reporter.addDeviceScreenshot("Mobile Screen", "Button is not displayed");
+	}
+	@Then("verify the {string} symbol is displayed for Android")
+	public void verify_the_symbol_is_displayed_for_Android(String symbol) {
+
+		String actual= DeviceActions.getAttribute((MobileElement) action.getElement("PORTFOLIO_EYE_ICON_BTN"), "content-desc");
+
+		if(symbol.equalsIgnoreCase("open eye")) {
+			AssertLogger.assertEquals(actual, "Hide monetary values", "Error..... Expected field not displayed");
+
+		}
+		else if(symbol.equalsIgnoreCase("closed eye") ) {
+			AssertLogger.assertEquals(actual, "Show monetary values", "Error..... Expected field not displayed.");
+		}
+		Reporter.addDeviceScreenshot("Portfolio screen", "Eye symbol display in portfolio screen");
+
+	}
+	@Then("user should see the {string} field value is hidden on the screen for Android")
+	public void user_should_see_the_field_value_is_hidden_on_the_screen_for_Android(String fieldName) {
+
+		String actual= DeviceActions.getAttribute((MobileElement) action.getElement(fieldName), "text");
+
+		if(fieldName.equalsIgnoreCase("PORTFOLIO_VALUE_TXT")|| fieldName.equalsIgnoreCase("PORTFOLIO_ACCOUNT_TOTAL_VALUE_1")|| 
+				fieldName.equalsIgnoreCase("PORTFOLIO_ACCOUNT_VALUE_CHANGE_1")||fieldName.equalsIgnoreCase("PORTFOLIO_ACCOUNT_CODE_1")) {
+			boolean flag = actual.matches(".*[0-9].*");
+			Assert.assertFalse(flag, "Error..... Expected field not displayed.");
+
+		}
+
+		else if(fieldName.equalsIgnoreCase("PORTFOLIO_SUMMARY_VALUE_CHANGE_TXT")) {
+			boolean flag = actual.matches(".*[0-9].*");
+			Assert.assertFalse(flag, "Error...Expected field not displayed.");
+
+
+		}
+
+		Reporter.addDeviceScreenshot("Portfolio screen", "Portfolio Summmary value and Value change fileds display in portfolio screen");
+	}
+	
+	@Then("user should still see the Percentage value is retained in the field {string} for Android")
+	public void user_should_still_see_the_Percentage_value_is_retained_in_the_field_for_Android(String fieldName) {
+		String actual= DeviceActions.getAttribute((MobileElement) action.getElement(fieldName), "text");
+		boolean flag = false;
+		if(fieldName.equalsIgnoreCase("PORTFOLIO_DASH_PERCENTAGE_CHANGE")) {
+			flag = actual.matches(".*[0-9].*");
+		}
+		else {
+			flag = actual.matches(".*[0-9].*");
+		}
+
+		Assert.assertTrue(flag, "Error...Percentage field not retained.");
+		Reporter.addDeviceScreenshot("Portfolio screen", "");
+	
+	}
+	@Then("user should see the {string} field value is hidden on the breakdown screen for Android")
+	public void user_should_see_the_field_value_is_hidden_on_the_breakdown_screen_for_Android(String fieldName) {
+		String actual= DeviceActions.getAttribute((MobileElement) action.getElement(fieldName), "value");
+		if(fieldName.equalsIgnoreCase("PORTFOLIO_VALUE_IN_PORTFOLIO_BREAKDOWN")) {
+			AssertLogger.assertEquals(actual, "£-,---,---.--", "Error..... Expected breakdown field displayed on screen.");
+		}
+
+		else if(fieldName.equalsIgnoreCase("PORTFOLIO_CASH_VALUE_IN_PORTFOLIO_BREAKDOWN")) {
+			AssertLogger.assertEquals(actual, "£--,---.--", "Error..... Expected breakdown field displayed on screen.");
+		}
+		Reporter.addDeviceScreenshot("Portfolio screen", "");
+
+	}
+	@Then("user push the app to background for {int} seconds and relaunch the app again for Android")
+	public void user_push_the_app_to_background_for_seconds_and_relaunch_the_app_again_for_Android(int seconds) throws MalformedURLException {
+		DeviceDriverManager.runAppInBackground(seconds);
+		Reporter.addDeviceScreenshot("Portfolio screen", "");
+	}
+	
 	
 	
 	
