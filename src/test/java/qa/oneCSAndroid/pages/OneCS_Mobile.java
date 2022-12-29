@@ -448,5 +448,54 @@ public class OneCS_Mobile {
 		Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
 		return pageValues;
 	}
+		
+		public boolean pillBoxDisplayAndroid() {
+			boolean flag = false;
+
+			List<MobileElement> fields = new ArrayList<MobileElement>();
+
+			fields.add((MobileElement) action.getElement("PORTFOLIO_SELECTOR_PILLBOX"));
+			
+			for (MobileElement element : fields) {
+				flag = element.isDisplayed();
+			}	
+
+			return flag;
+
+		}
+		
+		public boolean fieldsDisplayAndroid(String field1, String field2, String field3) {
+			boolean flag = false;
+
+			List<MobileElement> fields = new ArrayList<MobileElement>();
+
+			fields.add((MobileElement) action.getElement(field1));
+			fields.add((MobileElement) action.getElement(field2));
+			fields.add((MobileElement) action.getElement(field3));
+		
+
+			for (MobileElement element : fields) {
+				flag = element.isDisplayed();
+			}	
+
+			return flag;
+
+		}
+		
+		public boolean twoFieldsDisplayAndroid(String field1, String field2) {
+			boolean flag = false;
+
+			List<MobileElement> fields = new ArrayList<MobileElement>();
+
+			fields.add((MobileElement) action.getElement(field1));
+			fields.add((MobileElement) action.getElement(field2));
+		
+			for (MobileElement element : fields) {
+				flag = element.isDisplayed();
+			}	
+
+			return flag;
+
+		}
 
 }

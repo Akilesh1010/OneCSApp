@@ -22,10 +22,10 @@ Feature: Account Dashboard
     And user taps on "YOUR_ACCOUNTS" in Dashboard screen for Android
     And user selects a account from the list of accounts in Accounts screen for Android
     Then user verifies whether it lands on "ACCOUNT_DASHBOARD" screen for Android
-    And user taps on "BACK_BUTTON" in Dashboard screen for Android
-   	And user taps on "YOUR_ACCOUNTS" in Dashboard screen for Android
-    And user selects a account from the list of accounts in Accounts screen for Android
-    Then user verifies whether it lands on "ACCOUNT_DASHBOARD" screen for Android
+    #And user taps on "BACK_BUTTON" in Dashboard screen for Android
+   #	And user taps on "YOUR_ACCOUNTS" in Dashboard screen for Android
+    #And user selects a account from the list of accounts in Accounts screen for Android
+    #Then user verifies whether it lands on "ACCOUNT_DASHBOARD" screen for Android
     Then user validates the details in the Account Dashboard screen for Android
     And user the pulls down and refreshes the Accounts Dashboard screen for Android
     And user navigates to other tabs and should be able to find a change in values in Accounts Dashboard screen for Android
