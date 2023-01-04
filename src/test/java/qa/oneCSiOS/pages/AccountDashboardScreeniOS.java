@@ -53,6 +53,22 @@ public class AccountDashboardScreeniOS {
 
 		return flag;
 	}
+	
+	public boolean yourCurrentValueIsAndPerformanceIndicatorDisplayInAccountDashboardiOS(String performanceIndicator) {
+		boolean flag = false;
+
+		List<MobileElement> fields = new ArrayList<MobileElement>();
+
+		fields.add((MobileElement) action.getElement("YOUR_ACCOUNT_VALUE_IS_LABEL_TXT"));
+		fields.add((MobileElement) action.getElement(performanceIndicator));
+
+		for (MobileElement element : fields) {
+			flag = element.isDisplayed();
+		}	
+
+		return flag;
+
+	}
 
 	
 }

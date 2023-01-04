@@ -1,6 +1,7 @@
 package qa.oneCSiOS.stepDefs;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -55,6 +56,71 @@ public class IOSAccountDashboardStepDefs {
 		
 		String AccValueAfterRefresh = iOSSignInScreen.getTextiOS("ACCOUNT_SUMMARY_TOTAL_VALUE_LABEL");
 		Assert.assertNotEquals(AccValueBeforeRefresh, AccValueAfterRefresh, "Error.. Values matched.");
+	}
+	
+	@Then("user should be displayed with your current value is label and the {string} on iOS")
+	public void user_should_be_displayed_with_your_current_value_is_label_and_the_on_iOS(String perfomanceIndicator) {
+		boolean flag = accountDashboardiOS.yourCurrentValueIsAndPerformanceIndicatorDisplayInAccountDashboardiOS(perfomanceIndicator);
+		Assert.assertTrue(flag, "Error...Your account value is label and perfomanceIndicator fields do not appear on the Account Dashboard screen...");
+	    
+	}
+	
+	@Then("user confirms the value of the portfolio change is shown as a percentage figure for iOS")
+	public void user_confirms_the_value_of_the_portfolio_change_is_shown_as_a_percentage_figure_for_iOS() {
+		String percentage = iOSSignInScreen.getTextiOS("ACCOUNT_SUMMARY_VALUE_CHANGE_LABEL");
+		boolean flag = percentage.contains("%");
+		Assert.assertTrue(flag, "Error...value is not shown in percentage value");
+	    
+	}
+	
+	@Then("user should see {string} Account Value Change in the Account Dashboard screen for iOS")
+	public void user_should_see_Account_Value_Change_in_the_Account_Dashboard_screen_for_iOS(String performanceIndicator) {
+		String totalPortfolioValue = DeviceActions.getText((MobileElement) action.getElement("ACCOUNT_SUMMARY_VALUE_CHANGE_LABEL"));
+		String[] valueChangeSplit = totalPortfolioValue.split(" ");
+
+		if(performanceIndicator.equalsIgnoreCase("positive")) {
+			boolean postiveSign = valueChangeSplit[0].contains("+");
+			AssertLogger.assertTrue(postiveSign, "Postive sign does not appear in Account Value Change field..");
+			System.out.println(postiveSign);
+		}
+		else if(performanceIndicator.equalsIgnoreCase("negative")) {
+			boolean negativeSign = valueChangeSplit[0].contains("-");
+			AssertLogger.assertTrue(negativeSign, "Negative sign does not appear in Account Value Change field..");
+		}
+	}
+	
+
+	@Then("user should see {string} Sign in the Percentage value on the Account Dashboard screen for iOS")
+	public void user_should_see_Sign_in_the_Percentage_value_on_the_Account_Dashboard_screen_for_iOS(String performanceIndicator) {
+		String totalPortfolioValue = DeviceActions.getText((MobileElement) action.getElement("ACCOUNT_SUMMARY_VALUE_CHANGE_LABEL"));
+		String[] valueChangeSplit = totalPortfolioValue.split(" ");
+
+		if(performanceIndicator.equalsIgnoreCase("Positive")) {
+			boolean postivepPrcentageSign = valueChangeSplit[2].contains("+");
+			AssertLogger.assertTrue(postivepPrcentageSign, "Postive sign does not appear in Account Percentage field..");
+		}
+		else if(performanceIndicator.equalsIgnoreCase("negative")) {
+			boolean negativePercentageSign = valueChangeSplit[2].contains("-");
+			AssertLogger.assertTrue(negativePercentageSign, "Negative sign does not appear in Account Percentage field..");
+		}
+	}
+	
+	@Then("user should be able to swipe Up the screen to maximize the Cost information pop to full screen on iOS")
+	public void user_should_be_able_to_swipe_Up_the_screen_to_maximize_the_Cost_information_pop_to_full_screen_on_iOS() {
+		MobileElement startingElement= (MobileElement) action.getElement("GOT_IT_BTN");
+		MobileElement endingElement= (MobileElement) action.getElement("COST_INFO_POP_UP_TITLE");
+		dashboardScreeniOS.swipeiOS(startingElement, endingElement);
+		Reporter.addDeviceScreenshot("Account Breakdown", "Cost information pop up..");
+	}
+	
+	@Then("user should be able to swipe down the screen to close the Cost information pop on iOS")
+	public void user_should_be_able_to_swipe_down_the_screen_to_close_the_Cost_information_pop_on_iOS() {
+		MobileElement startingElement= (MobileElement) action.getElement("COST_INFO_POP_UP_TITLE");
+		MobileElement endingElement= (MobileElement) action.getElement("GOT_IT_BTN");
+		dashboardScreeniOS.swipeiOS(startingElement, endingElement);
+		Reporter.addDeviceScreenshot("Account Breakdown", "Cost information pop up..");
+		
+	  
 	}
 
 

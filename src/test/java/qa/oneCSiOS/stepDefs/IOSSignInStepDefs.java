@@ -79,7 +79,7 @@ public class IOSSignInStepDefs {
 	}
 
 	@Then("user sign in with valid username {string} and password {string} for iOS")
-	public void user_sign_in_with_valid_username_and_password(String userName, String pwd) {
+	public void user_sign_in_with_valid_username_and_password(String userName, String pwd) throws InterruptedException {
 		iOSSignInScreen.signIniOS(userName, pwd);
 		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
 	}
@@ -253,7 +253,7 @@ public class IOSSignInStepDefs {
 
 	@Then("user should see the entered username and password retained in sigin Screen for iOS")
 	public void user_should_see_the_entered_username_and_password_retained_in_sigin_Screen_for_iOS() {
-		iOSSignInScreen.btnClickiOS("EYE_PWD_HIDE_BTN");
+		iOSSignInScreen.btnClickiOS("EYE_PWD_SHOW_BTN");
 
 		Assert.assertEquals(iOSSignInScreen.getTextiOS("USERNAME_EDIT"),
 				DeviceActions.getTestData("Correct_Username"));
@@ -313,7 +313,13 @@ public class IOSSignInStepDefs {
 	}
 
 	@Then("user validates below fields in web url opened for iOS")
-	public void user_validates_below_fields_in_web_url_opened_for_iOS(DataTable dataTable) {
+	public void user_validates_below_fields_in_web_url_opened_for_iOS(DataTable dataTable) throws InterruptedException {
+//		Thread.sleep(15000);
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("LOGIN_TXT_IN_WEB")));
+		if(action.isPresent("ACCEPT_ALL_WEBSITE_BTN")) {
+			iOSSignInScreen.btnClickiOS("ACCEPT_ALL_WEBSITE_BTN");
+		}
+		
 		iOSSignInScreen.btnClickiOS("LOGIN_TXT_IN_WEB");
 		List<String> data = dataTable.asList();
 		List<String> pageValues = iOSSignInScreen.loginPageWebiOS();

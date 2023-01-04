@@ -43,11 +43,12 @@ public class SignInScreeniOS {
 		DeviceActions.sendKeys((MobileElement) action.getElement(inputField), DeviceActions.getTestData(value));
 	}
 	
-	public void signIniOS(String userName, String pwd) {
+	public void signIniOS(String userName, String pwd) throws InterruptedException {
 		DeviceActions.click((MobileElement) action.getElement("SIGN_IN_BTN"));
 		DeviceActions.sendKeys((MobileElement) action.getElement("USERNAME_EDIT"), userName);
 		DeviceActions.sendKeys((MobileElement) action.getElement("PWD_EDIT"), pwd);
 		DeviceActions.click((MobileElement) action.getElement("CONTINUE_SIGN_IN_BTN"));
+		Thread.sleep(5000);
 		while (DeviceActions.getText((MobileElement) action.getElement("SIGN_IN_CODE_2FA_TXT")) == "code loading") {
 //			System.out.println(iOSSignInScreen.getTextiOS("CODE_TO_TYPE"));	
 			continue;

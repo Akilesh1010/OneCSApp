@@ -93,6 +93,7 @@ public class IOSMoreSreenStepDefs {
 		List<String> data = dataTable.asList();
 		List<String> pageValues = moreScreeniOS.getAboutCSLablesiOS();
 		AssertLogger.assertEquals(pageValues, data, "Error..... About Charles Stanley labels does not match");
+		DeviceActions.scroll("down");
 
 		boolean flag = moreScreeniOS.aboutCSImageAndChevronDisplayiOS();
 		Assert.assertTrue(flag, "Error... About Charles Stanley Image and chevron not displayed.");
