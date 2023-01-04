@@ -2,14 +2,14 @@
 Feature: Validate the Account Management module validation on iOS app
 
   Background: 
-    Given user launch app "OneCSiOSApp" on "realDevice" mobile device
-    Then user should be displayed with secure sign in page for iOS
-    Then user enters value in "SECURE_SIGN_IN_INPUT_FIELD" field with "SIX_DIGIT" pin for iOS
-    And user Clicks on "SECURE_SIGN_IN_VERIFY_BTN" button for iOS
+    #Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
+    #Then user should be displayed with secure sign in page for iOS
+    #Then user enters value in "SECURE_SIGN_IN_INPUT_FIELD" field with "SIX_DIGIT" pin for iOS
+    #And user Clicks on "SECURE_SIGN_IN_VERIFY_BTN" button for iOS
 
   @Account_Management_iOS @7.01_iOS
   Scenario: 7.01 - Verify the "Account Management" bottom sheet
-    Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
     Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
     Then user sign in with valid username "execution" and password "Cupholder1" for iOS
     Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
@@ -35,7 +35,7 @@ Feature: Validate the Account Management module validation on iOS app
 
   @Account_Management_iOS @7.02_iOS
   Scenario: 7.02 - Verify  the account, when it is having the "activity list"
-    Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
     Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
     Then user sign in with valid username "execution" and password "Cupholder1" for iOS
     Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
@@ -54,7 +54,7 @@ Feature: Validate the Account Management module validation on iOS app
 
   @Account_Management_iOS @7.03_iOS
   Scenario: 7.03 - Verify the Manual refresh of the Activity screen
-    Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
     Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
     Then user sign in with valid username "bob" and password "Pass123$" for iOS
     Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
@@ -77,7 +77,7 @@ Feature: Validate the Account Management module validation on iOS app
 
   @Account_Management_iOS @7.04_iOS
   Scenario: 7.04 - Verify the Activity screen, when the account is having no activities
-    Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
     Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
     Then user sign in with valid username "testest" and password "Cupholder1" for iOS
     Then user should be displayed with Portfolio summary value details on iOS
@@ -93,7 +93,7 @@ Feature: Validate the Account Management module validation on iOS app
 
   @Account_Management_iOS @7.06_iOS
   Scenario: 7.06 - Verify the "Cash Movement" details when the "Cash Movement value" is positive in case of Money in
-    Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
     Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
     Then user sign in with valid username "execution" and password "Cupholder1" for iOS
     Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
@@ -109,7 +109,7 @@ Feature: Validate the Account Management module validation on iOS app
 
   @Account_Management_iOS @7.13_iOS
   Scenario: 7.13 - verify the order details listed  in the order list screen
-    Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
     Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
     Then user sign in with valid username "edinburgh" and password "Cupholder1" for iOS
     Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
@@ -131,7 +131,7 @@ Feature: Validate the Account Management module validation on iOS app
   @Account_Management_iOS @7.14_iOS
   Scenario: 7.14 - To verify the display of different order types/status of an order
     #Test data needed with all possible status types under 1 account
-    Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
     Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
     Then user sign in with valid username "edinburgh" and password "Cupholder1" for iOS
     Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
@@ -152,9 +152,9 @@ Feature: Validate the Account Management module validation on iOS app
 
   @Account_Management_iOS @7.16_iOS
   Scenario: 7.16 - Verify loading status of the pages
-    #Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
-    #Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
-    #Then user sign in with valid username "edinburgh" and password "Cupholder1" for iOS
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
+    Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
+    Then user sign in with valid username "edinburgh" and password "Cupholder1" for iOS
     Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
     Then user swipe up the Your Accounts screen to the full screen for iOS
     Then user selects the "Mrs Lydia Jordan Mr Edinburgh Edinburgh SIPP" from Your accounts screen for iOS
@@ -167,9 +167,9 @@ Feature: Validate the Account Management module validation on iOS app
 
   @Account_Management_iOS @7.17_iOS
   Scenario: 7.17-To verify the manual refresh of the order list screen
-    #Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
-    #Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
-    #Then user sign in with valid username "edinburgh" and password "Cupholder1" for iOS
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
+    Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
+    Then user sign in with valid username "edinburgh" and password "Cupholder1" for iOS
     Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
     Then user swipe up the Your Accounts screen to the full screen for iOS
     Then user selects the "Mrs Lydia Jordan Mr Edinburgh Edinburgh SIPP" from Your accounts screen for iOS
@@ -182,9 +182,9 @@ Feature: Validate the Account Management module validation on iOS app
 
   @Account_Management_iOS @7.18_iOS
   Scenario: 7.18 - Verify the details of each order status in order list
-    #Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
-    #Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
-    #Then user sign in with valid username "edinburgh" and password "Cupholder1" for iOS
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
+    Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
+    Then user sign in with valid username "edinburgh" and password "Cupholder1" for iOS
     Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
     Then user swipe up the Your Accounts screen to the full screen for iOS
     Then user selects the "Mrs Lydia Jordan Mr Edinburgh Edinburgh SIPP" from Your accounts screen for iOS
@@ -210,8 +210,8 @@ Feature: Validate the Account Management module validation on iOS app
 
   @Account_Management_iOS @7.19_iOS
   Scenario: 7.19 - verify the transition of the bottom sheet- View Order
-    #Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
-    #Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
+    Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
     Then user sign in with valid username "edinburgh" and password "Cupholder1" for iOS
     Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
     Then user swipe up the Your Accounts screen to the full screen for iOS
@@ -227,9 +227,9 @@ Feature: Validate the Account Management module validation on iOS app
 
   @Account_Management_iOS @7.25_iOS
   Scenario: 7.25 - Verify when the account is having no orders
-    #Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
-    #Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
-    #Then user sign in with valid username "testest" and password "Cupholder1" for iOS
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
+    Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
+    Then user sign in with valid username "testest" and password "Cupholder1" for iOS
     Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
     Then user swipe up the Your Accounts screen to the full screen for iOS
     Then user selects the "Mrs Lydia Jordan Mr Test Test SIPP" from Your accounts screen for iOS
@@ -242,9 +242,9 @@ Feature: Validate the Account Management module validation on iOS app
 
   @Account_Management_iOS @7.26_iOS
   Scenario: 7.26 - To verify the back button on the  "Order List" Screen
-    #Given user launch app "OneCSiOSApp" on "RealDevice" mobile device
-    #Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
-    #Then user sign in with valid username "testest" and password "Cupholder1" for iOS
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
+    Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
+    Then user sign in with valid username "testest" and password "Cupholder1" for iOS
     Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
     Then user swipe up the Your Accounts screen to the full screen for iOS
     Then user selects the "Mrs Lydia Jordan Mr Test Test SIPP" from Your accounts screen for iOS

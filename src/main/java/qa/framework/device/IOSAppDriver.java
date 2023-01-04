@@ -43,20 +43,21 @@ public class IOSAppDriver {
 		}
 		else if(deviceType.equalsIgnoreCase("BrowserStack")) {
 
-//			capabilities.setCapability("browserstack.user", "mohamednasarsyed_dJwZmc");
-//			capabilities.setCapability("browserstack.key", "8PEHGhm7dzbHtRqcptws");
-			capabilities.setCapability("browserstack.user", "akileshs_K8NpOV");
-			capabilities.setCapability("browserstack.key", "b4pfJpJmheYkiJoqhtax");
+			capabilities.setCapability("browserstack.user", "mohamednasarsyed_dJwZmc");
+			capabilities.setCapability("browserstack.key", "8PEHGhm7dzbHtRqcptws");
+//			capabilities.setCapability("browserstack.user", "akileshs_K8NpOV");
+//			capabilities.setCapability("browserstack.key", "b4pfJpJmheYkiJoqhtax");
 
 			capabilities.setCapability("device", "iPhone 13");
 			capabilities.setCapability("os_version", "15.4");
 			capabilities.setCapability("project", "MobileApp PoC");
 			capabilities.setCapability("build", "CS QA iOS build");
 			capabilities.setCapability("name", "iOS Sample test");
-//			capabilities.setCapability("app", "bs://ff6ea67909751edfc3882810183301f1540f272e");
-			capabilities.setCapability("app", "bs://caeab783236f99e319370570da54d0fbfb3c7964");
+			capabilities.setCapability("app", "bs://b13502eb586f2bb423a76b9c681e4cf47d575a03");
 			
 			capabilities.setCapability("browserstack.local", "true");
+			capabilities.setCapability("noReset", false);
+			capabilities.setCapability("fullReset", false);
 
 		}
 

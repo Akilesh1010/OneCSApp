@@ -161,5 +161,6 @@ public class IOSAccountManagementStepDefs {
 	public void user_waits_until_the_account_details_displayed_on_screen_for_iOS() {
 		wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("PROGRESS_CIRCLE_ICON")));
 	}
+	
 
 }
