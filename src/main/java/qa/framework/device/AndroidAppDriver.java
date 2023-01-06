@@ -89,6 +89,28 @@ public class AndroidAppDriver {
 		}
 		else if(deviceType.equalsIgnoreCase("BrowserStack")) {
 			DesiredCapabilities capabilities = getCapabilities(deviceType);
+				
+			capabilities.setCapability("browserstack.user", "akileshs_Jit0Ln");
+			capabilities.setCapability("browserstack.key", "XL3oy1yprCJD24apFpHu");
+	
+			capabilities.setCapability("app", "bs://9672c7cc1c9dc6cf7ff4a9fd344c03ce078e2e26");
+	
+			capabilities.setCapability("device", "Samsung Galaxy S20");
+			capabilities.setCapability("os_version", "10.0");
+	
+			capabilities.setCapability("project", "OneCS Mobile");
+			capabilities.setCapability("build", "OneCS QA");
+	
+			capabilities.setCapability("name", "OneCS Digital");
+	
+			/* Do not stop app, do not clear app data, and do not uninstall apk. */
+	
+			capabilities.setCapability("browserstack.local", "true");
+	
+			capabilities.setCapability("browserstack.autoWait", "2");
+
+			/* Do not stop app, do not clear app data, and do not uninstall apk. */
+			capabilities.setCapability("noReset", false);
 			
 			driver = new AndroidDriver<MobileElement>(new 
 					URL("http://hub.browserstack.com/wd/hub"), capabilities);

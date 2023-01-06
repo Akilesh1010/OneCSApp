@@ -85,6 +85,8 @@ public class OneCS_Mobile_StepDefs {
 
 	@Then("user should be Navigated to the {string} website for Android")
 	public void user_should_be_Navigated_to_the_website_for_Android(String URL) {
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("ACCEPT_ALL")));
+		DeviceActions.click((MobileElement) action.getElement("ACCEPT_ALL"));
 		softAssert.assertEquals(URL, OneCS.androidGetText("DEVICE_URL"));
 	}
 
@@ -483,12 +485,20 @@ public class OneCS_Mobile_StepDefs {
 
 	@Then("user enters {string} and {string} in web url opened for Android")
 	public void user_enters_and_in_web_url_opened_for_Android(String user, String pass) {
+		//DeviceActions.scrollToElement("Trouble Logging In?");
 		OneCS.AndroidInputText(user, user);
 		OneCS.AndroidInputText(pass, pass);
+		
+//		OneCS_Mobile.androidSwipe((MobileElement) action.getElement("ACCOUNT_MANAGEMENT"),
+//				(MobileElement) action.getElement("DARK_AREA"));
+		if(action.isPresent("WEB_VIEW")) {
+			OneCS.AndroidBtnClick("CLOSE_WEBPAGE");
+		}
 	}
 
 	@Then("user should be able to login to web application for Android")
 	public void user_should_be_able_to_login_to_web_application_for_Android() {
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("MEMORABLE_WORD")));
 		Assert.assertTrue(action.isPresent("MEMORABLE_WORD"));
 	}
 
@@ -916,7 +926,7 @@ public class OneCS_Mobile_StepDefs {
 	public void user_the_pulls_down_and_refreshes_the_Accounts_Dashboard_screen_for_Android() {
 
 		OneCS_Mobile.androidSwipe((MobileElement) action.getElement("ACCOUNT_DASHBOARD"),
-				(MobileElement) action.getElement("VALUE_AS_OF_ACCOUNT"));
+				(MobileElement) action.getElement("HOLDINGS_TAB"));
 	}
 
 	@Then("user navigates to other tabs and should be able to find a change in values in Accounts Dashboard screen for Android")
@@ -1364,12 +1374,80 @@ public class OneCS_Mobile_StepDefs {
 		Reporter.addDeviceScreenshot("Portfolio screen", "");
 	}
 	
+	@When("user Clicks on {string} in More Screen for Android")
+	public void user_Clicks_on_in_More_Screen_for_Android(String Documents) throws Throwable {
+		DeviceActions.click((MobileElement) action.getElement(Documents));
+		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
+	}
 	
+	@Then("user verifies Name should be displayed in two separate multiple lines for Android")
+	public void user_verifies_Name_should_be_displayed_in_two_separate_multiple_lines_for_Android() {
+		wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("ACTIVITY_SCREEN_LOADINGSPINNER")));
+		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement("Account_Name_More")));
+	}
 	
+	@When("user Clicks on {string} in Documents Screen for Android")
+	public void user_Clicks_on_in_Documents_Screen_for_Android(String Reports) throws Throwable {
+		DeviceActions.click((MobileElement) action.getElement(Reports));
+		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
+	}
+	@When("user Taps on any document listed under the tab for Android")
+	public void user_Taps_on_any_document_listed_under_the_tab_for_Android() {
+		wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("ACTIVITY_SCREEN_LOADINGSPINNER")));
+		DeviceActions.click((MobileElement) action.getElement("DOCUMENTS_REPORT_TAB"));
+		
+		if(action.isDisplayed((MobileElement) action.getElement("CONNECTION_ERROR"))) {
+			DeviceActions.click((MobileElement) action.getElement("OKAY_BUTTON"));
+		}
+		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
+	}
+	@Then("user should be Navigated to {string} for Android")
+	public void user_should_be_Navigated_to_for_Android(String string) {
+	    Assert.assertTrue(action.isPresent("Documents_Option"));
+	}
+	@Then("user verifies {string} is highlghted by default for Android")
+	public void user_verifies_is_highlghted_by_default_for_Android(String Reports) {
+		String actual= DeviceActions.getAttribute((MobileElement) action.getElement(Reports), "selected");
+		AssertLogger.assertEquals(actual, "true", "Error..... Expected breakdown field displayed on screen.");
+	}
 	
+	@Then("user should see {string} as header in the middle with {string}n for Android")
+	public void user_should_see_as_header_in_the_middle_with_n_for_Android(String documentName, String backButton) {
+		Assert.assertTrue(action.isPresent(documentName));
+		Assert.assertTrue(action.isPresent(backButton));
+	}
+	@Then("user should see {string} in the right corner for Android")
+	public void user_should_see_in_the_right_corner_for_Android(String shareButton) {
+		Assert.assertTrue(action.isPresent(shareButton));
+	}
+	@When("user taps on {string} in document for Android")
+	public void user_taps_on_in_document_for_Android(String shareButton) {
+	    OneCS.AndroidBtnClick(shareButton);
+	}
+	@Then("user should be navigated to the {string} for Android")
+	public void user_should_be_navigated_to_the_for_Android(String url) {
+	    String URL=DeviceActions.getAttribute((MobileElement) action.getElement(url), "text");
+	    boolean flag=URL.contains("portalgateway-sit.charles-stanley.co.uk");
+	    Assert.assertTrue(flag);
+	    
+	}
 	
-	
-	
+	@Then("user should verify {string} are displayed in the Holdings screen for Android")
+	public void user_should_verify_are_displayed_in_the_Holdings_screen_for_Android(String noHoldings) {
+		Assert.assertFalse(action.isPresent(noHoldings));
+	}
+
+	@Then("user should not see {string} In the minimized view of the Holdings screen")
+	public void user_should_not_see_In_the_minimized_view_of_the_Holdings_screen(String ChevronButton) {
+		Assert.assertFalse(action.isPresent(ChevronButton));
+	}
+
+	@Then("user should see {string} In the fullscreen view of the Holdings screen")
+	public void user_should_see_In_the_fullscreen_view_of_the_Holdings_screen(String ChevronButton) {
+		OneCS.AndroidBtnClick("HOLDINGS_TAB");
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement(ChevronButton)));
+		Assert.assertTrue(action.isPresent(ChevronButton));
+	}
 	
 	
 	

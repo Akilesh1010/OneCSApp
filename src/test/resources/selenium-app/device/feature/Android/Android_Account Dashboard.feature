@@ -3,7 +3,7 @@ Feature: Account Dashboard
 
   @Account_Dashboard_Android @5.01_Android
   Scenario: 5.01 - To verify the Account Dashboard Screen details
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "edinburgh" and "Cupholder1" for Android
     When user Clicks on "Continue_Button"
@@ -33,7 +33,7 @@ Feature: Account Dashboard
     
 @Account_Dashboard_Android @5.02_Android
   Scenario: 5.02 - To verify the Account Dashboard Screen details
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "edinburgh" and "Cupholder1" for Android
     When user Clicks on "Continue_Button"
@@ -54,7 +54,7 @@ Feature: Account Dashboard
 		    
 @Account_Dashboard_Android @5.03_Android
   Scenario: 5.03 - To verify the account values refresh after certain duration of time
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "edinburgh" and "Cupholder1" for Android
     When user Clicks on "Continue_Button"
@@ -74,7 +74,7 @@ Feature: Account Dashboard
 		
 	@Account_Dashboard_Android @5.05_Android
   Scenario: 5.05 - To verify the "Account Dashboard" Screen when the values had +ve change
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "edinburgh" and "Cupholder1" for Android
     When user Clicks on "Continue_Button"
@@ -98,7 +98,7 @@ Feature: Account Dashboard
 	
 	@Account_Dashboard_Android @5.06_Android
   Scenario: 5.06 - To verify the "Account Dashboard" Screen when the values had -ve change
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "edinburgh" and "Cupholder1" for Android
     When user Clicks on "Continue_Button"

@@ -8,6 +8,8 @@ import java.util.Set;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
@@ -21,7 +23,9 @@ import qa.framework.dbutils.SQLDriver;
 import qa.framework.report.Report;
 import qa.framework.utils.Action;
 import qa.framework.utils.ExceptionHandler;
+import qa.framework.utils.GlobalVariables;
 import qa.framework.utils.Reporter;
+import qa.framework.webui.browsers.WebDriverManager;
 import qa.framework.webui.element.Element;
 
 public class DeviceActions extends TouchAction {
@@ -567,6 +571,36 @@ public class DeviceActions extends TouchAction {
 			}
 		}
 		return "undefined";
+	}
+	
+	public synchronized static final void ScrollToElement(WebElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getDriver();
+		String status = "FAIL";
+		try {
+			js.executeScript("arguments[0].scrollIntoView(true);", element);
+			new WebDriverWait(WebDriverManager.getDriver(), GlobalVariables.waitTime)
+            .until(ExpectedConditions.visibilityOf(element));
+			
+		//	Thread.sleep(1000);
+
+			status = "PASS";
+		} catch (Exception e) {
+			try {
+				js.executeScript("arguments[0].scrollIntoView(true);", element);
+				new WebDriverWait(WebDriverManager.getDriver(), GlobalVariables.waitTime)
+	            .until(ExpectedConditions.visibilityOf(element));
+				
+			//	Thread.sleep(1000);
+
+				status = "PASS";
+			} 
+			catch (Exception e2) {
+				ExceptionHandler.handleException(e2);
+			}
+		} finally {
+			Report.printOperation("Scroll To element");
+			Report.printStatus(status);
+		}
 	}
 
 }
