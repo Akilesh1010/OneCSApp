@@ -3,7 +3,7 @@ Feature: MORE
 
   @More_Android @8.01_Android
   Scenario: 8.01 - Verify the  MORE screen details
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user enters "Correct_Username" and "Correct_Password"
     When user Clicks on "Continue_Button"
