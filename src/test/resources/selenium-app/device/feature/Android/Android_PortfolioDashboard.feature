@@ -1,9 +1,9 @@
 @td_OneCSAndroid_TD
 Feature: Portfolio Dashboard
 
-  @More_Android @4.01_Android
+  @PortfolioDashboard_Android @4.01_Android
   Scenario: 4.01 - To verify the "Portfolio Dashboard" Screen details and validations
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "NegativeBalance" and "Cupholder1" for Android
     #When user enters "Correct_Username" and "Correct_Password"
@@ -28,9 +28,9 @@ Feature: Portfolio Dashboard
     Then user should see the Account Dashboard Value Change is matching with Sum of All Holdings Value Change for Android
 		And user closes "app" on mobile device			
 		
-		@PortfolioDashboard_iOS @4.02_Android
+		@PortfolioDashboard_Android @4.02_Android
   Scenario: 4.02 - To verify the "Portfolio Dashboard" Screen when the monetary values had +ve change
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "execution" and "Cupholder1" for Android
     #When user enters "Correct_Username" and "Correct_Password"
@@ -48,9 +48,9 @@ Feature: Portfolio Dashboard
     Then user should see "Positive" Sign in the Percentage value on the Portfolio Dashboard screen for Android
     And user closes "app" on mobile device
 
-  @PortfolioDashboard_iOS @4.03_Android
+  @PortfolioDashboard_Android @4.03_Android
   Scenario: 4.03 - To verify the "Portfolio Dashboard" Screen when the monetary values had -ve change
-   	Given user launch app "OneCS.apk" on "Emulator" mobile device
+   	Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "NegativeBalance" and "Cupholder1" for Android
     When user Clicks on "Continue_Button"
@@ -70,7 +70,7 @@ Feature: Portfolio Dashboard
     
     @PortfolioDashboard_Android @4.05_Android
   Scenario: 4.05 - To verify the "Portfolio breakdown" screen details
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "NegativeBalance" and "Cupholder1" for Android
     When user Clicks on "Continue_Button"
@@ -100,7 +100,7 @@ Feature: Portfolio Dashboard
     
     @PortfolioDashboard_Android @4.06_Android
   Scenario: 4.06 - To verify the details of Cost Information Pop Up on the "Portfolio breakdown" screen details
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "NegativeBalance" and "Cupholder1" for Android
     When user Clicks on "Continue_Button"
@@ -132,7 +132,7 @@ Feature: Portfolio Dashboard
     
     @PortfolioDashboard_Android @4.08_Android
   Scenario: 4.08 - To verify the "Your Accounts" bottom sheet details and its validations
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "NegativeBalance" and "Cupholder1" for Android
     When user Clicks on "Continue_Button"
@@ -157,7 +157,7 @@ Feature: Portfolio Dashboard
     @PortfolioDashboard_Android @4.10_Android
   Scenario: 4.10 - To verify the "Your Accounts" bottom sheet when there are no accounts under the selected Portfolio
     #CoreyDuffy\Cupholder1
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "CoreyDuffy" and "Cupholder1" for Android
     When user Clicks on "Continue_Button"
@@ -178,7 +178,7 @@ Feature: Portfolio Dashboard
     @PortfolioDashboard_Android @4.11_Android
   Scenario: 4.11 - Portfolio Dashboard - To Verify the Number formatting & styling, when switching between the show/hide state.
     #execution/Cupholder1
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "execution" and "Cupholder1" for Android
     When user Clicks on "Continue_Button"
@@ -207,7 +207,7 @@ Feature: Portfolio Dashboard
     @PortfolioDashboard_Android @4.12_Android
   Scenario: 4.12 - Portfolio Breakdown - To Verify the Number formatting & styling, when switching between the show/hide state.
     #execution/Cupholder1
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "execution" and "Cupholder1" for Android
     When user Clicks on "Continue_Button"
@@ -235,7 +235,7 @@ Feature: Portfolio Dashboard
     @PortfolioDashboard_Android @4.13_Android
   Scenario: 4.13 - Your Accounts - To Verify the Number formatting & styling, when switching between the show/hide state.
     #execution/Cupholder1
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "execution" and "Cupholder1" for Android
     When user Clicks on "Continue_Button"
@@ -259,7 +259,7 @@ Feature: Portfolio Dashboard
     @PortfolioDashboard_Android @4.14_Android
   Scenario: 4.14 - Verify the Number formatting & styling, when user is backgrounding the app and foregrounding it again.
     #execution/Cupholder1
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "execution" and "Cupholder1" for Android
     When user Clicks on "Continue_Button"
@@ -291,7 +291,7 @@ Feature: Portfolio Dashboard
     @PortfolioDashboard_Android @4.15_Android
   Scenario: 4.15 - Verify the Number formatting & styling, when user is closing the OneCS app and launching it again.
     #execution/Cupholder1
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "execution" and "Cupholder1" for Android
     When user Clicks on "Continue_Button"
@@ -304,7 +304,7 @@ Feature: Portfolio Dashboard
 		And user taps on "MAY_BE_LATER" option for Android
     Then user is on the dashboard screen they should be displayed with pillbox with down arrow for Android
     And user closes "app" on mobile device
-    Given user launch app "OneCS.apk" on "Emulator" mobile device
+    Given user launch app "OneCS.apk" on "BrowserStack" mobile device
     And user Clicks on "SIGN_IN" button
     When user logins with "execution" and "Cupholder1" for Android
     When user Clicks on "Continue_Button"
