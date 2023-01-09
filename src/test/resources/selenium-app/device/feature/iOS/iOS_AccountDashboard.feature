@@ -176,3 +176,192 @@ Feature: Account Dashboard feature validation on iOS app
     Then user should see "COST_INFO_POP_UP_TITLE" text in the pop up for iOS
     Then user Clicks on "IC_CLOSE_BTN" button for iOS
     And user closes "app" on mobile device
+
+  @AccountDashboard_iOS @5.11_iOS
+  Scenario: 5.11 - [Account Dashboard & Holdings]  - To Verify the Number formatting & styling, when switching between the show/hide state.
+    #edinburgh/Cupholder1
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
+    Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
+    Then user sign in with valid username "edinburgh" and password "Cupholder1" for iOS
+    Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    Then user swipe up the Your Accounts screen to the full screen for iOS
+    Then user selects the "Mrs Lydia Jordan Mr Edinburgh Edinburgh SIPP" from Your accounts screen for iOS
+    Then user waits until the account details displayed on screen for iOS
+    Then user should see "ACCOUNT_SUMMARY_NAME_LABEL_TXT" screen for iOS
+    Then verify the "open eye" symbol is displayed on accounts screen for iOS
+    Then user Clicks on "EYE_SIGN_IN_ACCOUNT_DASHBOARD_BTN" button for iOS
+    Then verify the "closed eye" symbol is displayed on accounts screen for iOS
+    Then user should see the "ACCOUNT_SUMMARY_TOTAL_VALUE_LABEL" field value is hidden on the account dashboard screen for iOS
+    Then user should see the "ACCOUNT_SUMMARY_VALUE_CHANGE_LABEL" field value is hidden on the account dashboard screen for iOS
+    Then user should still see the Percentage value is retained in account dashboard "ACCOUNT_SUMMARY_VALUE_CHANGE_LABEL" for iOS
+    #Then user should verify the value of date format displayed correctly on the "Account dashboard" screen for iOS
+    Then user swipe up the Your Accounts screen to the full screen for iOS
+    Then user should see the "ACCOUNT_HOLDING_VALUE_1" field value is hidden on the account dashboard screen for iOS
+    Then user should see the "ACCOUNT_HOLDING_PRICE_1" field value is hidden on the account dashboard screen for iOS
+    Then user should see the "ACCOUNT_HOLDING_VALUE_CHANGE_1" field value is hidden on the account dashboard screen for iOS
+    Then user should see the "ACCOUNT_HOLDING_COST_1" field value is hidden on the account dashboard screen for iOS
+    Then user should still see the Percentage value is retained in account dashboard "ACCOUNT_HOLDING_PERCENTAGE_CHANGE_1" for iOS
+    And user closes "app" on mobile device
+
+  @AccountDashboard_iOS @5.12_iOS
+  Scenario: 5.12 - [Account Breakdown] - To Verify the Number formatting & styling, when switching between the show/hide state.
+    #edinburgh/Cupholder1
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
+    Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
+    Then user sign in with valid username "edinburgh" and password "Cupholder1" for iOS
+    Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    Then user swipe up the Your Accounts screen to the full screen for iOS
+    Then user selects the "Mrs Lydia Jordan Mr Edinburgh Edinburgh SIPP" from Your accounts screen for iOS
+    Then user waits until the account details displayed on screen for iOS
+    Then user should see "ACCOUNT_SUMMARY_NAME_LABEL_TXT" screen for iOS
+    Then verify the "open eye" symbol is displayed on accounts screen for iOS
+    Then user Clicks on "EYE_SIGN_IN_ACCOUNT_DASHBOARD_BTN" button for iOS
+    Then verify the "closed eye" symbol is displayed on accounts screen for iOS
+    Then user Clicks on "ACCOUNT_MANAGEMENT_PENCIL_BTN" button for iOS
+    Then user should see "ACCOUNT_MANAGEMENT_DRAG_UP_BTN" in the popup screen for iOS
+    When user Clicks on "ACCOUNT_BREAKDOWN_BTN" button for iOS
+    Then user should see "ACCOUNT_BREAKDOWN_SCREEN_TITLE" and "BACK_BUTTON" fields are displayed for iOS
+    #Then user waits until Investment breakdown details are displayed on screen for iOS
+    Then user should see the "PORTFOLIO_VALUE_IN_ACCOUNT_BREAKDOWN" field is hidden on the Account breakdown screen for iOS
+    Then user should see the "CASH_VALUE_IN_ACCOUNT_BREAKDOWN" field is hidden on the Account breakdown screen for iOS
+    Then user should see the "COST_VALUE_IN_ACCOUNT_BREAKDOWN" field value is NOT hidden on the screen for iOS
+    Then user Clicks on "BACK_BUTTON" button for iOS
+    Then verify the "closed eye" symbol is displayed on accounts screen for iOS
+    And user closes "app" on mobile device
+
+  @AccountDashboard_iOS @5.14_iOS
+  Scenario: 5.14 - Verify the Number formatting & styling, when user is backgrounding the app and foregrounding it again.
+    #edinburgh/Cupholder1
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
+    Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
+    Then user sign in with valid username "edinburgh" and password "Cupholder1" for iOS
+    Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    Then user swipe up the Your Accounts screen to the full screen for iOS
+    Then user selects the "Mrs Lydia Jordan Mr Edinburgh Edinburgh SIPP" from Your accounts screen for iOS
+    Then user waits until the account details displayed on screen for iOS
+    Then user should see "ACCOUNT_SUMMARY_NAME_LABEL_TXT" screen for iOS
+    Then verify the "open eye" symbol is displayed on accounts screen for iOS
+    Then user Clicks on "EYE_SIGN_IN_ACCOUNT_DASHBOARD_BTN" button for iOS
+    Then verify the "closed eye" symbol is displayed on accounts screen for iOS
+    Then user push the app to background for 10 seconds and relaunch the app again for iOS
+    Then user should see the "ACCOUNT_SUMMARY_TOTAL_VALUE_LABEL" field value is hidden on the account dashboard screen for iOS
+    Then user should see the "ACCOUNT_SUMMARY_VALUE_CHANGE_LABEL" field value is hidden on the account dashboard screen for iOS
+    Then user should still see the Percentage value is retained in account dashboard "ACCOUNT_SUMMARY_VALUE_CHANGE_LABEL" for iOS
+    Then user swipe up the Your Accounts screen to the full screen for iOS
+    Then user should see the "ACCOUNT_HOLDING_VALUE_1" field value is hidden on the account dashboard screen for iOS
+    Then user should see the "ACCOUNT_HOLDING_PRICE_1" field value is hidden on the account dashboard screen for iOS
+    Then user should see the "ACCOUNT_HOLDING_VALUE_CHANGE_1" field value is hidden on the account dashboard screen for iOS
+    Then user should see the "ACCOUNT_HOLDING_COST_1" field value is hidden on the account dashboard screen for iOS
+    Then user should still see the Percentage value is retained in account dashboard "ACCOUNT_HOLDING_PERCENTAGE_CHANGE_1" for iOS
+    And user closes "app" on mobile device
+
+  @AccountDashboard_iOS @5.15_iOS
+  Scenario: 5.15 - Verify the Number formatting & styling, when user is closing the OneCS app and launching it again.
+    #edinburgh/Cupholder1
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
+    Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
+    Then user sign in with valid username "edinburgh" and password "Cupholder1" for iOS
+    Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    Then user swipe up the Your Accounts screen to the full screen for iOS
+    Then user selects the "Mrs Lydia Jordan Mr Edinburgh Edinburgh SIPP" from Your accounts screen for iOS
+    Then user waits until the account details displayed on screen for iOS
+    Then user should see "ACCOUNT_SUMMARY_NAME_LABEL_TXT" screen for iOS
+    Then verify the "open eye" symbol is displayed on accounts screen for iOS
+    And user closes "app" on mobile device
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
+    Then user should be displayed with secure sign in page for iOS
+    Then user enters value in "SECURE_SIGN_IN_INPUT_FIELD" field with "SIX_DIGIT" pin for iOS
+    And user Clicks on "SECURE_SIGN_IN_VERIFY_BTN" button for iOS
+    Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    Then user swipe up the Your Accounts screen to the full screen for iOS
+    Then user selects the "Mrs Lydia Jordan Mr Edinburgh Edinburgh SIPP" from Your accounts screen for iOS
+    Then user waits until the account details displayed on screen for iOS
+    Then user should see "ACCOUNT_SUMMARY_NAME_LABEL_TXT" screen for iOS
+    Then verify the "open eye" symbol is displayed on accounts screen for iOS
+    Then user should see the "ACCOUNT_SUMMARY_TOTAL_VALUE_LABEL" field value is NOT hidden on the screen for iOS
+    Then user should see the "ACCOUNT_SUMMARY_VALUE_CHANGE_LABEL" field value is NOT hidden on the screen for iOS
+    Then user swipe up the Your Accounts screen to the full screen for iOS
+    Then user should see the "ACCOUNT_HOLDING_VALUE_1" field value is NOT hidden on the screen for iOS
+    Then user should see the "ACCOUNT_HOLDING_PRICE_1" field value is NOT hidden on the screen for iOS
+    Then user should see the "ACCOUNT_HOLDING_VALUE_CHANGE_1" field value is NOT hidden on the screen for iOS
+    Then user should see the "ACCOUNT_HOLDING_COST_1" field value is NOT hidden on the screen for iOS
+    And user closes "app" on mobile device
+
+  @AccountDashboard_iOS @5.16_iOS
+  Scenario: 5.16 - Verify the Number formatting & styling, when user is logging out the OneCS app and logging in it again in the hidden state
+    #edinburgh/Cupholder1
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
+    Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
+    Then user sign in with valid username "edinburgh" and password "Cupholder1" for iOS
+    Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    Then user swipe up the Your Accounts screen to the full screen for iOS
+    Then user selects the "Mrs Lydia Jordan Mr Edinburgh Edinburgh SIPP" from Your accounts screen for iOS
+    Then user waits until the account details displayed on screen for iOS
+    Then user should see "ACCOUNT_SUMMARY_NAME_LABEL_TXT" screen for iOS
+    Then verify the "open eye" symbol is displayed on accounts screen for iOS
+    Then user Clicks on "EYE_SIGN_IN_ACCOUNT_DASHBOARD_BTN" button for iOS
+    Then verify the "closed eye" symbol is displayed on accounts screen for iOS
+    When user Clicks on "MORE_TAB" button for iOS
+    Then user should see "OneCS" as tittle in more options Screen for iOS
+    And user Signs Out the Mobile Application for iOS
+    Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
+    Then user sign in with valid username "edinburgh" and password "Cupholder1" for iOS
+    Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    Then user swipe up the Your Accounts screen to the full screen for iOS
+    Then user selects the "Mrs Lydia Jordan Mr Edinburgh Edinburgh SIPP" from Your accounts screen for iOS
+    Then user waits until the account details displayed on screen for iOS
+    Then user should see "ACCOUNT_SUMMARY_NAME_LABEL_TXT" screen for iOS
+    Then user should see the "ACCOUNT_SUMMARY_TOTAL_VALUE_LABEL" field value is hidden on the account dashboard screen for iOS
+    Then user should see the "ACCOUNT_SUMMARY_VALUE_CHANGE_LABEL" field value is hidden on the account dashboard screen for iOS
+    Then user should still see the Percentage value is retained in account dashboard "ACCOUNT_SUMMARY_VALUE_CHANGE_LABEL" for iOS
+    Then user swipe up the Your Accounts screen to the full screen for iOS
+    Then user should see the "ACCOUNT_HOLDING_VALUE_1" field value is hidden on the account dashboard screen for iOS
+    Then user should see the "ACCOUNT_HOLDING_PRICE_1" field value is hidden on the account dashboard screen for iOS
+    Then user should see the "ACCOUNT_HOLDING_VALUE_CHANGE_1" field value is hidden on the account dashboard screen for iOS
+    Then user should see the "ACCOUNT_HOLDING_COST_1" field value is hidden on the account dashboard screen for iOS
+    Then user should still see the Percentage value is retained in account dashboard "ACCOUNT_HOLDING_PERCENTAGE_CHANGE_1" for iOS
+    And user closes "app" on mobile device
+
+  @AccountDashboard_iOS @5.17_iOS
+  Scenario: 5.17- verify the Account dashboard screen when user having Accounts with zero Portfolio and Zero Cash Balance
+    #edinburgh/Cupholder1
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
+    Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
+    Then user sign in with valid username "noholdings" and password "Cupholder1" for iOS
+    Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    Then user swipe up the Your Accounts screen to the full screen for iOS
+    Then user selects the "Mrs Lydia Jordan Miss Window Csl SIPP" from Your accounts screen for iOS
+    Then user waits until the account details displayed on screen for iOS
+    Then user should see "ACCOUNT_SUMMARY_NAME_LABEL_TXT" screen for iOS
+    Then user should see "ACCOUNT_SUMMARY_TOTAL_VALUE_LABEL" field value displayed as "£0.00" on dashboard screen for iOS
+    Then user should see "ACCOUNT_SUMMARY_VALUE_CHANGE_LABEL" field value displayed as "£0 0%" on dashboard screen for iOS
+    Then user should see "ACCOUNT_SUMMARY_REFRESH_AT_LABEL" displayed on screen for iOS
+    Then user should be able to pull down the Account dashboard screen to refresh the details for iOS
+    #Then user should verify the value of date format displayed correctly on the "Account dashboard" screen for iOS
+    And user closes "app" on mobile device
+    
+    @AccountDashboard_iOS @5.18_iOS
+  Scenario: 5.18 - Verification for Accounts with zero Portfolio and Non-Zero Cash Balance 
+    #edinburgh/Cupholder1
+    Given user launch app "OneCSiOSApp" on "BrowserStack" mobile device
+    Then user should see "CS_WELCOME_LOGO" in welcome screen for iOS
+    Then user sign in with valid username "noholdings" and password "Cupholder1" for iOS
+    Then user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS
+    Then user swipe up the Your Accounts screen to the full screen for iOS
+    Then user selects the "Mrs Lydia Jordan Miss Window Csl SIPP" from Your accounts screen for iOS
+    Then user waits until the account details displayed on screen for iOS
+    Then user should see "ACCOUNT_SUMMARY_NAME_LABEL_TXT" screen for iOS
+    Then user should see "ACCOUNT_SUMMARY_TOTAL_VALUE_LABEL" field value displayed as "£0.00" on dashboard screen for iOS
+    Then user should see "ACCOUNT_SUMMARY_VALUE_CHANGE_LABEL" field value displayed as "£0 0%" on dashboard screen for iOS
+    Then user should see "ACCOUNT_SUMMARY_REFRESH_AT_LABEL" displayed on screen for iOS
+    Then user should be able to pull down the Account dashboard screen to refresh the details for iOS
+    Then user should verify the value of date format displayed correctly on the "Account dashboard" screen for iOS
+    Then user Clicks on "ACCOUNT_MANAGEMENT_PENCIL_BTN" button for iOS
+    Then user should see "ACCOUNT_MANAGEMENT_DRAG_UP_BTN" in the popup screen for iOS
+    When user Clicks on "ACCOUNT_BREAKDOWN_BTN" button for iOS
+    Then user should see "ACCOUNT_BREAKDOWN_SCREEN_TITLE" and "BACK_BUTTON" fields are displayed for iOS
+    Then user should see "PORTFOLIO_VALUE_IN_ACCOUNT_BREAKDOWN" field value displayed as "£0.00" on dashboard screen for iOS
+    Then user should see "CASH_VALUE_IN_ACCOUNT_BREAKDOWN" field value displayed as "£0.00" on dashboard screen for iOS
+    Then user should see "COST_VALUE_IN_ACCOUNT_BREAKDOWN" field value displayed as "£0.00" on dashboard screen for iOS
+    And user closes "app" on mobile device
+    

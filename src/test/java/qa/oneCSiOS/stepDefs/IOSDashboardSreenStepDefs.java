@@ -64,7 +64,8 @@ public class IOSDashboardSreenStepDefs {
 	@Given("user is on the dashboard screen they should be displayed with pillbox with down arrow for iOS")
 	public void user_is_on_the_dashboard_screen_they_should_be_displayed_with_pillbox_with_down_arrow() {
 		if(action.isPresent("PROGRESS_CIRCLE_ICON")) {
-			wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("PROGRESS_CIRCLE_ICON")));
+			wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("WELCOME_BACK_TXT")));
+//			wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("PROGRESS_CIRCLE_ICON")));
 		}
 		
 		boolean flag = dashboardScreeniOS.pillBoxDisplayiOS();
@@ -514,8 +515,9 @@ public class IOSDashboardSreenStepDefs {
 
 		String actual= DeviceActions.getAttribute((MobileElement) action.getElement(fieldName), "value");
 
-		if(fieldName.equalsIgnoreCase("PORTFOLIO_VALUE_TXT")|| fieldName.equalsIgnoreCase("PORTFOLIO_ACCOUNT_TOTAL_VALUE_1")|| 
-				fieldName.equalsIgnoreCase("PORTFOLIO_ACCOUNT_VALUE_CHANGE_1")||fieldName.equalsIgnoreCase("PORTFOLIO_ACCOUNT_CODE_1")) {
+		if(fieldName.equalsIgnoreCase("PORTFOLIO_VALUE_TXT")|| fieldName.equalsIgnoreCase("ACCOUNT_HOLDING_VALUE_1")|| 
+				fieldName.equalsIgnoreCase("ACCOUNT_HOLDING_PRICE_1")||fieldName.equalsIgnoreCase("ACCOUNT_HOLDING_VALUE_CHANGE_1")
+			|| fieldName.equalsIgnoreCase("ACCOUNT_HOLDING_COST_1")) {
 			boolean flag = actual.matches(".*[0-9].*");
 			Assert.assertFalse(flag, "Error..... Expected field not displayed.");
 //			AssertLogger.assertEquals(actual, "Hidden value", "Error..... Expected field not displayed.");
