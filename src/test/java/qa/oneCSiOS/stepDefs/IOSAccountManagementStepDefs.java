@@ -159,7 +159,7 @@ public class IOSAccountManagementStepDefs {
 	
 	@Then("user waits until the account details displayed on screen for iOS")
 	public void user_waits_until_the_account_details_displayed_on_screen_for_iOS() {
-		wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("PROGRESS_CIRCLE_ICON")));
+		wait.until(ExpectedConditions.visibilityOf((MobileElement) action.getElement("ACCOUNT_SUMMARY_NAME_LABEL_TXT")));
 	}
 	
 

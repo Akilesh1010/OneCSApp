@@ -29,6 +29,7 @@ public class CommonDeviceStepDefs {
 
 		} else if (type.equalsIgnoreCase("app")) {
 			DeviceDriverManager.quit();
+//			DeviceDriverManager.closeApp();
 
 		}
 
