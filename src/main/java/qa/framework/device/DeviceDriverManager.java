@@ -12,6 +12,9 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
+import io.appium.java_client.android.nativekey.PressesKey;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
@@ -444,6 +447,11 @@ public class DeviceDriverManager {
 	public static void runAppInBackground(int seconds) {
 		((AppiumDriver<?>)driver).runAppInBackground(Duration.ofSeconds(seconds));
 	}
+	
+	public static void backButton() {
+		((PressesKey)driver).pressKey(new KeyEvent(AndroidKey.BACK));
+	}
+	
 
 	public static void quit() {
 		flag=false;
