@@ -497,5 +497,18 @@ public class OneCS_Mobile {
 			return flag;
 
 		}
+		
+		public static List<String> getDocumentsTabvalues() {
+			List<String> pageValues = new ArrayList<String>();
+			pageValues.add(DeviceActions.getText((MobileElement) action.getElement("REPORTS_DOCUMENTS_TAB")));
+			pageValues.add(DeviceActions.getText((MobileElement) action.getElement("CONTRACTS_DOCUMENTS_TAB")));
+			 
+			androidSwipe((MobileElement) action.getElement("CONTRACTS_DOCUMENTS_TAB"), (MobileElement) action.getElement("ALLDOCS_DOCUMENTS_TAB"));
+			
+			pageValues.add(DeviceActions.getText((MobileElement) action.getElement("STATEMENTS_DOCUMENTS_TAB")));
+			pageValues.add(DeviceActions.getText((MobileElement) action.getElement("NOTIFICATIONS_DOCUMENTS_TAB")));
+			Reporter.addDeviceScreenshot("Login Scrren", "Mobile ");
+			return pageValues;
+		}
 
 }

@@ -22,6 +22,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.Activity;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
@@ -1380,12 +1381,6 @@ public class OneCS_Mobile_StepDefs {
 		Reporter.addDeviceScreenshot("Login Screen", "Mobile App Login Screen");
 	}
 	
-	@Then("user verifies Name should be displayed in two separate multiple lines for Android")
-	public void user_verifies_Name_should_be_displayed_in_two_separate_multiple_lines_for_Android() {
-		wait.until(ExpectedConditions.invisibilityOf((MobileElement) action.getElement("ACTIVITY_SCREEN_LOADINGSPINNER")));
-		Assert.assertTrue(action.isDisplayed((MobileElement) action.getElement("Account_Name_More")));
-	}
-	
 	@When("user Clicks on {string} in Documents Screen for Android")
 	public void user_Clicks_on_in_Documents_Screen_for_Android(String Reports) throws Throwable {
 		DeviceActions.click((MobileElement) action.getElement(Reports));
@@ -1405,8 +1400,8 @@ public class OneCS_Mobile_StepDefs {
 	public void user_should_be_Navigated_to_for_Android(String string) {
 	    Assert.assertTrue(action.isPresent("Documents_Option"));
 	}
-	@Then("user verifies {string} is highlghted by default for Android")
-	public void user_verifies_is_highlghted_by_default_for_Android(String Reports) {
+	@Then("user verifies {string} is highlighted by default for Android")
+	public void user_verifies_is_highlighted_by_default_for_Android(String Reports) {
 		String actual= DeviceActions.getAttribute((MobileElement) action.getElement(Reports), "selected");
 		AssertLogger.assertEquals(actual, "true", "Error..... Expected breakdown field displayed on screen.");
 	}
@@ -1449,8 +1444,65 @@ public class OneCS_Mobile_StepDefs {
 		Assert.assertTrue(action.isPresent(ChevronButton));
 	}
 	
+	@Then("user should be navigated to {string} and {string} without displaying {string} for Android")
+	public void user_should_be_navigated_to_and_without_displaying_for_Android(String searchPage, String backButton, String xButton) throws InterruptedException {
+		while(action.isPresent("ACTIVITY_SCREEN_LOADINGSPINNER"))
+		Assert.assertTrue(action.isPresent(searchPage));
+		Assert.assertTrue(action.isPresent(backButton));
+		Assert.assertFalse(action.isPresent(xButton));
+	}
+	@Then("user types {string} in Search field for Android")
+	public void user_types_in_Search_field_for_Android(String searchText) {
+		
+		OneCS.AndroidInputUserPass("SEARCH_EDIT_TEXT", searchText);
+		DeviceDriverManager.backButton();
+	}
+
+	@Then("corresponding searched document name should display in the list of documents")
+	public void corresponding_searched_document_name_should_display_in_the_list_of_documents() {
+		List<Object> searchReports = action.getElements("SEARCH_REPORT_LIST");
+		int count = 0;
+		for (int i = 0; i < searchReports.size(); i++) {
+
+			String value = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(
+					By.xpath("//android.widget.TextView[@resource-id='document-"+i+"-title']")));
+			boolean flag = value.startsWith("Val");
+			if(flag) {
+				count++;
+			}
+			
+			//Assert.assertTrue(flag);
+		}
+		Assert.assertEquals(searchReports.size(), count);
+	}
 	
+	@Then("user should see below Tabs in Documents screen for Android")
+	public void user_should_see_below_Tabs_in_Documents_screen_for_Android(DataTable dataTable) {
+		List<String> data = dataTable.asList();
+		List<String> pageValues = OneCS_Mobile.getDocumentsTabvalues();
+		AssertLogger.assertEquals(pageValues, data, "Error..... Mobile screen values does not match");
+	}
 	
+	@Then("user should be able to scroll the Quick filter tab from left and right")
+	public void user_should_be_able_to_scroll_the_Quick_filter_tab_from_left_and_right() {
+	    OneCS_Mobile.androidSwipe((MobileElement) action.getElement("CONTRACTS_DOCUMENTS_TAB"), (MobileElement) action.getElement("ALLDOCS_DOCUMENTS_TAB"));
+	}
+	
+	@Then("upon tapping {string} only {string} documents should be listed by {string} for Android")
+	public void upon_tapping_only_documents_should_be_listed_by_for_Android(String documentTab, String documentType, String searchList) {
+	
+	   OneCS.AndroidBtnClick(documentTab);
+	   List<Object> searchReports = action.getElements(searchList);
+	   for (int i = 0; i < searchReports.size(); i++) {
+
+			String value = DeviceActions.getText((MobileElement) DeviceDriverManager.getDriver().findElement(
+					By.xpath("//android.widget.TextView[@resource-id='document-"+i+"-title']")));
+			boolean flag = value.equalsIgnoreCase(documentType);
+			
+			Assert.assertTrue(flag);
+		}
+	   	
+	}
 	
 	
 	
